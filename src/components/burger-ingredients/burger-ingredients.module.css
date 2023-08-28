@@ -1,0 +1,33 @@
+.burger_ingredients {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 40vw;
+  margin: 40px;
+}
+
+.tabs {
+  display: flex;
+}
+
+.card_ingredient {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+  max-width: 20vw;
+}
+
+.currencyIcon {
+  padding-left: 45px;
+}
+
+.ingredient__price {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.ingredient__name {
+  composes: ingredient__price;
+}
