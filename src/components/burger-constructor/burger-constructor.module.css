@@ -1,0 +1,43 @@
+.burger_constructor{
+  display: flex;
+  flex-direction: column;
+  max-width: 40vw;
+  margin-left: 40px;
+}
+
+.list_ingredients {
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+.custom_scrollbar {
+  overflow: auto;
+  height: 330px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.custom_scrollbar::-webkit-scrollbar {
+  background-color: #2F2F37;
+  width: 10px;
+  height: 10px;
+}
+
+.custom_scrollbar::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.middle_ingredients {
+  composes: custom_scrollbar;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}

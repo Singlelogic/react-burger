@@ -1,5 +1,5 @@
 import React from 'react';
-import { Counter, CurrencyIcon, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
 import { data } from '../../utils/data';
 import { parseIngredients } from '../../utils/parseData';
@@ -29,10 +29,10 @@ function CardIngredient({ ingredient }) {
 		<div className={styles.card_ingredient}>
 			<img src={ingredient.image} alt={ingredient.ingredient} />
       <span className={styles.ingredient__price}>
-        {ingredient.price}
+        <span className="text text_type_digits-default">{ingredient.price}</span>
         <CurrencyIcon type="primary" className={styles.currencyIcon} />
       </span>
-			<span className={styles.ingredient__name}>
+			<span className="text text_type_main-small">
         {ingredient.name}
       </span>
 		</div>
@@ -44,7 +44,7 @@ function BurgerIngredients() {
 
 	return (
 		<div className={styles.burger_ingredients}>
-			<h1>Соберите бургер</h1>
+			<h1 className="text text_type_main-large">Соберите бургер</h1>
 
 			<div className={styles.tabs}>
         {Object.keys(typeIngredients).map((key) => (

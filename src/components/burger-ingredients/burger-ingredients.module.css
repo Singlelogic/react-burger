@@ -1,13 +1,11 @@
 .burger_ingredients {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 40vw;
-  margin: 40px;
+  padding-top: 40px;
+  margin-right: 40px;
 }
 
 .tabs {
   display: flex;
+  margin-top: 20px;
 }
 
 .card_ingredient {
@@ -26,8 +24,33 @@
   display: flex;
   justify-content: center;
   margin-bottom: 5px;
+  gap: 10px;
 }
 
 .ingredient__name {
   composes: ingredient__price;
+}
+
+.custom_scrollbar {
+  overflow: auto;
+  max-height: 65vh;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.custom_scrollbar::-webkit-scrollbar {
+  background-color: #2F2F37;
+  width: 10px;
+  height: 10px;
+}
+
+.custom_scrollbar::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.list_ingredients {
+  composes: custom_scrollbar;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
