@@ -12,16 +12,16 @@ const typeIngredients = {
 const ingredients = parseIngredients(data);
 
 function IngredientsByType({ type, ingredients }) {
-	return (
+  return (
 		<>
 			<h2>{type}</h2>
 			<ul>
-        {ingredients.map((ingredient) => (
-          <CardIngredient key={ingredient._id} ingredient={ingredient} />
-        ))}
+				{ingredients.map((ingredient) => (
+					<CardIngredient key={ingredient._id} ingredient={ingredient} />
+				))}
 			</ul>
 		</>
-	)
+  )
 }
 
 function CardIngredient({ ingredient }) {
