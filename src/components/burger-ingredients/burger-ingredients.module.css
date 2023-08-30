@@ -8,29 +8,6 @@
   margin-top: 20px;
 }
 
-.card_ingredient {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  list-style-type: none;
-  max-width: 20vw;
-}
-
-.currencyIcon {
-  padding-left: 45px;
-}
-
-.ingredient__price {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5px;
-  gap: 10px;
-}
-
-.ingredient__name {
-  composes: ingredient__price;
-}
-
 .custom_scrollbar {
   overflow: auto;
   max-height: 65vh;
