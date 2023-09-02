@@ -29,7 +29,7 @@ function BurgerIngredients() {
 
       <div className={styles.list_ingredients}>
         {Object.keys(typeIngredients).map((key) => (
-          <IngredientsByType type={typeIngredients[key]} ingredients={ingredients[key]} />
+          <IngredientsByType key={key} type={typeIngredients[key]} ingredients={ingredients[key]} />
         ))}
       </div>
     </div>
