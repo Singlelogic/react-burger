@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
 import {
@@ -7,14 +8,25 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import ingredientPropType from '../burger-ingredients/ingredient-prop-type';
 import { parseData } from '../../utils/parseData';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
 
 function BurgerConstructor({ data }) {
+  const [isVisible, setIsVisible] = useState(false);
   const ingredients = parseData(data);
   const bun = ingredients['bun'][0];
   const middleIngredients = [
     ...ingredients['sauce'],
     ...ingredients['main'],
   ];
+
+  function handleOpenModal() {
+    setIsVisible(true)
+  }
+
+  function handleCloseModal() {
+    setIsVisible(false)
+  }
 
   return (
     <div className={styles.burger_constructor}>
@@ -55,8 +67,16 @@ function BurgerConstructor({ data }) {
       <div className={styles.order}>
         <p className="text text_type_digits-medium">610</p>
         <CurrencyIcon type="primary"/>
-        <Button type="primary" size="medium">Оформить заказ</Button>
+        <Button type="primary" size="medium" onClick={handleOpenModal}>
+          Оформить заказ
+        </Button>
       </div>
+
+      {isVisible &&
+        <Modal onClose={handleCloseModal} >
+          <OrderDetails />
+        </Modal>
+      }
     </div>
   );
 }
