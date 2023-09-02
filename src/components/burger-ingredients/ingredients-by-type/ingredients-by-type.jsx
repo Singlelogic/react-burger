@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import CardIngredient from '../ingredient-card/ingredient-card'
-import ingredientPropTypes from '../ingredient-prop-types'
+import ingredientPropType from '../ingredient-prop-type'
 
 function IngredientsByType({ type, ingredients }) {
   return (
@@ -17,7 +17,7 @@ function IngredientsByType({ type, ingredients }) {
 
 IngredientsByType.propTypes = {
   type: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(ingredientPropTypes),
+  ingredients: PropTypes.arrayOf(ingredientPropType),
 }
 
 export default IngredientsByType;

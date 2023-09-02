@@ -1,10 +1,21 @@
+import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
-import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { data } from '../../utils/data';
+import {
+  Button,
+  ConstructorElement,
+  CurrencyIcon
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import ingredientPropType from '../burger-ingredients/ingredient-prop-type';
+import { parseData } from '../../utils/parseData';
 
-const bun = data.find(item => item._id === '60666c42cc7b410027a1a9b1');
+function BurgerConstructor({ data }) {
+  const ingredients = parseData(data);
+  const bun = ingredients['bun'][0];
+  const middleIngredients = [
+    ...ingredients['sauce'],
+    ...ingredients['main'],
+  ];
 
-function BurgerConstructor() {
   return (
     <div className={styles.burger_constructor}>
 
@@ -19,15 +30,16 @@ function BurgerConstructor() {
         />
 
         <div className={styles.middle_ingredients}>
-          {data.map((ingredient) => {
-            return (ingredient.type === 'main' || ingredient.type === 'sauce') &&
+          {middleIngredients.map((ingredient) => {
+            return (
               <ConstructorElement
                 key={ingredient._id}
                 text={ingredient.name}
                 price={ingredient.price}
                 thumbnail={ingredient.image}
               />
-           })}
+            )
+          })}
         </div>
 
         <ConstructorElement
@@ -47,6 +59,11 @@ function BurgerConstructor() {
       </div>
     </div>
   );
+}
+
+
+BurgerConstructor.propType = {
+  data: PropTypes.arrayOf(ingredientPropType),
 }
 
 export default BurgerConstructor;

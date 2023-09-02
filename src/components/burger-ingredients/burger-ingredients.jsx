@@ -1,19 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-ingredients.module.css';
+import ingredientPropType from './ingredient-prop-type';
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
-import { data } from '../../utils/data';
-import { parseIngredients } from '../../utils/parseData';
+import { parseData } from '../../utils/parseData';
 
 const typeIngredients = {
   'bun': 'Булки',
   'sauce': 'Соусы',
   'main': 'Начинки',
 };
-const ingredients = parseIngredients(data);
 
-function BurgerIngredients() {
+function BurgerIngredients({ data }) {
   const [current, setCurrent] = React.useState('bun');
+  const ingredients = parseData(data);
 
   return (
     <div className={styles.burger_ingredients}>
@@ -34,6 +35,10 @@ function BurgerIngredients() {
       </div>
     </div>
   )
+}
+
+BurgerIngredients.propType = {
+  data: PropTypes.arrayOf(ingredientPropType),
 }
 
 export default BurgerIngredients;

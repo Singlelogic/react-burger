@@ -1,11 +1,11 @@
-export function parseIngredients(ingredients) {
-  let groupIngredient = {};
+export function parseData(data) {
+  let groupData = {};
 
-  for (const ingredient of ingredients) {
-    const type = ingredient.type;
-    if (!(type in groupIngredient)) groupIngredient[type] = [];
-    groupIngredient[type].push(ingredient);
+  for (const item of data) {
+    const type = item.type;
+    if (!(type in groupData)) groupData[type] = [];
+    groupData[type].push(item);
   }
 
-  return groupIngredient;
+  return groupData;
 }
