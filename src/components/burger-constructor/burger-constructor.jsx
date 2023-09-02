@@ -20,15 +20,14 @@ function BurgerConstructor() {
 
         <div className={styles.middle_ingredients}>
           {data.map((ingredient) => {
-            return (ingredient.type === 'main' || ingredient.type === 'sauce') ?
+            return (ingredient.type === 'main' || ingredient.type === 'sauce') &&
               <ConstructorElement
                 key={ingredient._id}
                 text={ingredient.name}
                 price={ingredient.price}
                 thumbnail={ingredient.image}
-              /> : null}
-            )
-          }
+              />
+           })}
         </div>
 
         <ConstructorElement

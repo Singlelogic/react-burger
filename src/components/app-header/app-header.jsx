@@ -13,25 +13,25 @@ function AppHeader() {
       <nav className={styles.nav}>
         <ul className={styles.ul}>
           <li>
-            <button className={styles.btn}>
+            <a href="#" className={styles.link}>
               <BurgerIcon type="secondary" />
-              <span className={styles.btn_text}>Конструктор</span>
-            </button>
+              <span className={styles.link_text}>Конструктор</span>
+            </a>
           </li>
           <li>  
-            <button className={styles.btn}>
+            <a href="#" className={styles.link}>
               <ListIcon type="secondary" />
-              <span className={styles.btn_text}>Лента заказов</span>
-            </button>
+              <span className={styles.link_text}>Лента заказов</span>
+            </a>
           </li>
         </ul>
         <Logo />
         <ul className={styles.ul_end}>
           <li>
-            <button className={styles.btn}>
+            <a href="#" className={styles.link}>
               <ProfileIcon type="secondary" />
-              <span className={styles.btn_text}>Личный кабинет</span>
-            </button>
+              <span className={styles.link_text}>Личный кабинет</span>
+            </a>
           </li>
         </ul>
       </nav>
