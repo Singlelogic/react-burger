@@ -9,7 +9,7 @@ import {
 import ingredientPropType from '../burger-ingredients/ingredient-prop-type';
 import { parseData } from '../../utils/parseData';
 import Modal from '../modal/modal';
-import OrderDetails from '../order-details/order-details';
+import OrderDetails from './order-details/order-details';
 
 function BurgerConstructor({ data }) {
   const [isVisible, setIsVisible] = useState(false);

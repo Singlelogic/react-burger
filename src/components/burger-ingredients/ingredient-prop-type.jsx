@@ -4,7 +4,7 @@ const ingredientPropType = PropTypes.shape({
   _id: PropTypes.string.isRequired,
   name: PropTypes.string,
   type: PropTypes.string,
-  proteins:PropTypes.number,
+  proteins: PropTypes.number,
   fat: PropTypes.number,
   carbohydrates: PropTypes.number,
   calories: PropTypes.number,

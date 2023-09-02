@@ -9,7 +9,7 @@ function OrderDetails() {
       <p className="text text_type_main-default">Идентификатор заказа</p>
       <p className={styles.icon}><CheckMarkIcon type="secondary" /></p>
       <p className="text text_type_main-small">Ваш заказ начали готовить</p>
-      <p className={styles.text_gray + " text text_type_main-small"}>
+      <p className="text text_type_main-small text_color_inactive">
         Дождитесь готовности на орбитальной станции
       </p>
     </div>
