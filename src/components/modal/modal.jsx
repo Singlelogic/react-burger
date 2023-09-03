@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import ModalOverlay from './modal-overlay/modal-overlay';
 import styles from './modal.module.css';
 
@@ -40,6 +41,12 @@ function Modal(props) {
     ),
     modalRoot
   );
+}
+
+Modal.propTypes = {
+  children: PropTypes.node,
+  header: PropTypes.string,
+  onClose: PropTypes.func,
 }
 
 export default Modal;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './nutrient.module.css';
 
 function Nutrient({ title, value }) {
@@ -11,6 +12,11 @@ function Nutrient({ title, value }) {
       </span>
     </span>
   )
+}
+
+Nutrient.propTypes = {
+  title: PropTypes.string,
+  value: PropTypes.number,
 }
 
 export default Nutrient;

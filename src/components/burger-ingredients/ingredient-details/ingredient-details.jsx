@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
 import styles from './ingredient-details.module.css';
 import Nutrient from './nutrient/nutrient';
+import ingredientPropType from '../ingredient-prop-type';
 
 function IngredientDetails({ ingredient }) {
   return (
@@ -14,6 +16,10 @@ function IngredientDetails({ ingredient }) {
       </div>
     </div>
   )
+}
+
+IngredientDetails.propTypes = {
+  ingredient: PropTypes.objectOf(ingredientPropType),
 }
 
 export default IngredientDetails;

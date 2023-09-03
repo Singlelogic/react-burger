@@ -7,7 +7,6 @@ import Modal from '../../modal/modal';
 
 function CardIngredient({ ingredient }) {
   const [isVisible, setIsVisible] = useState(false);
-  const [ingredientId, setIngredientId] = useState(ingredient._id);
 
   function handleOpenModal() {
     setIsVisible(true)
@@ -32,7 +31,7 @@ function CardIngredient({ ingredient }) {
       </div>
 
       {isVisible &&
-        <Modal onClose={handleCloseModal} >
+        <Modal header="Детали ингредиента" onClose={handleCloseModal} >
           <IngredientDetails ingredient={ingredient} />
         </Modal>
       }
