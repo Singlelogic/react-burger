@@ -1,7 +1,7 @@
 .burger_constructor{
   display: flex;
   flex-direction: column;
-  max-width: 40vw;
+  width: 31vw;
   margin-left: 40px;
 }
 
@@ -12,7 +12,7 @@
 
 .custom_scrollbar {
   overflow: auto;
-  height: 330px;
+  height: 400px;
   margin-top:10px;
   margin-bottom:10px;
 }

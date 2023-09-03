@@ -1,10 +1,9 @@
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  list-style-type: none;
-  max-width: 15vw;
+  display: inline-block;
+  max-width: 10vw;
   position: relative;
+  padding-bottom: 32px;
+  margin-right: 80px;
 }
 
 .price {
@@ -12,8 +11,4 @@
   justify-content: center;
   margin-bottom: 5px;
   gap: 10px;
-}
-
-.currencyIcon {
-  padding-left: 45px;
 }

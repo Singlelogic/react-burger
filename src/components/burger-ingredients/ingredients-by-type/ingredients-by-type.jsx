@@ -4,14 +4,12 @@ import ingredientPropType from '../ingredient-prop-type'
 
 function IngredientsByType({ type, ingredients }) {
   return (
-    <>
+    <section>
       <h2>{type}</h2>
-      <ul>
-        {ingredients.map((ingredient) => (
-          <CardIngredient key={ingredient._id} ingredient={ingredient} />
-        ))}
-      </ul>
-    </>
+      {ingredients.map((ingredient) => (
+        <CardIngredient key={ingredient._id} ingredient={ingredient} />
+      ))}
+    </section>
   )
 }
 

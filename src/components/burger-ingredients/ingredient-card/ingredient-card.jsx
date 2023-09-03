@@ -23,7 +23,7 @@ function CardIngredient({ ingredient }) {
         <img src={ingredient.image} alt={ingredient.name} />
         <span className={styles.price}>
           <span className="text text_type_digits-default">{ingredient.price}</span>
-          <CurrencyIcon type="primary" className={styles.currencyIcon} />
+          <CurrencyIcon type="primary" />
         </span>
         <span className="text text_type_main-small">
           {ingredient.name}
