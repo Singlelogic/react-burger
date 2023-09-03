@@ -23,6 +23,8 @@
 }
 
 .link {
+  display: flex;
+  align-items: center;
   background-color: transparent;
   cursor: pointer;
   border: solid 0px;
