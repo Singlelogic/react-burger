@@ -7,27 +7,35 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 const url = "https://norma.nomoreparties.space/api/ingredients"
 
 function App() {
-  const [state, setState] = useState({
+  const [dataIngredients, setDataIngredients] = useState({
     isLoading: false,
     hasError: false,
     data: [],
   })
 
-  const getData = () => {
-    setState({ ...state, hasError: false, isLoading: true });
+  const getDataIngredients = () => {
+    setDataIngredients({ ...dataIngredients, hasError: false, isLoading: true });
     fetch(url)
-      .then(res => res.json())
-      .then(data => setState({ ...state, isLoading: false, data: data.data }))
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`${res.statusText} (status: ${res.status})`);
+        }
+        return res.json()
+      })
+      .then((data) => {
+        setDataIngredients({ ...dataIngredients, isLoading: false, data: data.data })
+      })
       .catch(e => {
-        setState({ ...state, hasError: true, isLoading: false })
+        console.log('Error:', e.message);
+        setDataIngredients({ ...dataIngredients, hasError: true, isLoading: false })
       });
   };
 
   useEffect(() => {
-    getData();
+    getDataIngredients();
   }, []);
 
-  const { data, isLoading, hasError } = state;
+  const { data, isLoading, hasError } = dataIngredients;
   return (
     <>
       <AppHeader />
