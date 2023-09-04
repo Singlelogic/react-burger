@@ -1,0 +1,14 @@
+.card {
+  display: inline-block;
+  max-width: 10vw;
+  position: relative;
+  padding-bottom: 32px;
+  margin-right: 80px;
+}
+
+.price {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  gap: 10px;
+}
