@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './order-details.module.css';
+import { ConstructorContext } from '../../../services/burger-constructor/constructor-context';
 
 function OrderDetails() {
+  const { burgerConstructor } = useContext(ConstructorContext);
+
   return (
     <div className={styles.content}>
-      <p className="text text_type_digits-large">034536</p>
+      <p className="text text_type_digits-large">
+        {burgerConstructor.orderNumber}
+      </p>
       <p className="text text_type_main-default">Идентификатор заказа</p>
       <p className={styles.icon}><CheckMarkIcon type="secondary" /></p>
       <p className="text text_type_main-small">Ваш заказ начали готовить</p>

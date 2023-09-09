@@ -9,17 +9,67 @@ import BurgerConstructorItem from './burger-constructor-item/burger-constructor-
 import Modal from '../modal/modal';
 import OrderDetails from './order-details/order-details';
 import { ConstructorContext } from '../../services/burger-constructor/constructor-context';
+import { SET_ORDER_NUMBER } from '../../services/burger-constructor/actions';
 
 function BurgerConstructor() {
   const [isVisible, setIsVisible] = useState(false);
-  const { burgerConstructor } = useContext(ConstructorContext);
+  const { burgerConstructor, burgerConstructorDispatch } = useContext(ConstructorContext);
+
+  function handleOrder() {
+    sendOrder();
+    handleOpenModal();
+  }
+
+  function sendOrder() {
+    fetch('https://norma.nomoreparties.space/api/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "ingredients": _getIngredientIds(),
+      })
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`${res.statusText} (status: ${res.status})`);
+        }
+        return res.json()
+      })
+      .then((data) => {
+        if (data.success) {
+          burgerConstructorDispatch({
+            type: SET_ORDER_NUMBER,
+            payload: {
+              number: data.order.number,
+            },
+          })
+        }
+      })
+      .catch(e => {
+        console.log('Error:', e.message);
+      });
+  }
+
+  function _getIngredientIds() {
+    let ingredientIds = [];
+
+    if (burgerConstructor.bun) {
+      ingredientIds.push(burgerConstructor.bun._id);
+    }
+    burgerConstructor.ingredients.map((ingredient) => {
+      ingredientIds.push(ingredient._id);
+    })
+
+    return ingredientIds;
+  }
 
   function handleOpenModal() {
-    setIsVisible(true)
+    setIsVisible(true);
   }
 
   function handleCloseModal() {
-    setIsVisible(false)
+    setIsVisible(false);
   }
 
   return (
@@ -60,7 +110,7 @@ function BurgerConstructor() {
           {burgerConstructor.totalPrice}
         </p>
         <CurrencyIcon type="primary"/>
-        <Button type="primary" size="medium" onClick={handleOpenModal}>
+        <Button type="primary" size="medium" onClick={handleOrder}>
           Оформить заказ
         </Button>
       </div>

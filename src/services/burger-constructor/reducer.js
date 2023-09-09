@@ -1,5 +1,5 @@
 import {v4 as uuidv4} from 'uuid';
-import { ADD_INGREDIENT, DELETE_INGREDIENT } from './actions';
+import { ADD_INGREDIENT, DELETE_INGREDIENT, SET_ORDER_NUMBER } from './actions';
 import { initConstructor } from './constructor-context';
 
 export const burgerConstructorReducer = (state = initConstructor, action) => {
@@ -38,6 +38,12 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
           ingredients: ingredients,
           totalPrice: getTotalPrice(ingredients, state.bun),
         };
+      }
+
+    case SET_ORDER_NUMBER:
+      return {
+        ...state,
+        orderNumber: action.payload.number,
       }
 
     default:
