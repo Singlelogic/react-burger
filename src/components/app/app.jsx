@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import styles from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
+import {
+  ConstructorContext,
+  initConstructor,
+} from '../../services/burger-constructor/constructor-context';
+import { burgerConstructorReducer } from '../../services/burger-constructor/reducer';
 
 const url = "https://norma.nomoreparties.space/api/ingredients"
 
@@ -12,6 +17,10 @@ function App() {
     hasError: false,
     data: [],
   })
+  const [burgerConstructor, burgerConstructorDispatch] = useReducer(
+    burgerConstructorReducer,
+    initConstructor,
+  );
 
   const getDataIngredients = () => {
     setDataIngredients({ ...dataIngredients, hasError: false, isLoading: true });
@@ -45,10 +54,10 @@ function App() {
         {!isLoading &&
          !hasError &&
          data.length &&
-          <>
+          <ConstructorContext.Provider value={{ burgerConstructor, burgerConstructorDispatch }}>
             <BurgerIngredients data={data} />
-            <BurgerConstructor data={data} />
-          </>
+            <BurgerConstructor />
+          </ConstructorContext.Provider>
         }
       </section>
     </>
