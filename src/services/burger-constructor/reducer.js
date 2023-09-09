@@ -2,11 +2,10 @@ import { ADD_INGREDIENT, DELETE_INGREDIENT } from './actions';
 import { initConstructor } from './constructor-context';
 
 export const burgerConstructorReducer = (state = initConstructor, action) => {
-  const type = action.payload.type;
-
   switch (action.type) {
+
     case ADD_INGREDIENT:
-      if (type === 'bun') {
+      if (action.payload.type === 'bun') {
         return {
           ...state,
           bun: action.payload,
@@ -21,8 +20,8 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
         };
       }
 
-    case DELETE_INGREDIENT && type === 'bun':
-      if (type === 'bun') {
+    case DELETE_INGREDIENT:
+      if (action.payload.type === 'bun') {
         return {
           ...state,
           bun: null,
@@ -30,7 +29,7 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
         };
       } else {
         let ingredients = state.ingredients.filter((ingredient) => {
-          return ingredient._id !== action.payload._id
+          return ingredient._id !== action.payload.id;
         })
         return {
           ...state,

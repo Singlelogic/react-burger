@@ -5,6 +5,7 @@ import {
   ConstructorElement,
   CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item';
 import Modal from '../modal/modal';
 import OrderDetails from './order-details/order-details';
 import { ConstructorContext } from '../../services/burger-constructor/constructor-context';
@@ -38,14 +39,7 @@ function BurgerConstructor() {
 
         <div className={styles.middle_ingredients}>
           {burgerConstructor.ingredients.map((ingredient) => {
-            return (
-              <ConstructorElement
-                key={ingredient._id}
-                text={ingredient.name}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
-              />
-            )
+            return <BurgerConstructorItem ingredient={ingredient} />
           })}
         </div>
 
