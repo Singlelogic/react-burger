@@ -12,14 +12,13 @@ function BurgerConstructorItem({ ingredient }) {
     burgerConstructorDispatch({
       type: DELETE_INGREDIENT,
       payload: {
-        id: ingredient._id,
+        id: ingredient.id,
       },
     })
   }
 
   return (
     <ConstructorElement
-      key={ingredient._id}
       text={ingredient.name}
       price={ingredient.price}
       thumbnail={ingredient.image}

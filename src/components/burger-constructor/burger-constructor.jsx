@@ -39,7 +39,7 @@ function BurgerConstructor() {
 
         <div className={styles.middle_ingredients}>
           {burgerConstructor.ingredients.map((ingredient) => {
-            return <BurgerConstructorItem ingredient={ingredient} />
+            return <BurgerConstructorItem key={ingredient.id} ingredient={ingredient} />
           })}
         </div>
 

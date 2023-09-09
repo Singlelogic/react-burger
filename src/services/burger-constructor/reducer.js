@@ -1,3 +1,4 @@
+import {v4 as uuidv4} from 'uuid';
 import { ADD_INGREDIENT, DELETE_INGREDIENT } from './actions';
 import { initConstructor } from './constructor-context';
 
@@ -12,7 +13,8 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
           totalPrice: getTotalPrice(state.ingredients, action.payload),
         };
       } else {
-        let ingredients = [...state.ingredients, action.payload]
+        const ingredient = {...action.payload, id: uuidv4()};
+        const ingredients = [...state.ingredients, ingredient];
         return {
           ...state,
           ingredients: ingredients,
@@ -29,7 +31,7 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
         };
       } else {
         let ingredients = state.ingredients.filter((ingredient) => {
-          return ingredient._id !== action.payload.id;
+          return ingredient.id !== action.payload.id;
         })
         return {
           ...state,
