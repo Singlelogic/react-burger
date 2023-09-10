@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useMemo } from 'react';
 import styles from './burger-constructor.module.css';
 import {
   Button,
@@ -58,7 +58,7 @@ function BurgerConstructor() {
       ingredientIds.push(burgerConstructor.bun._id);
     }
     burgerConstructor.ingredients.map((ingredient) => {
-      ingredientIds.push(ingredient._id);
+      return ingredientIds.push(ingredient._id);
     })
 
     return ingredientIds;
@@ -72,13 +72,24 @@ function BurgerConstructor() {
     setIsVisible(false);
   }
 
+  const totalPrice = useMemo(() => {
+    const bun = burgerConstructor.bun;
+    const ingredients = burgerConstructor.ingredients;
+
+    const priceBun = bun ? bun.price * 2 : 0;
+    const priceIngredients = ingredients.reduce((acc, ingredient) => {
+      return acc + ingredient.price
+    }, 0);
+
+    return priceBun + priceIngredients;
+  }, [burgerConstructor])
+
   return (
     <div className={styles.burger_constructor}>
 
       <div className={styles.list_ingredients}>
         {burgerConstructor.bun &&
           <ConstructorElement
-            key={burgerConstructor.bun._id}
             type="top"
             isLocked={true}
             text={burgerConstructor.bun.name + " (верх)"}
@@ -95,7 +106,6 @@ function BurgerConstructor() {
 
         {burgerConstructor.bun &&
           <ConstructorElement
-            key={burgerConstructor.bun._id}
             type="bottom"
             isLocked={true}
             text={burgerConstructor.bun.name + " (низ)"}
@@ -106,9 +116,7 @@ function BurgerConstructor() {
       </div>
 
       <div className={styles.order}>
-        <p className="text text_type_digits-medium">
-          {burgerConstructor.totalPrice}
-        </p>
+        <p className="text text_type_digits-medium">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
         <Button type="primary" size="medium" onClick={handleOrder}>
           Оформить заказ

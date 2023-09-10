@@ -10,15 +10,12 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
         return {
           ...state,
           bun: action.payload,
-          totalPrice: getTotalPrice(state.ingredients, action.payload),
         };
       } else {
         const ingredient = {...action.payload, id: uuidv4()};
-        const ingredients = [...state.ingredients, ingredient];
         return {
           ...state,
-          ingredients: ingredients,
-          totalPrice: getTotalPrice(ingredients, state.bun),
+          ingredients: [...state.ingredients, ingredient],
         };
       }
 
@@ -27,16 +24,13 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
         return {
           ...state,
           bun: null,
-          totalPrice: getTotalPrice(state.ingredients, null)
         };
       } else {
-        let ingredients = state.ingredients.filter((ingredient) => {
-          return ingredient.id !== action.payload.id;
-        })
         return {
           ...state,
-          ingredients: ingredients,
-          totalPrice: getTotalPrice(ingredients, state.bun),
+          ingredients: state.ingredients.filter((ingredient) => {
+            return ingredient.id !== action.payload.id;
+          })
         };
       }
 
@@ -49,14 +43,4 @@ export const burgerConstructorReducer = (state = initConstructor, action) => {
     default:
       throw new Error(`Wrong type of action: ${action.type}`);
   }
-}
-
-
-function getTotalPrice(ingredients, bun) {
-  const priceBun = bun ? bun.price * 2 : 0;
-  const priceIngredients = ingredients.reduce((acc, ingredient) => {
-    return acc + ingredient.price
-  }, 0);
-
-  return priceBun + priceIngredients;
 }
