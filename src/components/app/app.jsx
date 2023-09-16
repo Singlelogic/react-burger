@@ -10,6 +10,7 @@ function App() {
       <AppHeader />
       <section className={styles.content}>
         <BurgerIngredients />
+        <BurgerConstructor />
       </section>
     </>
   )

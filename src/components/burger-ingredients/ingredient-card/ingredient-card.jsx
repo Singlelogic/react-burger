@@ -1,19 +1,19 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './ingredient-card.module.css';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../../modal/modal';
-import { ConstructorContext } from '../../../services/burger-constructor/constructor-context';
-import { ADD_INGREDIENT } from '../../../services/burger-constructor/actions';
+import { addIngredient } from '../../../services/burger-constructor/actions';
 
 function CardIngredient({ ingredient }) {
   const [isVisible, setIsVisible] = useState(false);
-//  const { burgerConstructorDispatch } = useContext(ConstructorContext);
+  const dispatch = useDispatch();
 
   function handleClickCard() {
     handleOpenModal();
-//    burgerConstructorDispatch({type: ADD_INGREDIENT, payload: ingredient});
+    dispatch(addIngredient(ingredient));
   }
 
   function handleOpenModal() {

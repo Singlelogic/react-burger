@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Loader } from '../../ui/loader/loader';
 import styles from './burger-ingredients.module.css';
-import ingredientPropType from './ingredient-prop-type';
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
-import { geIngredients } from '../../services/burger-ingredients/actions';
+import { getIngredients } from '../../services/burger-ingredients/actions';
 
 const typeIngredients = {
   'bun': 'Булки',
@@ -25,7 +24,7 @@ function BurgerIngredients() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(geIngredients());
+    dispatch(getIngredients());
   }, [dispatch])
 
   const content = useMemo(() => {
@@ -47,7 +46,7 @@ function BurgerIngredients() {
           Ошибка загрузки данных!
         </p>
     )
-  }, [ingredientsRequest, ingredients]);
+  }, [ingredientsRequest, ingredients, ingredientsFailed]);
 
   return (
     <div className={styles.burger_ingredients}>

@@ -1,4 +1,5 @@
-import { useState, useContext, useMemo } from 'react';
+import { useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-constructor.module.css';
 import {
   Button,
@@ -8,50 +9,20 @@ import {
 import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item';
 import Modal from '../modal/modal';
 import OrderDetails from './order-details/order-details';
-import { ConstructorContext } from '../../services/burger-constructor/constructor-context';
-import { SET_ORDER_NUMBER } from '../../services/burger-constructor/actions';
+import { sendOrder } from '../../services/burger-constructor/actions';
 
 function BurgerConstructor() {
   const [isVisible, setIsVisible] = useState(false);
-  const { burgerConstructor, burgerConstructorDispatch } = useContext(ConstructorContext);
+  const burgerConstructor = useSelector(store => store.burgerConstructor)
+
+  const dispatch = useDispatch();
 
   function handleOrder() {
-    sendOrder();
+    dispatch(sendOrder(ingredientIds));
     handleOpenModal();
   }
 
-  function sendOrder() {
-    fetch('https://norma.nomoreparties.space/api/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "ingredients": _getIngredientIds(),
-      })
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`${res.statusText} (status: ${res.status})`);
-        }
-        return res.json()
-      })
-      .then((data) => {
-        if (data.success) {
-          burgerConstructorDispatch({
-            type: SET_ORDER_NUMBER,
-            payload: {
-              number: data.order.number,
-            },
-          })
-        }
-      })
-      .catch(e => {
-        console.log('Error:', e.message);
-      });
-  }
-
-  function _getIngredientIds() {
+  const ingredientIds = useMemo(() => {
     let ingredientIds = [];
 
     if (burgerConstructor.bun) {
@@ -62,7 +33,7 @@ function BurgerConstructor() {
     })
 
     return ingredientIds;
-  }
+  }, [burgerConstructor.bun, burgerConstructor.ingredients])
 
   function handleOpenModal() {
     setIsVisible(true);

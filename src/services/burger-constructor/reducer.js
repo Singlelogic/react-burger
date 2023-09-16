@@ -1,46 +1,69 @@
-import {v4 as uuidv4} from 'uuid';
-import { ADD_INGREDIENT, DELETE_INGREDIENT, SET_ORDER_NUMBER } from './actions';
-import { initConstructor } from './constructor-context';
+import {
+  ADD_INGREDIENT_BUN,
+  ADD_INGREDIENT,
+  DELETE_INGREDIENT_BUN,
+  DELETE_INGREDIENT,
+  SEND_ORDER_REQUEST,
+  SEND_ORDER_SUCCESS,
+  SEND_ORDER_FAILED,
+} from './actions';
 
-export const burgerConstructorReducer = (state = initConstructor, action) => {
+const initialState = {
+  ingredients: [],
+  bun: null,
+  sendOrderRequest: false,
+  sendOrderFailed: false,
+  orderNumber: null,
+}
+
+export const burgerConstructorReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case ADD_INGREDIENT:
-      if (action.payload.type === 'bun') {
-        return {
-          ...state,
-          bun: action.payload,
-        };
-      } else {
-        const ingredient = {...action.payload, id: uuidv4()};
-        return {
-          ...state,
-          ingredients: [...state.ingredients, ingredient],
-        };
-      }
-
-    case DELETE_INGREDIENT:
-      if (action.payload.type === 'bun') {
-        return {
-          ...state,
-          bun: null,
-        };
-      } else {
-        return {
-          ...state,
-          ingredients: state.ingredients.filter((ingredient) => {
-            return ingredient.id !== action.payload.id;
-          })
-        };
-      }
-
-    case SET_ORDER_NUMBER:
+    case ADD_INGREDIENT_BUN:
       return {
         ...state,
-        orderNumber: action.payload.number,
+        bun: action.bun,
+      };
+    case ADD_INGREDIENT:
+      return {
+        ...state,
+        ingredients: [...state.ingredients, action.ingredient],
+      };
+
+    case DELETE_INGREDIENT_BUN:
+      return {
+        ...state,
+        bun: null,
+      };
+    case DELETE_INGREDIENT:
+      return {
+        ...state,
+        ingredients: state.ingredients.filter((ingredient) => {
+          return ingredient.id !== action.ingredient.id;
+        })
+      };
+
+    case SEND_ORDER_REQUEST:
+      return {
+        ...state,
+        sendOrderRequest: true,
+        sendOrderFailed: false,
+      }
+    case SEND_ORDER_SUCCESS:
+      return {
+        ...state,
+        orderNumber: action.orderNumber,
+        sendOrderRequest: false,
+        sendOrderFailed: false,
+      }
+    case SEND_ORDER_FAILED:
+      return {
+        ...state,
+        sendOrderRequest: false,
+        sendOrderFailed: true,
       }
 
     default:
-      throw new Error(`Wrong type of action: ${action.type}`);
+      return state;
   }
 }
