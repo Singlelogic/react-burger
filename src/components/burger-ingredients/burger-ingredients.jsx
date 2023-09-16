@@ -1,10 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Loader } from '../../ui/loader/loader';
 import styles from './burger-ingredients.module.css';
 import ingredientPropType from './ingredient-prop-type';
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
-import { parseData } from '../../utils/parseData';
+import { geIngredients } from '../../services/burger-ingredients/actions';
 
 const typeIngredients = {
   'bun': 'Булки',
@@ -12,9 +13,41 @@ const typeIngredients = {
   'main': 'Начинки',
 };
 
-function BurgerIngredients({ data }) {
+function BurgerIngredients() {
   const [current, setCurrent] = React.useState('bun');
-  const ingredients = parseData(data);
+
+  const {
+    ingredients,
+    ingredientsRequest,
+    ingredientsFailed
+  } = useSelector(store => store.ingredients);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(geIngredients());
+  }, [dispatch])
+
+  const content = useMemo(() => {
+    return ingredientsRequest ? (
+      <Loader size="large" />
+    ) : (
+      !ingredientsFailed ?
+        <div className={styles.list_ingredients}>
+          {Object.keys(typeIngredients).map((key) => (
+            <IngredientsByType
+              key={key}
+              type={typeIngredients[key]}
+              ingredients={ingredients.filter((item) => item.type === key)}
+            />
+          ))}
+        </div>
+      :
+        <p className="text text_type_main-default">
+          Ошибка загрузки данных!
+        </p>
+    )
+  }, [ingredientsRequest, ingredients]);
 
   return (
     <div className={styles.burger_ingredients}>
@@ -28,17 +61,9 @@ function BurgerIngredients({ data }) {
         ))}
       </div>
 
-      <div className={styles.list_ingredients}>
-        {Object.keys(typeIngredients).map((key) => (
-          <IngredientsByType key={key} type={typeIngredients[key]} ingredients={ingredients[key]} />
-        ))}
-      </div>
+      {content}
     </div>
   )
-}
-
-BurgerIngredients.propType = {
-  data: PropTypes.arrayOf(ingredientPropType),
 }
 
 export default BurgerIngredients;

@@ -9,11 +9,11 @@ import { ADD_INGREDIENT } from '../../../services/burger-constructor/actions';
 
 function CardIngredient({ ingredient }) {
   const [isVisible, setIsVisible] = useState(false);
-  const { burgerConstructorDispatch } = useContext(ConstructorContext);
+//  const { burgerConstructorDispatch } = useContext(ConstructorContext);
 
   function handleClickCard() {
     handleOpenModal();
-    burgerConstructorDispatch({type: ADD_INGREDIENT, payload: ingredient});
+//    burgerConstructorDispatch({type: ADD_INGREDIENT, payload: ingredient});
   }
 
   function handleOpenModal() {
