@@ -5,7 +5,8 @@ import styles from './burger-constructor.module.css';
 import {
   Button,
   ConstructorElement,
-  CurrencyIcon
+  CurrencyIcon,
+  DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item';
 import Modal from '../modal/modal';
@@ -73,13 +74,16 @@ function BurgerConstructor() {
 
       <div className={className} ref={dropTarget}>
         {burgerConstructor.bun &&
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={burgerConstructor.bun.name + " (верх)"}
-            price={burgerConstructor.bun.price}
-            thumbnail={burgerConstructor.bun.image}
-          />
+          <>
+            <span className={styles.drag_bun}><DragIcon type="primary" /></span>
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={burgerConstructor.bun.name + " (верх)"}
+              price={burgerConstructor.bun.price}
+              thumbnail={burgerConstructor.bun.image}
+            />
+          </>
         }
 
         <div className={styles.middle_ingredients}>
@@ -89,13 +93,16 @@ function BurgerConstructor() {
         </div>
 
         {burgerConstructor.bun &&
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={burgerConstructor.bun.name + " (низ)"}
-            price={burgerConstructor.bun.price}
-            thumbnail={burgerConstructor.bun.image}
-          />
+          <>
+            <span className={styles.drag_bun}><DragIcon type="primary" /></span>
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={burgerConstructor.bun.name + " (низ)"}
+              price={burgerConstructor.bun.price}
+              thumbnail={burgerConstructor.bun.image}
+            />
+          </>
         }
       </div>
 

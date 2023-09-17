@@ -46,3 +46,7 @@
   border: dashed green;
   border-radius: 55px;
 }
+
+.drag_bun {
+  visibility: hidden;
+}
