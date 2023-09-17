@@ -6,6 +6,7 @@ import styles from './ingredient-card.module.css';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../../modal/modal';
 import { addIngredient } from '../../../services/burger-constructor/actions';
+import { selectIngredient, unselectIngredient } from '../../../services/burger-ingredients/actions';
 
 function CardIngredient({ ingredient }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -17,11 +18,13 @@ function CardIngredient({ ingredient }) {
   }
 
   function handleOpenModal() {
-    setIsVisible(true)
+    setIsVisible(true);
+    dispatch(selectIngredient(ingredient));
   }
 
   function handleCloseModal() {
-    setIsVisible(false)
+    setIsVisible(false);
+    dispatch(unselectIngredient());
   }
 
   return (
