@@ -12,14 +12,16 @@ import {
 const initialState = {
   ingredients: [],
   bun: null,
+}
+
+const orderInitialState = {
   sendOrderRequest: false,
   sendOrderFailed: false,
   orderNumber: null,
 }
 
-export const burgerConstructorReducer = (state = initialState, action) => {
+export const ConstructorIngredientsReducer = (state = initialState, action) => {
   switch (action.type) {
-
     case ADD_INGREDIENT_BUN:
       return {
         ...state,
@@ -30,7 +32,6 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         ...state,
         ingredients: [...state.ingredients, action.ingredient],
       };
-
     case DELETE_INGREDIENT_BUN:
       return {
         ...state,
@@ -43,7 +44,18 @@ export const burgerConstructorReducer = (state = initialState, action) => {
           return ingredient.id !== action.ingredient.id;
         })
       };
+    case MOVE_INGREDIENT:
+      return {
+        ...state,
+        ingredients: action.ingredients,
+      }
+    default:
+      return state;
+  }
+}
 
+export const orderReducer = (state = orderInitialState, action) => {
+  switch (action.type) {
     case SEND_ORDER_REQUEST:
       return {
         ...state,
@@ -63,13 +75,6 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         sendOrderRequest: false,
         sendOrderFailed: true,
       }
-
-    case MOVE_INGREDIENT:
-      return {
-        ...state,
-        ingredients: action.ingredients,
-      }
-
     default:
       return state;
   }

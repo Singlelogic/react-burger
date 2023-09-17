@@ -8,7 +8,7 @@ function OrderDetails() {
     sendOrderRequest,
     sendOrderFailed,
     orderNumber,
-  } = useSelector(store => store.burgerConstructor);
+  } = useSelector(store => store.order);
 
   return (
     sendOrderRequest ? (

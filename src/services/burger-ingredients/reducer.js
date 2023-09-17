@@ -10,7 +10,10 @@ const initialState = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
-  selectedIngredient: null,
+}
+
+const detailIngredientInitialState = {
+  ingredient: null,
 }
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
@@ -34,18 +37,23 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         ingredientsRequest: false,
         ingredientsFailed: true,
       }
+    default:
+      return state;
+  }
+}
 
+export const detailIngredientReducer = (state = detailIngredientInitialState, action) => {
+  switch (action.type) {
     case SELECT_INGREDIENT:
       return {
         ...state,
-        selectedIngredient: action.ingredient,
+        ingredient: action.ingredient,
       }
     case UNSELECT_INGREDIENT:
       return {
         ...state,
-        selectedIngredient: null,
+        ingredient: null,
       }
-
     default:
       return state;
   }
