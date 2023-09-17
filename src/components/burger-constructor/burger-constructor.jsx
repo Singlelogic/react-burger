@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css';
 import {
   Button,
@@ -9,13 +10,23 @@ import {
 import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item';
 import Modal from '../modal/modal';
 import OrderDetails from './order-details/order-details';
-import { sendOrder } from '../../services/burger-constructor/actions';
+import { addIngredient, sendOrder } from '../../services/burger-constructor/actions';
 
 function BurgerConstructor() {
   const [isVisible, setIsVisible] = useState(false);
   const burgerConstructor = useSelector(store => store.burgerConstructor)
 
   const dispatch = useDispatch();
+
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: 'burger-ingredients',
+    collect: monitor => ({
+      isHover: monitor.isOver(),
+    }),
+    drop(ingredient) {
+      dispatch(addIngredient(ingredient))
+    },
+  })
 
   function handleOrder() {
     dispatch(sendOrder(ingredientIds));
@@ -55,10 +66,12 @@ function BurgerConstructor() {
     return priceBun + priceIngredients;
   }, [burgerConstructor])
 
+  const className = `${styles.list_ingredients} ${ isHover ? styles.onHover : '' }`;
+
   return (
     <div className={styles.burger_constructor}>
 
-      <div className={styles.list_ingredients}>
+      <div className={className} ref={dropTarget}>
         {burgerConstructor.bun &&
           <ConstructorElement
             type="top"

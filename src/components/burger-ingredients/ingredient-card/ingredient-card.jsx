@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './ingredient-card.module.css';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../../modal/modal';
-import { addIngredient } from '../../../services/burger-constructor/actions';
 import { selectIngredient, unselectIngredient } from '../../../services/burger-ingredients/actions';
 
 function CardIngredient({ ingredient }) {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
-  function handleClickCard() {
-    handleOpenModal();
-    dispatch(addIngredient(ingredient));
-  }
+  const [, refDrag] = useDrag({
+    type: 'burger-ingredients',
+    item: ingredient,
+  });
 
   function handleOpenModal() {
     setIsVisible(true);
@@ -29,7 +29,7 @@ function CardIngredient({ ingredient }) {
 
   return (
     <>
-      <div className={styles.card} onClick={handleClickCard} >
+      <div className={styles.card} onClick={handleOpenModal} ref={refDrag}>
         <Counter count={1} size="small" />
         <img src={ingredient.image} alt={ingredient.name} />
         <span className={styles.price}>
