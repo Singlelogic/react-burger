@@ -67,7 +67,7 @@ function BurgerConstructor() {
     return priceBun + priceIngredients;
   }, [burgerConstructor])
 
-  const className = `${styles.list_ingredients} ${ isHover ? styles.onHover : '' }`;
+  const className = `${styles.list_ingredients} ${ isHover ? styles.on_hover : '' }`;
 
   return (
     <div className={styles.burger_constructor}>

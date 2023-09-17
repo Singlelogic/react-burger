@@ -6,6 +6,7 @@ import {
   SEND_ORDER_REQUEST,
   SEND_ORDER_SUCCESS,
   SEND_ORDER_FAILED,
+  MOVE_INGREDIENT,
 } from './actions';
 
 const initialState = {
@@ -61,6 +62,12 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         ...state,
         sendOrderRequest: false,
         sendOrderFailed: true,
+      }
+
+    case MOVE_INGREDIENT:
+      return {
+        ...state,
+        ingredients: action.ingredients,
       }
 
     default:
