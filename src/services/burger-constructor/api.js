@@ -1,8 +1,7 @@
-
-const url = "https://norma.nomoreparties.space/api/orders"
+import { baseURL, baseHandler } from '../base-api';
 
 export const sendOrderRequest = (ingredientIds) => {
-  return fetch(url, {
+  return fetch(baseURL + 'orders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -11,13 +10,6 @@ export const sendOrderRequest = (ingredientIds) => {
       "ingredients": ingredientIds,
     })
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(res.status);
-    })
-    .catch(err => {
-      console.log('ERROR: ', err.message);
-    })
+    .then((res) => baseHandler(res))
+    .catch(err => console.log('ERROR: ', err.message));
 }

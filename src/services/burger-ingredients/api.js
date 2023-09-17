@@ -1,15 +1,7 @@
-
-const url = "https://norma.nomoreparties.space/api/ingredients"
+import { baseURL, baseHandler } from '../base-api';
 
 export const getIngredientsRequest = () => {
-  return fetch(url)
-    .then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(res.status);
-    })
-    .catch(err => {
-      console.log('ERROR: ', err.message);
-    })
+  return fetch(baseURL + 'ingredients')
+    .then((res) => baseHandler(res))
+    .catch(err => console.log('ERROR: ', err.message));
 }

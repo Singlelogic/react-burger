@@ -19,7 +19,7 @@ function BurgerIngredients() {
     ingredients,
     ingredientsRequest,
     ingredientsFailed
-  } = useSelector(store => store.ingredients);
+  } = useSelector(store => store.burgerIngredients);
 
   const dispatch = useDispatch();
 
@@ -31,7 +31,11 @@ function BurgerIngredients() {
     return ingredientsRequest ? (
       <Loader size="large" />
     ) : (
-      !ingredientsFailed ?
+      ingredientsFailed ?
+        <p className="text text_type_main-default">
+          Ошибка загрузки данных!
+        </p>
+      :
         <div className={styles.list_ingredients}>
           {Object.keys(typeIngredients).map((key) => (
             <IngredientsByType
@@ -41,10 +45,6 @@ function BurgerIngredients() {
             />
           ))}
         </div>
-      :
-        <p className="text text_type_main-default">
-          Ошибка загрузки данных!
-        </p>
     )
   }, [ingredientsRequest, ingredients, ingredientsFailed]);
 

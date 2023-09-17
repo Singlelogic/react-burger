@@ -18,11 +18,10 @@ export function addIngredient(ingredient) {
       })
     }
   } else {
-    const ingredientWithUUID = {...ingredient, id: uuidv4()};
     return function(dispatch) {
       dispatch({
         type: ADD_INGREDIENT,
-        ingredient: ingredientWithUUID,
+        ingredient: {...ingredient, id: uuidv4()},
       })
     }
   }
