@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrag } from 'react-dnd';
 import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -11,11 +11,22 @@ import { selectIngredient, unselectIngredient } from '../../../services/burger-i
 function CardIngredient({ ingredient }) {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
+  const burgerConstructor = useSelector(store => store.burgerConstructor);
 
   const [, refDrag] = useDrag({
     type: 'burger-ingredients',
     item: ingredient,
   });
+
+  const count = useMemo(() => {
+    if (ingredient.type === 'bun' && burgerConstructor.bun) {
+      return burgerConstructor.bun._id === ingredient._id ? 1 : 0;
+    } else {
+      return burgerConstructor.ingredients.reduce((acc, constructorIngredient) => {
+        return acc + (constructorIngredient._id === ingredient._id ? 1 : 0)
+      }, 0)
+    }
+  }, [burgerConstructor.ingredients, burgerConstructor.bun]);
 
   function handleOpenModal() {
     setIsVisible(true);
@@ -30,7 +41,9 @@ function CardIngredient({ ingredient }) {
   return (
     <>
       <div className={styles.card} onClick={handleOpenModal} ref={refDrag}>
-        <Counter count={1} size="small" />
+        {count !== 0 &&
+          <Counter count={count} size="small" />
+        }
         <img src={ingredient.image} alt={ingredient.name} />
         <span className={styles.price}>
           <span className="text text_type_digits-default">{ingredient.price}</span>
