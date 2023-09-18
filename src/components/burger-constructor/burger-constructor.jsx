@@ -109,7 +109,7 @@ function BurgerConstructor() {
       <div className={styles.order}>
         <p className="text text_type_digits-medium">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-        <Button type="primary" size="medium" onClick={handleOrder}>
+        <Button type="primary" size="medium" onClick={handleOrder} htmlType={"button"}>
           Оформить заказ
         </Button>
       </div>

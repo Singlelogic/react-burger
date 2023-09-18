@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
-import PropTypes from 'prop-types';
 import {
   ConstructorElement,
   DragIcon,
@@ -36,7 +35,7 @@ function BurgerConstructorItem({ ingredient }) {
 
   return (
     <section ref={targetDrop}>
-      <span className={`${ isHover ? styles.on_hover : styles.hidden }`}></span>
+      <span className={`${isHover ? styles.on_hover : styles.hidden}`}/>
       <section ref={refDrag} style={{ opacity }}>
         <DragIcon type="primary" />
         <ConstructorElement
@@ -51,7 +50,7 @@ function BurgerConstructorItem({ ingredient }) {
 }
 
 BurgerConstructorItem.propTypes = {
-  ingredient: PropTypes.objectOf(ingredientPropType),
+  ingredient: ingredientPropType.isRequired,
 }
 
 export default BurgerConstructorItem;

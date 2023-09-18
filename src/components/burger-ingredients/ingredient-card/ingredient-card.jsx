@@ -26,7 +26,12 @@ function CardIngredient({ ingredient }) {
         return acc + (constructorIngredient._id === ingredient._id ? 1 : 0)
       }, 0)
     }
-  }, [burgerConstructor.ingredients, burgerConstructor.bun]);
+  }, [
+    burgerConstructor.ingredients,
+    burgerConstructor.bun,
+    ingredient._id,
+    ingredient.type,
+  ]);
 
   function handleOpenModal() {
     setIsVisible(true);
