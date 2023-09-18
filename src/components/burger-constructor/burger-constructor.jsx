@@ -29,6 +29,10 @@ function BurgerConstructor() {
     },
   })
 
+  const isOrderAllowed = useMemo(() => {
+    return burgerConstructor.bun !== null;
+  }, [burgerConstructor.bun])
+
   function handleOrder() {
     dispatch(sendOrder(ingredientIds));
     handleOpenModal();
@@ -109,10 +113,21 @@ function BurgerConstructor() {
       <div className={styles.order}>
         <p className="text text_type_digits-medium">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-        <Button type="primary" size="medium" onClick={handleOrder} htmlType={"button"}>
+        <Button
+          type="primary"
+          size="medium"
+          onClick={handleOrder}
+          htmlType={"button"}
+          disabled={!isOrderAllowed}
+        >
           Оформить заказ
         </Button>
       </div>
+      {!isOrderAllowed &&
+        <div className={styles.help_text}>
+          Для оформления заказа необходимо добавить булку!
+        </div>
+      }
 
       {isVisible &&
         <Modal onClose={handleCloseModal} >

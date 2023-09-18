@@ -50,3 +50,10 @@
 .drag_bun {
   visibility: hidden;
 }
+
+.help_text {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: 0;
+  color: #8585ad;
+}
