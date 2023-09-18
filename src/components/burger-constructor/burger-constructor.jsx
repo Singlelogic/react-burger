@@ -13,9 +13,11 @@ import Modal from '../modal/modal';
 import OrderDetails from './order-details/order-details';
 import { addIngredient, sendOrder } from '../../services/burger-constructor/actions';
 
+export const getBurgerConstructor = (state) => state.burgerConstructor;
+
 function BurgerConstructor() {
   const [isVisible, setIsVisible] = useState(false);
-  const burgerConstructor = useSelector(store => store.burgerConstructor)
+  const burgerConstructor = useSelector(getBurgerConstructor)
 
   const dispatch = useDispatch();
 

@@ -11,9 +11,11 @@ import {
   moveIngredient,
 } from '../../../services/burger-constructor/actions';
 
+const getConstructorIngredients = (state) => state.burgerConstructor.ingredients;
+
 function BurgerConstructorItem({ ingredient }) {
   const dispatch = useDispatch();
-  const ingredients = useSelector(store => store.burgerConstructor.ingredients);
+  const ingredients = useSelector(getConstructorIngredients);
 
   const [{ opacity }, refDrag] = useDrag({
     type: 'burger-constructor',

@@ -12,6 +12,8 @@ const typeIngredients = {
   'main': 'Начинки',
 };
 
+const getBurgerIngredients = (state) => state.burgerIngredients;
+
 function BurgerIngredients() {
   const dispatch = useDispatch();
   const [current, setCurrent] = React.useState('bun');
@@ -20,7 +22,7 @@ function BurgerIngredients() {
     ingredients,
     ingredientsRequest,
     ingredientsFailed
-  } = useSelector(store => store.burgerIngredients);
+  } = useSelector(getBurgerIngredients);
 
   useEffect(() => {
     dispatch(getIngredients());

@@ -3,12 +3,14 @@ import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-component
 import { Loader } from '../../../ui/loader/loader';
 import styles from './order-details.module.css';
 
+const getOrder = (state) => state.order;
+
 function OrderDetails() {
   const {
     sendOrderRequest,
     sendOrderFailed,
     orderNumber,
-  } = useSelector(store => store.order);
+  } = useSelector(getOrder);
 
   return (
     sendOrderRequest ? (

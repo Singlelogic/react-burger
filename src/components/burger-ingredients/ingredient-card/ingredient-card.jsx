@@ -7,11 +7,12 @@ import styles from './ingredient-card.module.css';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import Modal from '../../modal/modal';
 import { selectIngredient, unselectIngredient } from '../../../services/burger-ingredients/actions';
+import { getBurgerConstructor } from '../../burger-constructor/burger-constructor';
 
 function CardIngredient({ ingredient }) {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
-  const burgerConstructor = useSelector(store => store.burgerConstructor);
+  const burgerConstructor = useSelector(getBurgerConstructor);
 
   const [, refDrag] = useDrag({
     type: 'burger-ingredients',
