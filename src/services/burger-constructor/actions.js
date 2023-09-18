@@ -5,6 +5,7 @@ export const ADD_INGREDIENT_BUN = 'ADD_INGREDIENT_BUN';
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const DELETE_INGREDIENT_BUN = 'DELETE_INGREDIENT_BUN';
 export const DELETE_INGREDIENT = 'DELETE_INGREDIENT';
+export const CLEAR_CONSTRUCTOR = 'CLEAR_CONSTRUCTOR';
 export const SEND_ORDER_REQUEST = 'SEND_ORDER_REQUEST';
 export const SEND_ORDER_SUCCESS = 'SEND_ORDER_SUCCESS';
 export const SEND_ORDER_FAILED = 'SEND_ORDER_FAILED';
@@ -46,26 +47,6 @@ export function deleteIngredient(ingredient) {
   }
 }
 
-export function sendOrder(ingredientIds) {
-  return function(dispatch) {
-    dispatch({
-      type: SEND_ORDER_REQUEST,
-    });
-    sendOrderRequest(ingredientIds).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: SEND_ORDER_SUCCESS,
-          orderNumber: res.order.number,
-        });
-      } else {
-        dispatch({
-          type: SEND_ORDER_FAILED,
-        });
-      }
-    });
-  };
-}
-
 export function moveIngredient(dragIngredient, dropIngredient, ingredients) {
   let fromIndex = ingredients.indexOf(dragIngredient);
   let toIndex = ingredients.indexOf(dropIngredient);
@@ -83,4 +64,27 @@ export function moveIngredient(dragIngredient, dropIngredient, ingredients) {
       ingredients: newIngredients,
     })
   }
+}
+
+export function sendOrder(ingredientIds) {
+  return function(dispatch) {
+    dispatch({
+      type: SEND_ORDER_REQUEST,
+    });
+    sendOrderRequest(ingredientIds).then(res => {
+      if (res && res.success) {
+        dispatch({
+          type: SEND_ORDER_SUCCESS,
+          orderNumber: res.order.number,
+        });
+        dispatch({
+          type: CLEAR_CONSTRUCTOR,
+        })
+      } else {
+        dispatch({
+          type: SEND_ORDER_FAILED,
+        });
+      }
+    });
+  };
 }

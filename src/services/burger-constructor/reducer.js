@@ -3,6 +3,7 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT_BUN,
   DELETE_INGREDIENT,
+  CLEAR_CONSTRUCTOR,
   SEND_ORDER_REQUEST,
   SEND_ORDER_SUCCESS,
   SEND_ORDER_FAILED,
@@ -48,6 +49,12 @@ export const ConstructorIngredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: action.ingredients,
+      }
+    case CLEAR_CONSTRUCTOR:
+      return {
+        ...state,
+        ingredients: [],
+        bun: null,
       }
     default:
       return state;
