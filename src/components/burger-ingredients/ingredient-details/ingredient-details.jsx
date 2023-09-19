@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import styles from './ingredient-details.module.css';
 import Nutrient from './nutrient/nutrient';
 import ingredientPropType from '../ingredient-prop-type';
@@ -19,7 +18,7 @@ function IngredientDetails({ ingredient }) {
 }
 
 IngredientDetails.propTypes = {
-  ingredient: PropTypes.objectOf(ingredientPropType),
+  ingredient: ingredientPropType.isRequired,
 }
 
 export default IngredientDetails;
