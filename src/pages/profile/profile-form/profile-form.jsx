@@ -1,15 +1,15 @@
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./profile-form.module.css";
 
 
-const getUserStore = (store) => store.user.user;
+const getUserStore = (store) => store.user.user.data;
 
 function ProfileForm() {
   const { name, email } = useSelector(getUserStore);
-  const [form, setForm] = useState({name, email, password: ""});
+  const [form, setForm] = useState({name, email, password: "********"});
 
   const handleChangeForm = (e) => {
     setForm({...form, [e.target.name]: e.target.value });

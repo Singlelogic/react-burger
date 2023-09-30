@@ -31,7 +31,7 @@ function Login() {
       <form className={styles.form} onSubmit={handleSubmit}>
         <EmailInput onChange={handleChangeForm} value={form.email} name={"email"} />
         <PasswordInput onChange={handleChangeForm} value={form.password} name={"password"} />
-        <Button type="primary" size="medium">
+        <Button type="primary" size="medium" htmlType={"submit"}>
           Войти
         </Button>
       </form>

@@ -5,7 +5,7 @@ import { ConstructorIngredientsReducer } from "./burger-constructor/reducers/bur
 import { orderReducer } from "./burger-constructor/reducers/order";
 import { burgerIngredientsReducer } from "./burger-ingredients/reducers/burger-ingredients";
 import { detailIngredientReducer } from "./burger-ingredients/reducers/detail-ingredient";
-import { userReducer } from "./user/reducers/user";
+import { userReducer } from "./user/reducers";
 
 
 export const rootReducer = combineReducers({

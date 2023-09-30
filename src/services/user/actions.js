@@ -18,7 +18,7 @@ export function setUser(user) {
   return function(dispatch) {
     dispatch({
       type: SET_USER,
-      user: user,
+      data: user,
     })
   }
 }
@@ -33,8 +33,8 @@ export function getUser() {
         if (res && res.success) {
           dispatch({
             type: GET_USER_SUCCESS,
-            user: res.user,
-          })
+          });
+          dispatch(setUser(res.user));
         } else {
           dispatch({
             type: GET_USER_FAILED,

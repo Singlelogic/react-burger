@@ -17,7 +17,6 @@ export function logout(refreshToken) {
         dispatch({
           type: LOGOUT_SUCCESS,
         });
-        console.log("res", res);
         localStorage.removeItem("accessToken");
         deleteCookie("refreshToken");
         dispatch(setUser(null));
