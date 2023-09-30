@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  width: 1250px;
+}
+
+.nav {
+  display: block;
+  max-width: 320px;
+  margin-bottom: 80px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+}
