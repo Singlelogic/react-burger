@@ -1,5 +1,5 @@
 import { baseAuthURL } from "../base-auth-api";
-import { baseHandlerResponse } from "../../base-api";
+import { checkResponse } from "../../base-api";
 
 
 export const logoutRequest = (refreshToken) => {
@@ -13,6 +13,6 @@ export const logoutRequest = (refreshToken) => {
       token: refreshToken,
     }),
   })
-    .then((res) => baseHandlerResponse(res))
+    .then((res) => checkResponse(res))
     .catch(err => console.log("ERROR: ", err.message));
 }

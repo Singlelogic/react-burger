@@ -41,10 +41,5 @@ export function getUser() {
           });
         }
       })
-      .catch(() => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        dispatch(setUser(null));
-      })
   };
 }

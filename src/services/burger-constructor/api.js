@@ -1,4 +1,4 @@
-import { baseURL, baseHandlerResponse } from '../base-api';
+import { baseURL, checkResponse } from '../base-api';
 
 export const sendOrderRequest = (ingredientIds) => {
   return fetch(baseURL + 'orders', {
@@ -10,6 +10,6 @@ export const sendOrderRequest = (ingredientIds) => {
       "ingredients": ingredientIds,
     })
   })
-    .then((res) => baseHandlerResponse(res))
+    .then((res) => checkResponse(res))
     .catch(err => console.log('ERROR: ', err.message));
 }

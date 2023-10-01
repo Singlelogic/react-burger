@@ -1,5 +1,5 @@
 import { baseAuthURL } from "../base-auth-api";
-import { baseHandlerResponse } from "../../base-api";
+import { checkResponse } from "../../base-api";
 
 
 export const registrationRequest = (data) => {
@@ -14,6 +14,6 @@ export const registrationRequest = (data) => {
       "password": data.password,
     })
   })
-    .then((res) => baseHandlerResponse(res))
+    .then((res) => checkResponse(res))
     .catch(err => console.log("ERROR: ", err.message));
 }
