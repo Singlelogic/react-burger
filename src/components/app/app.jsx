@@ -9,6 +9,7 @@ import Login from "../../pages/auth/login/login";
 import Registration from "../../pages/auth/registration/registration";
 import ResetPassword from "../../pages/auth/reset-password/reset-password";
 import Home from "../../pages/home/home";
+import NotFound404 from "../../pages/not-found/not-found";
 import Profile from "../../pages/profile/profile";
 import ProfileForm from "../../pages/profile/profile-form/profile-form";
 import { checkUserAuth } from "../../services/user/actions";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
           <Route path="" element={<OnlyAuth component={<ProfileForm />} />} />
         </Route>
+        <Route path="*" element={<NotFound404 />} />
       </Routes>
     </>
   )
