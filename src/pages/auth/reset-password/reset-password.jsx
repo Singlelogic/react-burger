@@ -12,7 +12,7 @@ import { resetPassword } from "../../../services/auth/reset-password/actions";
 
 function ResetPassword() {
   const dispatch = useDispatch();
-  const [form, setForm] = useState({ password: "", code: "" });
+  const [form, setForm] = useState({ password: "", token: "" });
 
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -44,8 +44,8 @@ function ResetPassword() {
           type={"text"}
           placeholder={"Введите код из письма"}
           onChange={handleChangeForm}
-          value={form.code}
-          name={"code"}
+          value={form.token}
+          name={"token"}
           error={false}
           errorText={"Ошибка"}
           size={"default"}

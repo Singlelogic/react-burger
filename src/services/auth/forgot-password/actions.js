@@ -1,5 +1,3 @@
-import { redirect } from "react-router-dom";
-
 import { forgotPasswordRequest } from "./api";
 
 export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
@@ -17,7 +15,7 @@ export function forgotPassword(data) {
         dispatch({
           type: FORGOT_PASSWORD_SUCCESS,
         });
-        return redirect("/reset-password");
+        window.location.replace("/reset-password");
       } else {
         dispatch({
           type: FORGOT_PASSWORD_FAILED,
