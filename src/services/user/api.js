@@ -9,3 +9,17 @@ export const getUserRequest = () => {
     },
   })
 }
+
+export const updateUserRequest = (form) => {
+  return fetchWithRefresh(baseURL + "auth/user", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "authorization": "Bearer " + localStorage.getItem("accessToken"),
+    },
+    body: JSON.stringify({
+      "name": form.name,
+      "email": form.email,
+    })
+  })
+}
