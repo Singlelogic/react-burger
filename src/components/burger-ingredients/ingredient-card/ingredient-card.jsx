@@ -33,22 +33,24 @@ function CardIngredient({ ingredient }) {
   ]);
 
   return (
-    <Link style= {{ textDecoration: "none" }} to={{
-      pathname: `ingredients/${ingredient._id}`,
-      search: "isModal=true",
-    }}>
-      <div className={styles.card} ref={refDrag}>
-        {count !== 0 && <Counter count={count} size="small" />}
-        <img src={ingredient.image} alt={ingredient.name} />
-        <span className={styles.price}>
-          <span className="text text_type_digits-default">{ingredient.price}</span>
-          <CurrencyIcon type="primary" />
-        </span>
-        <span className="text text_type_main-small">
-          {ingredient.name}
-        </span>
-      </div>
-    </Link>
+    <div className={styles.content}>
+      <Link style= {{ textDecoration: "none" }} to={{
+        pathname: `ingredients/${ingredient._id}`,
+        search: "isModal=true",
+      }}>
+        <div className={styles.card} ref={refDrag}>
+          {count !== 0 && <Counter count={count} size="small" />}
+          <img src={ingredient.image} alt={ingredient.name} />
+          <span className={styles.price}>
+            <span className="text text_type_digits-default">{ingredient.price}</span>
+            <CurrencyIcon type="primary" />
+          </span>
+          <span className="text text_type_main-small">
+            {ingredient.name}
+          </span>
+        </div>
+      </Link>
+    </div>
   )
 }
 
