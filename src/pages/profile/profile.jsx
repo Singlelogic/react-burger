@@ -23,12 +23,16 @@ function Profile() {
           <nav className={styles.nav}>
             <ul className={styles.list}>
               <li className={styles.item}>
-                <NavLink to="" className={classNameLink}>
+                <NavLink to="" className={({ isActive }) =>
+                  `${classNameLink} ${isActive ? styles.active : ""}`
+                }>
                   Профиль
                 </NavLink>
               </li>
               <li className={styles.item}>
-                <NavLink to="orders" className={classNameLink}>
+                <NavLink to="orders" className={({ isActive }) =>
+                  `${classNameLink} ${isActive ? styles.active : ""}`
+                }>
                   История заказов
                 </NavLink>
               </li>

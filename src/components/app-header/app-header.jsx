@@ -17,8 +17,14 @@ function AppHeader() {
         <ul className={styles.ul}>
           <li className={styles.item}>
             <NavLink to="/" className={styles.link}>
-              <BurgerIcon type="secondary" />
-              <span className={styles.link_text}>Конструктор</span>
+              {({ isActive }) => (
+                <>
+                  <BurgerIcon type={isActive ? "primary" : "secondary"} />
+                  <span className={`${styles.link_text} ${isActive ? styles.active : ""}`}>
+                    Конструктор
+                  </span>
+                </>
+              )}
             </NavLink>
           </li>
           <li>  
@@ -34,8 +40,14 @@ function AppHeader() {
         <ul className={styles.ul_end}>
           <li>
             <NavLink to="/profile" className={styles.link}>
-              <ProfileIcon type="secondary" />
-              <span className={styles.link_text}>Личный кабинет</span>
+              {({ isActive }) => (
+                <>
+                  <ProfileIcon type={isActive ? "primary" : "secondary"} />
+                  <span className={`${styles.link_text} ${isActive ? styles.active : ""}`}>
+                    Личный кабинет
+                  </span>
+                </>
+              )}
             </NavLink>
           </li>
         </ul>
