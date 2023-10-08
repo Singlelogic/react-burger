@@ -2,7 +2,7 @@ import {
   Button,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -13,6 +13,10 @@ import { forgotPassword } from "../../../services/auth/forgot-password/actions";
 function ForgotPassword() {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ email: "" });
+
+  useEffect(() => {
+    localStorage.setItem("forgotPasswordPageVisited", true);
+  }, [])
 
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

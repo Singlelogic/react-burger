@@ -2,7 +2,7 @@ import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -13,6 +13,12 @@ import { resetPassword } from "../../../services/auth/reset-password/actions";
 function ResetPassword() {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ password: "", token: "" });
+
+  useEffect(() => {
+    if (!localStorage.getItem("forgotPasswordPageVisited")) {
+      window.location.replace("/forgot-password");
+    }
+  }, [])
 
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

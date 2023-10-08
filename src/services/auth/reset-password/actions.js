@@ -16,6 +16,7 @@ export function resetPassword(data) {
           type: RESET_PASSWORD_SUCCESS,
         });
         window.location.replace("/login");
+        localStorage.removeItem("forgotPasswordPageVisited");
       } else {
         dispatch({
           type: RESET_PASSWORD_FAILED,
