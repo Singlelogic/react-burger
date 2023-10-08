@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
-import AppHeader from '../../components/app-header/app-header';
+import AppHeader from "../../components/app-header/app-header";
+import IngredientDetails from "../../components/burger-ingredients/ingredient-details/ingredient-details";
 import ForgotPassword from "../../pages/auth/forgot-password/forgot-password";
 import Login from "../../pages/auth/login/login";
 import Registration from "../../pages/auth/registration/registration";
@@ -12,6 +13,7 @@ import Home from "../../pages/home/home";
 import NotFound404 from "../../pages/not-found/not-found";
 import Profile from "../../pages/profile/profile";
 import ProfileForm from "../../pages/profile/profile-form/profile-form";
+import { getIngredients } from '../../services/burger-ingredients/actions';
 import { checkUserAuth } from "../../services/user/actions";
 
 
@@ -20,7 +22,11 @@ function App() {
 
   useEffect(() => {
     dispatch(checkUserAuth());
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch])
 
   return (
     <>
@@ -34,6 +40,7 @@ function App() {
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
           <Route path="" element={<OnlyAuth component={<ProfileForm />} />} />
         </Route>
+        <Route path="/ingredients/:id" element={<IngredientDetails />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
     </>

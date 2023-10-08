@@ -1,17 +1,15 @@
-import { useState, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useDrag } from 'react-dnd';
-import PropTypes from 'prop-types';
-import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './ingredient-card.module.css';
-import IngredientDetails from '../ingredient-details/ingredient-details';
-import Modal from '../../modal/modal';
-import { selectIngredient, unselectIngredient } from '../../../services/burger-ingredients/actions';
-import { getBurgerConstructor } from '../../burger-constructor/burger-constructor';
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
+import { useMemo } from "react";
+import { useDrag } from "react-dnd";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import styles from "./ingredient-card.module.css";
+import { getBurgerConstructor } from "../../burger-constructor/burger-constructor";
+
 
 function CardIngredient({ ingredient }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const dispatch = useDispatch();
   const burgerConstructor = useSelector(getBurgerConstructor);
 
   const [, refDrag] = useDrag({
@@ -34,22 +32,13 @@ function CardIngredient({ ingredient }) {
     ingredient.type,
   ]);
 
-  function handleOpenModal() {
-    setIsVisible(true);
-    dispatch(selectIngredient(ingredient));
-  }
-
-  function handleCloseModal() {
-    setIsVisible(false);
-    dispatch(unselectIngredient());
-  }
-
   return (
-    <>
-      <div className={styles.card} onClick={handleOpenModal} ref={refDrag}>
-        {count !== 0 &&
-          <Counter count={count} size="small" />
-        }
+    <Link style= {{ textDecoration: "none" }} to={{
+      pathname: `ingredients/${ingredient._id}`,
+      search: "isModal=true",
+    }}>
+      <div className={styles.card} ref={refDrag}>
+        {count !== 0 && <Counter count={count} size="small" />}
         <img src={ingredient.image} alt={ingredient.name} />
         <span className={styles.price}>
           <span className="text text_type_digits-default">{ingredient.price}</span>
@@ -59,13 +48,7 @@ function CardIngredient({ ingredient }) {
           {ingredient.name}
         </span>
       </div>
-
-      {isVisible &&
-        <Modal header="Детали ингредиента" onClose={handleCloseModal} >
-          <IngredientDetails ingredient={ingredient} />
-        </Modal>
-      }
-    </>
+    </Link>
   )
 }
 
