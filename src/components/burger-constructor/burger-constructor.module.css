@@ -1,8 +1,7 @@
 .burger_constructor{
   display: flex;
   flex-direction: column;
-  width: 31vw;
-  margin-left: 40px;
+  width: 42vw;
 }
 
 .list_ingredients {
@@ -12,7 +11,7 @@
 
 .custom_scrollbar {
   overflow: auto;
-  height: 400px;
+  height: 330px;
   margin-top:10px;
   margin-bottom:10px;
 }

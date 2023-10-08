@@ -83,7 +83,7 @@ function BurgerIngredients() {
   }, [ingredientsRequest, ingredients, ingredientsFailed]);
 
   return (
-    <div className={styles.burger_ingredients}>
+    <div className={styles.content}>
       <h1 className="text text_type_main-large">Соберите бургер</h1>
 
       <div className={styles.tabs}>
