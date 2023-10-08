@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
 
-const getUserStore = (store) => store.user;
+export const getUserStore = (store) => store.user;
 
 const ProtectedRouteElement = ({ onlyAuth = true, component }) => {
   const { loadUser, user } = useSelector(getUserStore);

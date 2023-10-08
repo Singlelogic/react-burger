@@ -4,7 +4,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./reset-password.module.css";
 import { resetPassword } from "../../../services/auth/reset-password/actions";
@@ -12,11 +12,12 @@ import { resetPassword } from "../../../services/auth/reset-password/actions";
 
 function ResetPassword() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [form, setForm] = useState({ password: "", token: "" });
 
   useEffect(() => {
     if (!localStorage.getItem("forgotPasswordPageVisited")) {
-      window.location.replace("/forgot-password");
+      navigate("/forgot-password");
     }
   }, [])
 

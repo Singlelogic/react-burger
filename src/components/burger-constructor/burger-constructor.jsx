@@ -1,25 +1,31 @@
-import { useState, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useDrop } from 'react-dnd';
-import styles from './burger-constructor.module.css';
 import {
   Button,
   ConstructorElement,
   CurrencyIcon,
   DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item';
-import Modal from '../modal/modal';
-import OrderDetails from './order-details/order-details';
-import { addIngredient, sendOrder } from '../../services/burger-constructor/actions';
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useState, useMemo } from "react";
+import { useDrop } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import styles from "./burger-constructor.module.css";
+import BurgerConstructorItem from "./burger-constructor-item/burger-constructor-item";
+import OrderDetails from "./order-details/order-details";
+import Modal from "../modal/modal";
+import { getUserStore } from "../protected-route-element/protected-route-element";
+import { addIngredient, sendOrder } from "../../services/burger-constructor/actions";
+
 
 export const getBurgerConstructor = (state) => state.burgerConstructor;
 
 function BurgerConstructor() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
   const burgerConstructor = useSelector(getBurgerConstructor)
-
-  const dispatch = useDispatch();
+  const { loadUser, user } = useSelector(getUserStore);
+  const location = useLocation();
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'burger-ingredients',
@@ -36,8 +42,14 @@ function BurgerConstructor() {
   }, [burgerConstructor.bun])
 
   function handleOrder() {
-    dispatch(sendOrder(ingredientIds));
-    handleOpenModal();
+    if (!loadUser.isRequest) {
+      if (user.data) {
+        dispatch(sendOrder(ingredientIds));
+        handleOpenModal();
+      } else {
+        return navigate("/login");
+      }
+    }
   }
 
   const ingredientIds = useMemo(() => {

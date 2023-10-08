@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 import Nutrient from "./nutrient/nutrient";
@@ -10,6 +10,7 @@ import Modal from "../../modal/modal";
 
 
 function IngredientDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const {
@@ -28,7 +29,7 @@ function IngredientDetails() {
   })
 
   function handleCloseModal() {
-    window.location.replace("/");
+    navigate("/");
   }
 
   const content = useMemo(() => {
