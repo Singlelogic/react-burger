@@ -1,37 +1,54 @@
-import React from 'react';
 import {
   BurgerIcon,
   ListIcon,
   Logo,
   ProfileIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './app-header.module.css';
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+
+import styles from "./app-header.module.css";
+
 
 function AppHeader() {
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
         <ul className={styles.ul}>
-          <li>
-            <a href="#" className={styles.link}>
-              <BurgerIcon type="secondary" />
-              <span className={styles.link_text}>Конструктор</span>
-            </a>
+          <li className={styles.item}>
+            <NavLink to="/" className={styles.link}>
+              {({ isActive }) => (
+                <>
+                  <BurgerIcon type={isActive ? "primary" : "secondary"} />
+                  <span className={`${styles.link_text} ${isActive ? styles.active : ""}`}>
+                    Конструктор
+                  </span>
+                </>
+              )}
+            </NavLink>
           </li>
           <li>  
-            <a href="#" className={styles.link}>
+            <NavLink to="#" className={styles.link}>
               <ListIcon type="secondary" />
               <span className={styles.link_text}>Лента заказов</span>
-            </a>
+            </NavLink>
           </li>
         </ul>
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <ul className={styles.ul_end}>
           <li>
-            <a href="#" className={styles.link}>
-              <ProfileIcon type="secondary" />
-              <span className={styles.link_text}>Личный кабинет</span>
-            </a>
+            <NavLink to="/profile" className={styles.link}>
+              {({ isActive }) => (
+                <>
+                  <ProfileIcon type={isActive ? "primary" : "secondary"} />
+                  <span className={`${styles.link_text} ${isActive ? styles.active : ""}`}>
+                    Личный кабинет
+                  </span>
+                </>
+              )}
+            </NavLink>
           </li>
         </ul>
       </nav>

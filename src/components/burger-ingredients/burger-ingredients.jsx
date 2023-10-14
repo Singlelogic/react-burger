@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useRef, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Loader } from '../../ui/loader/loader';
 import styles from './burger-ingredients.module.css';
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
-import { getIngredients } from '../../services/burger-ingredients/actions';
+
 
 const typeIngredients = {
   'bun': 'Булки',
@@ -12,10 +12,9 @@ const typeIngredients = {
   'main': 'Начинки',
 };
 
-const getBurgerIngredients = (state) => state.burgerIngredients;
+export const getBurgerIngredients = (state) => state.burgerIngredients;
 
 function BurgerIngredients() {
-  const dispatch = useDispatch();
   const [current, setCurrent] = React.useState('bun');
 
   const {
@@ -23,10 +22,6 @@ function BurgerIngredients() {
     ingredientsRequest,
     ingredientsFailed
   } = useSelector(getBurgerIngredients);
-
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch])
 
   const refs = {
     'bun': useRef(),
@@ -88,7 +83,7 @@ function BurgerIngredients() {
   }, [ingredientsRequest, ingredients, ingredientsFailed]);
 
   return (
-    <div className={styles.burger_ingredients}>
+    <div className={styles.content}>
       <h1 className="text text_type_main-large">Соберите бургер</h1>
 
       <div className={styles.tabs}>

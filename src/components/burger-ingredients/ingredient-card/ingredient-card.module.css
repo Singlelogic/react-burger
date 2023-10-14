@@ -1,9 +1,16 @@
-.card {
+.content {
   display: inline-block;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 10vw;
   position: relative;
   padding-bottom: 32px;
   margin-right: 80px;
+  color: white;
 }
 
 .price {

@@ -1,4 +1,6 @@
 .header {
+  display: flex;
+  justify-content: center;
   background-color: #1C1C21;
   padding-top: 10px;
 }
@@ -6,20 +8,23 @@
 .nav {
   display: grid;
   grid-template-columns: 1fr 300px 1fr;
+  width: 1250px;
 }
 
 .ul {
   display: flex;
-  padding: 0;
   list-style-type: none;
-  padding-left: 10%;
+  padding: 0;
+}
+
+.item:not(:last-child) {
+  padding-right: 15px;
 }
 
 .ul_end {
   composes: ul;
   justify-content: flex-end;
   padding-left: 0;
-  padding-right: 10%;
 }
 
 .link {
@@ -35,4 +40,8 @@
 .link_text {
   color: #8585ad;
   padding-left: 5px;
+}
+
+.active {
+  color: white !important;
 }
