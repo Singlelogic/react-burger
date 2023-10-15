@@ -19,7 +19,7 @@ function ResetPassword() {
     if (!localStorage.getItem("forgotPasswordPageVisited")) {
       navigate("/forgot-password");
     }
-  }, [])
+  }, [navigate]);
 
   const handleChangeForm = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

@@ -1,11 +1,10 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 import Nutrient from "./nutrient/nutrient";
 import { getBurgerIngredients } from "../burger-ingredients";
-import ingredientPropType from "../ingredient-prop-type";
 import Modal from "../../modal/modal";
 
 
@@ -13,20 +12,16 @@ function IngredientDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
-  const {
-    ingredients,
-    ingredientsRequest,
-    ingredientsFailed
-  } = useSelector(getBurgerIngredients);
+  const { ingredients, ingredientsRequest } = useSelector(getBurgerIngredients);
 
   const ingredient = useMemo(() => {
     return ingredients.find((item) => item._id === id);
-  }, [ingredients]);
+  }, [ingredients, id]);
 
   const isModal = useMemo(() => {
     const param = searchParams.get("isModal");
     return param && param === "true";
-  })
+  }, [searchParams]);
 
   function handleCloseModal() {
     navigate("/");
@@ -51,7 +46,7 @@ function IngredientDetails() {
         }
       </>
     )
-  })
+  }, [ingredientsRequest, ingredient])
 
   return (
     <>

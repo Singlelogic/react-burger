@@ -28,7 +28,7 @@ function ProfileForm() {
 
   const isChange = useMemo(() => {
     return name !== form.name || email !== form.email
-  })
+  }, [form, name, email]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

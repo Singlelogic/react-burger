@@ -21,10 +21,12 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(getIngredients());
   }, [dispatch])
 
