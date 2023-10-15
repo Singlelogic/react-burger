@@ -3,7 +3,8 @@ import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-component
 import { Loader } from '../../../ui/loader/loader';
 import styles from './order-details.module.css';
 
-const getOrder = (state) => state.order;
+
+const getOrder = (state: any) => state.order;
 
 function OrderDetails() {
   const {

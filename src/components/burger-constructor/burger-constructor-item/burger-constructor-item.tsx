@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 import {
@@ -5,15 +6,18 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './burger-constructor-item.module.css';
-import ingredientPropType from '../../burger-ingredients/ingredient-prop-type';
+import { IIngredient } from "../burger-constructor";
 import {
   deleteIngredient,
   moveIngredient,
 } from '../../../services/burger-constructor/actions';
 
-const getConstructorIngredients = (state) => state.burgerConstructor.ingredients;
+interface IIngredientProp {
+  ingredient: IIngredient;
+}
+const getConstructorIngredients = (state: any) => state.burgerConstructor.ingredients;
 
-function BurgerConstructorItem({ ingredient }) {
+const BurgerConstructorItem: FC<IIngredientProp> = ({ ingredient }) => {
   const dispatch = useDispatch();
   const ingredients = useSelector(getConstructorIngredients);
 
@@ -31,6 +35,7 @@ function BurgerConstructorItem({ ingredient }) {
       isHover: monitor.isOver(),
     }),
     drop(dragIngredient) {
+      // @ts-ignore
       dispatch(moveIngredient(dragIngredient, ingredient, ingredients));
     }
   })
@@ -44,15 +49,12 @@ function BurgerConstructorItem({ ingredient }) {
           text={ingredient.name}
           price={ingredient.price}
           thumbnail={ingredient.image}
+          // @ts-ignore
           handleClose={() => dispatch(deleteIngredient(ingredient))}
         />
       </section>
     </section>
   )
-}
-
-BurgerConstructorItem.propTypes = {
-  ingredient: ingredientPropType.isRequired,
 }
 
 export default BurgerConstructorItem;
