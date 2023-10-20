@@ -15,20 +15,21 @@ function Registration() {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ email: "", password: "", name: "" });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(registration(form));
-  }
-
-  const handleChangeForm = (e) => {
+  const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // @ts-ignore
+    dispatch(registration(form));
+  }
 
   return (
     <div className={styles.container}>
       <span className={`text text_type_main-medium ${styles.title}`}>Регистрация</span>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={(e) => {handleSubmit(e)}}>
         <Input
           type={"text"}
           placeholder={"Имя"}

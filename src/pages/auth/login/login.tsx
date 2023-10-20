@@ -15,12 +15,13 @@ function Login() {
   const dispatch = useDispatch();
   const [form, setForm] = useState({ email: "", password: "" });
 
-  const handleChangeForm = (e) => {
+  const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(login(form));
   };
 
@@ -28,7 +29,7 @@ function Login() {
     <div className={styles.container}>
       <span className={`text text_type_main-medium ${styles.title}`}>Вход</span>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={(e) => {handleSubmit(e)}}>
         <EmailInput onChange={handleChangeForm} value={form.email} name={"email"} />
         <PasswordInput onChange={handleChangeForm} value={form.password} name={"password"} />
         <Button type="primary" size="medium" htmlType={"submit"}>

@@ -21,12 +21,13 @@ function ResetPassword() {
     }
   }, [navigate]);
 
-  const handleChangeForm = (e) => {
+  const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(resetPassword(form));
   };
 
@@ -36,7 +37,7 @@ function ResetPassword() {
         Восстановление пароля
       </span>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={(e) => {handleSubmit(e)}}>
         <Input
           type={"password"}
           placeholder={"Введите новый пароль"}
