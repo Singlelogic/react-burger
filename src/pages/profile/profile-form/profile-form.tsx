@@ -6,19 +6,20 @@ import styles from "./profile-form.module.css";
 import { updateUser } from "../../../services/user/actions";
 
 
-const getUserStore = (store) => store.user.user.data;
+const getUserStore = (store: any) => store.user.user.data;
 
 function ProfileForm() {
   const dispatch = useDispatch();
   const { name, email } = useSelector(getUserStore);
   const [form, setForm] = useState({name, email, password: "********"});
 
-  const handleChangeForm = (e) => {
+  const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(updateUser(form));
   };
 
@@ -31,7 +32,7 @@ function ProfileForm() {
   }, [form, name, email]);
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={(e) => {handleSubmit(e)}}>
       <Input
         type={"text"}
         placeholder={"Имя"}

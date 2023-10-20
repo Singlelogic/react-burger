@@ -11,6 +11,7 @@ function Profile() {
 
   const logoutOnClick = () => {
     const refreshToken = getCookie("refreshToken");
+    // @ts-ignore
     dispatch(logout(refreshToken));
   }
 
