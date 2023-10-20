@@ -1,15 +1,20 @@
-import { useCallback, useEffect } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import ModalOverlay from './modal-overlay/modal-overlay';
-import styles from './modal.module.css';
+import React, { FC, useCallback, useEffect } from "react";
+import ReactDOM from "react-dom";
 
-const modalRoot = document.getElementById('react-modals');
+import styles from "./modal.module.css";
+import ModalOverlay from "./modal-overlay/modal-overlay";
 
-function Modal(props) {
-  const { children, header, onClose } = props;
 
-  const handleKeyEscape = useCallback((e) => {
+const modalRoot = document.getElementById('react-modals') as HTMLElement;
+
+interface IModal {
+  children: React.ReactNode;
+  header?: string;
+  onClose: () => void;
+}
+
+const Modal: FC<IModal> = ({ children, header, onClose }) => {
+  const handleKeyEscape = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose();
     }
@@ -41,12 +46,6 @@ function Modal(props) {
     ),
     modalRoot
   );
-}
-
-Modal.propTypes = {
-  children: PropTypes.node,
-  header: PropTypes.string,
-  onClose: PropTypes.func,
 }
 
 export default Modal;
