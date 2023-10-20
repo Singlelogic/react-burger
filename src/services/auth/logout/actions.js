@@ -7,12 +7,12 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 
-export function logout(refreshToken) {
+export function logout(data) {
   return function(dispatch) {
     dispatch({
       type: LOGOUT_REQUEST
     });
-    logoutRequest(refreshToken).then(res => {
+    logoutRequest(data).then(res => {
       if (res && res.success) {
         dispatch({
           type: LOGOUT_SUCCESS,

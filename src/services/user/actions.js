@@ -47,12 +47,12 @@ export function getUser() {
   };
 }
 
-export function updateUser(form) {
+export function updateUser(data) {
   return function(dispatch) {
     dispatch({
       type: UPDATE_USER_REQUEST,
     });
-    updateUserRequest(form)
+    updateUserRequest(data)
       .then(res => {
         if (res && res.success) {
           dispatch({
