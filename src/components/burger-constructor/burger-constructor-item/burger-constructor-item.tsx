@@ -14,7 +14,7 @@ import {
 } from "../../../services/burger-constructor/actions";
 
 
-interface IIngredientProp {
+export interface IIngredientProp {
   ingredient: IIngredient;
 }
 const getConstructorIngredients = (state: any) => state.burgerConstructor.ingredients;

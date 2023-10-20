@@ -1,15 +1,18 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { useMemo } from "react";
+import { useMemo, FC } from "react";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import styles from "./ingredient-card.module.css";
 import { getBurgerConstructor } from "../../burger-constructor/burger-constructor";
+import { IIngredient } from "../../burger-constructor/burger-constructor";
+import {
+  IIngredientProp,
+} from "../../burger-constructor/burger-constructor-item/burger-constructor-item";
 
 
-function CardIngredient({ ingredient }) {
+const CardIngredient: FC<IIngredientProp> = ({ ingredient }) => {
   const burgerConstructor = useSelector(getBurgerConstructor);
 
   const [, refDrag] = useDrag({
@@ -21,7 +24,7 @@ function CardIngredient({ ingredient }) {
     if (ingredient.type === 'bun' && burgerConstructor.bun) {
       return burgerConstructor.bun._id === ingredient._id ? 1 : 0;
     } else {
-      return burgerConstructor.ingredients.reduce((acc, constructorIngredient) => {
+      return burgerConstructor.ingredients.reduce((acc: number, constructorIngredient: IIngredient) => {
         return acc + (constructorIngredient._id === ingredient._id ? 1 : 0)
       }, 0)
     }
@@ -52,12 +55,6 @@ function CardIngredient({ ingredient }) {
       </Link>
     </div>
   )
-}
-
-CardIngredient.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
 }
 
 export default CardIngredient;

@@ -1,7 +1,14 @@
-import PropTypes from 'prop-types';
-import styles from './nutrient.module.css';
+import { FC } from "react";
 
-function Nutrient({ title, value }) {
+import styles from "./nutrient.module.css";
+
+
+interface INutrient {
+  title: string;
+  value: number;
+}
+
+const Nutrient: FC<INutrient> = ({ title, value }) => {
   return (
     <span className={styles.nutrient}>
       <span className="text text_type_main-default text_color_inactive">
@@ -12,11 +19,6 @@ function Nutrient({ title, value }) {
       </span>
     </span>
   )
-}
-
-Nutrient.propTypes = {
-  title: PropTypes.string,
-  value: PropTypes.number,
 }
 
 export default Nutrient;
