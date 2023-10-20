@@ -1,10 +1,15 @@
+import React, { FC } from "react";
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
 
-export const getUserStore = (store) => store.user;
+export const getUserStore = (store: any) => store.user;
+interface IProtectedRouteElement {
+  onlyAuth?: boolean;
+  component: React.ReactElement;
+}
 
-const ProtectedRouteElement = ({ onlyAuth = true, component }) => {
+const ProtectedRouteElement: FC<IProtectedRouteElement> = ({ onlyAuth = true, component }) => {
   const { loadUser, user } = useSelector(getUserStore);
   const location = useLocation();
 
@@ -25,6 +30,6 @@ const ProtectedRouteElement = ({ onlyAuth = true, component }) => {
 };
 
 export const OnlyAuth = ProtectedRouteElement;
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth: FC<IProtectedRouteElement> = ({ component }) => (
   <ProtectedRouteElement onlyAuth={false} component={component} />
 );
