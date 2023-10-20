@@ -1,7 +1,8 @@
-import { useSelector } from 'react-redux';
-import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Loader } from '../../../ui/loader/loader';
-import styles from './order-details.module.css';
+import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector } from "react-redux";
+
+import { Loader } from "../../../ui/loader/loader";
+import styles from "./order-details.module.css";
 
 
 const getOrder = (state: any) => state.order;

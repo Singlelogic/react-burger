@@ -1,16 +1,18 @@
-import { FC } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { useDrag, useDrop } from 'react-dnd';
 import {
   ConstructorElement,
   DragIcon,
-} from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './burger-constructor-item.module.css';
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { FC } from "react";
+import { useDrag, useDrop } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
+
+import styles from "./burger-constructor-item.module.css";
 import { IIngredient } from "../burger-constructor";
 import {
   deleteIngredient,
   moveIngredient,
-} from '../../../services/burger-constructor/actions';
+} from "../../../services/burger-constructor/actions";
+
 
 interface IIngredientProp {
   ingredient: IIngredient;

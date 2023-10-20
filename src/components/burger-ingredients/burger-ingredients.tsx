@@ -1,18 +1,24 @@
-import React, { useEffect, useMemo, useRef, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Loader } from '../../ui/loader/loader';
-import styles from './burger-ingredients.module.css';
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useEffect, useMemo, useRef, useCallback } from "react";
+import { useSelector } from "react-redux";
+
+import styles from "./burger-ingredients.module.css";
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
+import { IIngredient } from "../burger-constructor/burger-constructor";
+import { Loader } from "../../ui/loader/loader";
 
 
-const typeIngredients = {
+type TTypeIngredients = {
+  [key: string]: string,
+}
+
+const typeIngredients: TTypeIngredients = {
   'bun': 'Булки',
   'sauce': 'Соусы',
   'main': 'Начинки',
 };
 
-export const getBurgerIngredients = (state) => state.burgerIngredients;
+export const getBurgerIngredients = (state: any) => state.burgerIngredients;
 
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState('bun');
@@ -23,17 +29,21 @@ function BurgerIngredients() {
     ingredientsFailed
   } = useSelector(getBurgerIngredients);
 
-  const refs = {
-    'bun': useRef(),
-    'sauce': useRef(),
-    'main': useRef(),
-    'list': useRef(),
+  type TRefs = {
+    [key: string]: React.RefObject<HTMLDivElement>,
+  }
+
+  const refs: TRefs = {
+    'bun': useRef(null),
+    'sauce': useRef(null),
+    'main': useRef(null),
+    'list': useRef(null),
   }
 
   const handlerScroll = useCallback(() => {
-    const scrollPosition = refs['list'].current.scrollTop;
-    const bunOffsetHeight = Number(refs['bun'].current.offsetHeight);
-    const sauceOffsetHeight = Number(refs['sauce'].current.offsetHeight);
+    const scrollPosition = Number(refs['list']?.current?.scrollTop) || 0;
+    const bunOffsetHeight = Number(refs['bun']?.current?.offsetHeight) || 0;
+    const sauceOffsetHeight = Number(refs['sauce']?.current?.offsetHeight) || 0;
 
     if (scrollPosition <= bunOffsetHeight) {
       setCurrent('bun');
@@ -42,7 +52,7 @@ function BurgerIngredients() {
     } else {
       setCurrent('main');
     }
-  })
+  }, [refs]);
 
   useEffect(() => {
     if (refs['list'].current) {
@@ -53,10 +63,10 @@ function BurgerIngredients() {
         refs['list'].current.removeEventListener('scroll', handlerScroll);
       }
     }
-  }, [handlerScroll]);
+  }, [handlerScroll, refs]);
 
-  const handlerClickTab = (ref) => {
-    ref.current.scrollIntoView({ block: "start", behavior: "smooth" });
+  const handlerClickTab = (ref: React.RefObject<HTMLDivElement>) => {
+    ref.current?.scrollIntoView({ block: "start", behavior: "smooth" });
   };
 
   const content = useMemo(() => {
@@ -74,13 +84,13 @@ function BurgerIngredients() {
               <IngredientsByType
                 key={key}
                 type={typeIngredients[key]}
-                ingredients={ingredients.filter((item) => item.type === key)}
+                ingredients={ingredients.filter((item: IIngredient) => item.type === key)}
               />
             </div>
           ))}
         </div>
     )
-  }, [ingredientsRequest, ingredients, ingredientsFailed]);
+  }, [ingredientsRequest, ingredients, ingredientsFailed, refs]);
 
   return (
     <div className={styles.content}>
