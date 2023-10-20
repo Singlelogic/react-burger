@@ -2,16 +2,21 @@ import { baseAuthURL } from "../base-auth-api";
 import { checkResponse } from "../../base-api";
 
 
-export const logoutRequest = (refreshToken) => {
-  return fetch(baseAuthURL + "logout", {
+interface ILoginData {
+  email: string;
+  password: string;
+}
+
+export const loginRequest = (data: ILoginData) => {
+  return fetch(baseAuthURL + "login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "authorization": "Bearer " + localStorage.getItem("accessToken"),
     },
     body: JSON.stringify({
-      token: refreshToken,
-    }),
+      "email": data.email,
+      "password": data.password,
+    })
   })
     .then((res) => checkResponse(res))
     .catch(err => console.log("ERROR: ", err.message));

@@ -2,17 +2,20 @@ import { baseAuthURL } from "../base-auth-api";
 import { checkResponse } from "../../base-api";
 
 
-export const registrationRequest = (data) => {
-  return fetch(baseAuthURL + "register", {
+interface ILogoutData {
+  refreshToken: string;
+}
+
+export const logoutRequest = (data: ILogoutData) => {
+  return fetch(baseAuthURL + "logout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "authorization": "Bearer " + localStorage.getItem("accessToken"),
     },
     body: JSON.stringify({
-      "name": data.name,
-      "email": data.email,
-      "password": data.password,
-    })
+      token: data.refreshToken,
+    }),
   })
     .then((res) => checkResponse(res))
     .catch(err => console.log("ERROR: ", err.message));

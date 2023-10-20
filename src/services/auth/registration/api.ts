@@ -2,13 +2,20 @@ import { baseAuthURL } from "../base-auth-api";
 import { checkResponse } from "../../base-api";
 
 
-export const loginRequest = (data) => {
-  return fetch(baseAuthURL + "login", {
+interface IRegistrationData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export const registrationRequest = (data: IRegistrationData) => {
+  return fetch(baseAuthURL + "register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      "name": data.name,
       "email": data.email,
       "password": data.password,
     })

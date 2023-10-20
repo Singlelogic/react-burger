@@ -2,12 +2,15 @@ import { setCookie, getCookie } from "./utils/cookie";
 
 
 export const baseURL = "https://norma.nomoreparties.space/api/"
+interface IOptions {
+  [key: string]: any,
+}
 
-export const fetchWithRefresh = async (url, options) => {
+export const fetchWithRefresh = async (url: string, options: IOptions) => {
   try {
     const res = await fetch(url, options);
     return await checkResponse(res);
-  } catch (err) {
+  } catch (err: any) {
     if (err.message === "jwt expired") {
       const data = await refreshToken();
       if (!data.success) {
@@ -24,7 +27,7 @@ export const fetchWithRefresh = async (url, options) => {
   }
 };
 
-export const checkResponse = (res) => {
+export const checkResponse = (res: Response) => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 

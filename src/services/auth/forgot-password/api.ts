@@ -1,7 +1,11 @@
 import { baseURL, checkResponse } from "../../base-api";
 
 
-export const forgotPasswordRequest = (data) => {
+interface IForgotPasswordData {
+  email: string;
+}
+
+export const forgotPasswordRequest = (data: IForgotPasswordData) => {
   return fetch(baseURL + "password-reset", {
     method: "POST",
     headers: {

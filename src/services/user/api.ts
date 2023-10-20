@@ -10,7 +10,12 @@ export const getUserRequest = () => {
   })
 }
 
-export const updateUserRequest = (form) => {
+interface IUpdateUserData {
+  name: string;
+  email: string;
+}
+
+export const updateUserRequest = (data: IUpdateUserData) => {
   return fetchWithRefresh(baseURL + "auth/user", {
     method: "PATCH",
     headers: {
@@ -18,8 +23,8 @@ export const updateUserRequest = (form) => {
       "authorization": "Bearer " + localStorage.getItem("accessToken"),
     },
     body: JSON.stringify({
-      "name": form.name,
-      "email": form.email,
+      "name": data.name,
+      "email": data.email,
     })
   })
 }

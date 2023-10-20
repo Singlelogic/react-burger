@@ -12,7 +12,7 @@ function Profile() {
   const logoutOnClick = () => {
     const refreshToken = getCookie("refreshToken");
     // @ts-ignore
-    dispatch(logout(refreshToken));
+    dispatch(logout({token: refreshToken}));
   }
 
   const classNameLink = `text text_type_main-medium text_color_inactive ${styles.link}`;

@@ -1,7 +1,7 @@
 import { baseURL, fetchWithRefresh } from "../base-api";
 
 
-export const sendOrderRequest = (ingredientIds) => {
+export const sendOrderRequest = (ingredientIds: string[]) => {
   return fetchWithRefresh(baseURL + "orders", {
     method: "POST",
     headers: {
