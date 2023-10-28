@@ -1,4 +1,5 @@
 import { getUserRequest, updateUserRequest } from "./api";
+import { getCookie } from "../utils/cookie";
 
 
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
@@ -11,7 +12,7 @@ export const SET_USER = "SET_USER";
 
 export const checkUserAuth = () => {
   return (dispatch) => {
-    if (localStorage.getItem("accessToken")) {
+    if (localStorage.getItem("accessToken") && getCookie("refreshToken")) {
       dispatch(getUser());
     }
   };

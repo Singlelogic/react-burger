@@ -13,7 +13,7 @@ import Home from "../../pages/home/home";
 import NotFound404 from "../../pages/not-found/not-found";
 import Profile from "../../pages/profile/profile";
 import ProfileForm from "../../pages/profile/profile-form/profile-form";
-import { getIngredients } from '../../services/burger-ingredients/actions';
+import { getIngredients } from "../../services/burger-ingredients/actions";
 import { checkUserAuth } from "../../services/user/actions";
 
 
