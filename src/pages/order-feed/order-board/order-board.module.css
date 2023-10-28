@@ -1,0 +1,29 @@
+.content {
+  border: solid;  /* TODO: Удалить после завершения верстки */
+  height: 80vh;
+  width: 595px;
+}
+
+.listOrderStatuses {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 60px;
+}
+
+.status {
+  width: 280px;
+  padding-bottom: 24px;
+}
+
+.statusDone {
+  composes: status;
+  margin-right: 35px;
+}
+
+.statusProgress {
+  composes: status;
+}
+
+.completedInTime {
+  padding-bottom: 60px;
+}

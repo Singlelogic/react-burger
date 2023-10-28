@@ -9,6 +9,7 @@ import ForgotPassword from "../../pages/auth/forgot-password/forgot-password";
 import Login from "../../pages/auth/login/login";
 import Registration from "../../pages/auth/registration/registration";
 import ResetPassword from "../../pages/auth/reset-password/reset-password";
+import OrderFeed from "../../pages/order-feed/order-feed";
 import Home from "../../pages/home/home";
 import NotFound404 from "../../pages/not-found/not-found";
 import Profile from "../../pages/profile/profile";
@@ -39,6 +40,7 @@ function App() {
         <Route path="/register" element={<OnlyUnAuth component={<Registration />} />} />
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
+        <Route path="/feed" element={<OrderFeed />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
           <Route path="" element={<OnlyAuth component={<ProfileForm />} />} />
         </Route>

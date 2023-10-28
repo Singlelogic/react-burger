@@ -1,0 +1,6 @@
+.content {
+  border: solid;  /* TODO: Удалить после завершения верстки */
+  height: 80vh;
+  width: 595px;
+  margin-right: 60px;
+}

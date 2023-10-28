@@ -3,6 +3,7 @@ import { FC } from "react";
 import CardIngredient from "../ingredient-card/ingredient-card";
 import { IIngredient } from "../../burger-constructor/burger-constructor";
 
+
 interface IIngredientsByType {
   type: string;
   ingredients: IIngredient[];

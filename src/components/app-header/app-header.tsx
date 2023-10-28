@@ -28,9 +28,15 @@ function AppHeader() {
             </NavLink>
           </li>
           <li>  
-            <NavLink to="#" className={styles.link}>
-              <ListIcon type="secondary" />
-              <span className={styles.link_text}>Лента заказов</span>
+            <NavLink to="/feed" className={styles.link}>
+              {({ isActive }) => (
+                <>
+                  <ListIcon type={isActive ? "primary" : "secondary"} />
+                  <span className={`${styles.link_text} ${isActive ? styles.active : ""}`}>
+                    Лента заказов
+                  </span>
+                </>
+              )}
             </NavLink>
           </li>
         </ul>

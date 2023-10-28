@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+}
+
+.content {
+  width: 1250px;
+}
+
+.header {
+  margin-bottom: 15px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
