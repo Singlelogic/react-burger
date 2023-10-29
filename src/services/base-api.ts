@@ -30,9 +30,7 @@ export const fetchWithRefresh = async (url: string, options: IOptions) => {
 };
 
 export const checkResponse = (res: Response) => {
-  return res.ok ? res.json() : res.json()
-    .then((err) => Promise.reject(err))
-    .catch(err => console.log("ERROR: ", err.message));
+  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 export const refreshToken = () => {
@@ -46,5 +44,5 @@ export const refreshToken = () => {
     }),
   })
     .then(checkResponse)
-    .catch(err => console.log("ERROR: ", err.message))
+    .catch(err => console.log("ERROR TEST: ", err.message))
 };
