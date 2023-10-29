@@ -1,7 +1,9 @@
 import { setCookie, getCookie } from "./utils/cookie";
 
 
-export const baseURL = "https://norma.nomoreparties.space/api/"
+export const baseURL = "https://norma.nomoreparties.space/api/";
+export const wssOrderFeedURL = "wss://norma.nomoreparties.space/orders/all";
+
 interface IOptions {
   [key: string]: any,
 }
@@ -13,7 +15,7 @@ export const fetchWithRefresh = async (url: string, options: IOptions) => {
   } catch (err: any) {
     if (err.message === "jwt expired") {
       const data = await refreshToken();
-      if (!data.success) {
+      if (data === undefined || !data.success) {
         return Promise.reject(data);
       }
       localStorage.setItem("accessToken", data.accessToken.split("Bearer ")[1]);
@@ -28,7 +30,9 @@ export const fetchWithRefresh = async (url: string, options: IOptions) => {
 };
 
 export const checkResponse = (res: Response) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+  return res.ok ? res.json() : res.json()
+    .then((err) => Promise.reject(err))
+    .catch(err => console.log("ERROR: ", err.message));
 };
 
 export const refreshToken = () => {
@@ -40,5 +44,7 @@ export const refreshToken = () => {
     body: JSON.stringify({
       token: getCookie("refreshToken"),
     }),
-  }).then(checkResponse);
+  })
+    .then(checkResponse)
+    .catch(err => console.log("ERROR: ", err.message))
 };

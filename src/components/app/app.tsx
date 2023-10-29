@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     // @ts-ignore
     dispatch(getIngredients());
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <>
