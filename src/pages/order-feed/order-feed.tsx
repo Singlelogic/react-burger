@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ListOrders from "./list-orders/list-orders";
 import OrderBoard from "./order-board/order-board";
@@ -9,10 +9,14 @@ import {
   wsConnect as wsConnectOrderFeed,
   wsDisconnect as wsDisconnectOrderFeed,
 } from "../../services/order-feed/actions";
+import { getOrderFeedStore } from "../../utils/store";
+import { WebSocketStatus } from "../../types/order-feed";
+import { Loader } from "../../ui/loader/loader";
 
 
 const OrderFeed = () => {
   const dispatch = useDispatch();
+  const { status, ordersFeed: { orders } } = useSelector(getOrderFeedStore);
 
   useEffect(() => {
     dispatch(wsConnectOrderFeed(wssOrderFeedURL));
@@ -29,8 +33,22 @@ const OrderFeed = () => {
           Лента заказов
         </h1>
         <div className={styles.main}>
-          <ListOrders />
-          <OrderBoard />
+          {status === WebSocketStatus.ONLINE ?
+            <>
+              <div className={styles.blockLeft}>
+                {orders && <ListOrders orders={orders} />}
+              </div>
+              <div className={styles.blockRight}>
+                <OrderBoard/>
+              </div>
+            </>
+          : status === WebSocketStatus.CONNECTING ?
+              <Loader size="large" />
+            :
+              <p className="text text_type_main-default error-text">
+                Не удается подключиться к серверу!
+              </p>
+          }
         </div>
       </div>
     </div>

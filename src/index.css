@@ -6,3 +6,7 @@
 .help-text {
   color: #404053;
 }
+
+.error-text {
+  color: red;
+}

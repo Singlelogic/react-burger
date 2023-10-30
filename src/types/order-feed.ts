@@ -14,10 +14,11 @@ export enum StatusOrderFeed {
 
 export type TOrderFeed = {
   _id: number;
+  name: string;
   status: StatusOrderFeed;
   number: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   ingredients: Array<string>;
 }
 

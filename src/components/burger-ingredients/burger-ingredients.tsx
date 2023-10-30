@@ -74,7 +74,7 @@ function BurgerIngredients() {
       <Loader size="large" />
     ) : (
       ingredientsFailed ?
-        <p className="text text_type_main-default">
+        <p className="text text_type_main-default error-text">
           Ошибка загрузки данных!
         </p>
       :

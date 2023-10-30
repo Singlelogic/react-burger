@@ -3,7 +3,7 @@ import styles from "./order-board.module.css";
 
 const OrderBoard = () => {
   return (
-    <div className={styles.content}>
+    <>
 
       <div className={styles.listOrderStatuses}>
         <div className={`text text_type_main-medium ${styles.statusDone}`}>
@@ -32,7 +32,7 @@ const OrderBoard = () => {
         </div>
       </div>
 
-    </div>
+    </>
   )
 }
 

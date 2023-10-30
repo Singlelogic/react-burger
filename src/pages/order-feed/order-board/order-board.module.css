@@ -1,9 +1,3 @@
-.content {
-  border: solid;  /* TODO: Удалить после завершения верстки */
-  height: 80vh;
-  width: 595px;
-}
-
 .listOrderStatuses {
   display: flex;
   justify-content: flex-start;
