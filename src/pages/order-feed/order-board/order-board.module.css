@@ -7,6 +7,9 @@
 .status {
   width: 280px;
   padding-bottom: 24px;
+  /* Удалить после изменение размещения, по 10 строк на столбец */
+  overflow: auto;
+  height: 39vh;
 }
 
 .statusDone {
@@ -20,4 +23,8 @@
 
 .completedInTime {
   padding-bottom: 60px;
+}
+
+.done {
+  color: #00CCCC;
 }
