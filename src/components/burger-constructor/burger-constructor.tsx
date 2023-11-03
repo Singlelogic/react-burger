@@ -72,8 +72,11 @@ function BurgerConstructor() {
     let ingredientIds = [];
 
     if (burgerConstructor.bun) {
-      ingredientIds.push(burgerConstructor.bun._id);
+      for (let i = 0; i < 2; i++) {
+        ingredientIds.push(burgerConstructor.bun._id);
+      }
     }
+
     burgerConstructor.ingredients.map((ingredient: IIngredient) => {
       return ingredientIds.push(ingredient._id);
     })
