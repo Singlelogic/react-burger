@@ -7,15 +7,16 @@ import { TOrderFeed } from "../../../types/order-feed";
 
 type TListOrders = {
   orders: Array<TOrderFeed>;
+  isShowStatus?: boolean;
 }
 
-const ListOrders: FC<TListOrders> = ({ orders }) => {
+const ListOrders: FC<TListOrders> = ({ orders, isShowStatus }) => {
   return (
     <div className={styles.content}>
       {orders.map((order) => {
         return (
           <div key={order._id} className={styles.card}>
-            <OrderCard order={order} isShowStatus={false} />
+            <OrderCard order={order} isShowStatus={isShowStatus} />
           </div>
         )
       })}

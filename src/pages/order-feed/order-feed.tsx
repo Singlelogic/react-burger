@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ListOrders from "./list-orders/list-orders";
 import OrderBoard from "./order-board/order-board";
 import styles from "./order-feed.module.css";
-import { wssOrderFeedURL } from "../../services/base-api";
+import { wssBaseOrderFeedURL } from "../../services/base-api";
 import {
   wsConnect as wsConnectOrderFeed,
   wsDisconnect as wsDisconnectOrderFeed,
@@ -19,7 +19,7 @@ const OrderFeed = () => {
   const { status, ordersFeed: { orders } } = useSelector(getOrderFeedStore);
 
   useEffect(() => {
-    dispatch(wsConnectOrderFeed(wssOrderFeedURL));
+    dispatch(wsConnectOrderFeed(wssBaseOrderFeedURL + "/all"));
 
     return () => {
       dispatch(wsDisconnectOrderFeed());
@@ -35,10 +35,10 @@ const OrderFeed = () => {
         <div className={styles.main}>
           {status === WebSocketStatus.ONLINE ?
             <>
-              <div className={styles.blockLeft}>
-                {orders && <ListOrders orders={orders} />}
+              <div className={styles.list}>
+                {orders && <ListOrders orders={orders} isShowStatus={false} />}
               </div>
-              <div className={styles.blockRight}>
+              <div>
                 <OrderBoard/>
               </div>
             </>

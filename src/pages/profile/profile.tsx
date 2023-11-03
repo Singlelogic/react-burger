@@ -24,7 +24,7 @@ function Profile() {
           <nav className={styles.nav}>
             <ul className={styles.list}>
               <li className={styles.item}>
-                <NavLink to="" className={({ isActive }) =>
+                <NavLink end to="" className={({ isActive }) =>
                   `${classNameLink} ${isActive ? styles.active : ""}`
                 }>
                   Профиль

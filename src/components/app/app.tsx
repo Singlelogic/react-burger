@@ -14,6 +14,7 @@ import Home from "../../pages/home/home";
 import NotFound404 from "../../pages/not-found/not-found";
 import Profile from "../../pages/profile/profile";
 import ProfileForm from "../../pages/profile/profile-form/profile-form";
+import OrderHistory from "../../pages/profile/order-history/order-history";
 import { getIngredients } from "../../services/burger-ingredients/actions";
 import { checkUserAuth } from "../../services/user/actions";
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/feed" element={<OrderFeed />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
           <Route path="" element={<OnlyAuth component={<ProfileForm />} />} />
+          <Route path="orders" element={<OnlyAuth component={<OrderHistory />} />} />
         </Route>
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
         <Route path="*" element={<NotFound404 />} />

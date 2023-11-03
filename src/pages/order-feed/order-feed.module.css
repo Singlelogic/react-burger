@@ -17,17 +17,9 @@
   justify-content: center;
 }
 
-.block {
+.list {
   overflow: auto;
   height: 80vh;
   width: 595px;
-}
-
-.blockLeft {
-  composes: block;
   margin-right: 60px;
-}
-
-.blockRight {
-  composes: block;
 }

@@ -45,6 +45,7 @@ export function getUser() {
           });
         }
       })
+      .catch(err => console.log("ERROR: ", err.message));
   };
 }
 

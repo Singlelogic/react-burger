@@ -3,6 +3,7 @@ import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./order-card.module.css";
+import { IIngredient } from "../burger-constructor/burger-constructor";
 import { TOrderFeed } from "../../types/order-feed";
 import { formatDate } from "../../utils/date";
 import { getBurgerIngredientsStore } from "../../utils/store";
@@ -13,16 +14,16 @@ type TOrderCard = {
   isShowStatus?: boolean;
 }
 
-const OrderCard: FC<TOrderCard> = ({ order, isShowStatus= true }) => {
+const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
   const { ingredients } = useSelector(getBurgerIngredientsStore);
 
   const totalPrice = useMemo(() => {
     return order.ingredients.reduce((acc, id) => {
-      const ingredient = ingredients.find((ingredient: any) => ingredient._id === id)
-      acc += ingredient.price
+      const ingredient = ingredients.find((ingredient: IIngredient) => ingredient._id === id)
+      acc = ingredient ? acc + ingredient.price : 0;
       return acc
     }, 0)
-  }, [ingredients]);
+  }, [order.ingredients, ingredients]);
 
   return (
     <div className={styles.cardOrder}>

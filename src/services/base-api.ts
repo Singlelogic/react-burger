@@ -1,8 +1,8 @@
-import { setCookie, getCookie } from "./utils/cookie";
+import { setCookie, getCookie, deleteCookie } from "./utils/cookie";
 
 
 export const baseURL = "https://norma.nomoreparties.space/api/";
-export const wssOrderFeedURL = "wss://norma.nomoreparties.space/orders/all";
+export const wssBaseOrderFeedURL = "wss://norma.nomoreparties.space/orders";
 
 interface IOptions {
   [key: string]: any,
@@ -44,5 +44,10 @@ export const refreshToken = () => {
     }),
   })
     .then(checkResponse)
-    .catch(err => console.log("ERROR TEST: ", err.message))
+    .catch(err => {
+      if (err.message === "Token is invalid") {
+        localStorage.removeItem("accessToken");
+        deleteCookie("refreshToken");
+      };
+    })
 };
