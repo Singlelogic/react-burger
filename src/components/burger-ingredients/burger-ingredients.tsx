@@ -6,6 +6,7 @@ import styles from "./burger-ingredients.module.css";
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
 import { IIngredient } from "../burger-constructor/burger-constructor";
 import { Loader } from "../../ui/loader/loader";
+import { getBurgerIngredientsStore } from "../../utils/store";
 
 
 type TTypeIngredients = {
@@ -18,8 +19,6 @@ const typeIngredients: TTypeIngredients = {
   'main': 'Начинки',
 };
 
-export const getBurgerIngredients = (state: any) => state.burgerIngredients;
-
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState('bun');
 
@@ -27,7 +26,7 @@ function BurgerIngredients() {
     ingredients,
     ingredientsRequest,
     ingredientsFailed
-  } = useSelector(getBurgerIngredients);
+  } = useSelector(getBurgerIngredientsStore);
 
   type TRefs = {
     [key: string]: React.RefObject<HTMLDivElement>,

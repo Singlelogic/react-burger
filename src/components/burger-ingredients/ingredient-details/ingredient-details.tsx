@@ -4,16 +4,16 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 import Nutrient from "./nutrient/nutrient";
-import { getBurgerIngredients } from "../burger-ingredients";
 import { IIngredient } from "../../burger-constructor/burger-constructor";
 import Modal from "../../modal/modal";
+import { getBurgerIngredientsStore } from "../../../utils/store";
 
 
 function IngredientDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [searchParams] = useSearchParams();
-  const { ingredients, ingredientsRequest } = useSelector(getBurgerIngredients);
+  const { ingredients, ingredientsRequest } = useSelector(getBurgerIngredientsStore);
 
   const ingredient = useMemo(() => {
     return ingredients.find((item: IIngredient) => item._id === id);
