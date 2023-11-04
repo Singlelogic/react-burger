@@ -17,9 +17,55 @@ type TOrderCard = {
 const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
   const { ingredients } = useSelector(getBurgerIngredientsStore);
 
+  const images = useMemo(() => {
+    let hasBun = false;
+    let idx = 0;
+
+    return order.ingredients.map((id: string) => {
+      const ingredient = ingredients.find((item: IIngredient) => item._id === id)
+
+      if (ingredient.type === 'bun') {
+        if (hasBun) return;
+        hasBun = true;
+      }
+
+      idx += 1;
+      if (idx < 6) {
+        return (
+          <div className={styles.imageContainer} key={idx}>
+            <div className={styles.imageCard}>
+              <img
+                src={ingredient.image_mobile}
+                className={styles.image}
+                alt="ingredient"
+              />
+            </div>
+          </div>
+        )
+      } else if (idx === 6) {
+        return (
+          <div className={styles.imageContainer} key={idx}>
+            <div className={styles.imageCardCount}>
+              <p className='text text_type_main-default'>
+                +{order.ingredients.length - 6}
+              </p>
+            </div>
+            <div className={styles.imageCard}>
+              <img
+                src={ingredient.image_mobile}
+                className={styles.image}
+                alt="ingredient"
+              />
+            </div>
+          </div>
+        )
+      }
+    })
+  }, [ingredients]);
+
   const totalPrice = useMemo(() => {
     return order.ingredients.reduce((acc, id) => {
-      const ingredient = ingredients.find((ingredient: IIngredient) => ingredient._id === id)
+      const ingredient = ingredients.find((item: IIngredient) => item._id === id)
       acc = ingredient ? acc + ingredient.price : 0;
       return acc
     }, 0)
@@ -66,7 +112,9 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
         }
       </div>
       <div className={styles.ingredients}>
-        <div className={styles.images}>Images</div>
+        <div className={styles.images}>
+          { images }
+        </div>
         <div className={styles.price}>
           <span className="text text_type_digits-default">{ totalPrice }</span>
           <CurrencyIcon type="primary" />
