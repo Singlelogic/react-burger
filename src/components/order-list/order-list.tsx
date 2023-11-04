@@ -1,16 +1,16 @@
 import { FC } from "react";
 
-import styles from "./list-orders.module.css";
-import OrderCard from "../../../components/order-card/order-card";
-import { TOrderFeed } from "../../../types/order-feed";
+import styles from "./order-list.module.css";
+import OrderCard from "../order-card/order-card";
+import { TOrderFeed } from "../../types/order-feed";
 
 
-type TListOrders = {
+type TOrderList = {
   orders: Array<TOrderFeed>;
   isShowStatus?: boolean;
 }
 
-const ListOrders: FC<TListOrders> = ({ orders, isShowStatus }) => {
+const OrderList: FC<TOrderList> = ({ orders, isShowStatus }) => {
   return (
     <div className={styles.content}>
       {orders.map((order) => {
@@ -24,4 +24,4 @@ const ListOrders: FC<TListOrders> = ({ orders, isShowStatus }) => {
   )
 }
 
-export default ListOrders;
+export default OrderList;

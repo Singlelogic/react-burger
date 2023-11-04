@@ -2,8 +2,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./order-history.module.css";
-import OrderCard from "../../../components/order-card/order-card";
-import ListOrders from "../../../pages/order-feed/list-orders/list-orders";
+import ListOrders from "../../../components/order-list/order-list";
 import { wssBaseOrderFeedURL } from "../../../services/base-api";
 import {
   wsConnect as wsConnectOrderFeed,

@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import ListOrders from "./list-orders/list-orders";
 import OrderBoard from "./order-board/order-board";
 import styles from "./order-feed.module.css";
+import OrderList from "../../components/order-list/order-list";
 import { wssBaseOrderFeedURL } from "../../services/base-api";
 import {
   wsConnect as wsConnectOrderFeed,
@@ -36,7 +36,7 @@ const OrderFeed = () => {
           {status === WebSocketStatus.ONLINE ?
             <>
               <div className={styles.list}>
-                {orders && <ListOrders orders={orders} isShowStatus={false} />}
+                {orders && <OrderList orders={orders} isShowStatus={false} />}
               </div>
               <div>
                 <OrderBoard/>
