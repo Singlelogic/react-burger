@@ -1,5 +1,5 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC, useMemo } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./order-card.module.css";
@@ -25,6 +25,28 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
     }, 0)
   }, [order.ingredients, ingredients]);
 
+  const getStatusLabel = useCallback((status: string) => {
+    switch (status) {
+      case 'created':
+        return 'Создан';
+      case 'pending':
+        return 'Готовится';
+      case 'done':
+        return 'Выполнен';
+      default:
+        return 'unknown';
+    }
+  }, []);
+
+  const getStatusColor = useCallback((status: string) => {
+    switch (status) {
+      case 'pending':
+        return styles.pending;
+      default:
+        return '';
+    }
+  }, []);
+
   return (
     <div className={styles.cardOrder}>
       <div className={styles.orderNumber}>
@@ -34,9 +56,13 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
         </span>
       </div>
       <div className={styles.info}>
-        <div className="text text_type_main-medium">{ order.name }</div>
+        <div className={`text text_type_main-medium ${styles.name}`}>
+          { order.name }
+        </div>
         {isShowStatus &&
-          <div className="text text_type_main-small">{order.status}</div>
+          <div className={`text text_type_main-small ${getStatusColor(order.status)}`}>
+            { getStatusLabel(order.status) }
+          </div>
         }
       </div>
       <div className={styles.ingredients}>
