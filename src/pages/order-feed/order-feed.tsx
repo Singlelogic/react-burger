@@ -42,12 +42,8 @@ const OrderFeed = () => {
                 <OrderBoard/>
               </div>
             </>
-          : status === WebSocketStatus.CONNECTING ?
-              <Loader size="large" />
-            :
-              <p className="text text_type_main-default error-text">
-                Не удается подключиться к серверу!
-              </p>
+          :
+            <Loader size="large" />
           }
         </div>
       </div>

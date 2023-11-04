@@ -1,5 +1,5 @@
 export enum WebSocketStatus {
-  CONNECTING = "CONNECTING...",
+  CONNECTING = "CONNECTING",
   ONLINE = "ONLINE",
   OFFLINE = "OFFLINE",
 }
