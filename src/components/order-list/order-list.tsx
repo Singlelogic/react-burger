@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import styles from "./order-list.module.css";
-import OrderCard from "../order-card/order-card";
+import OrderCard from "./order-card/order-card";
 import { TOrderFeed } from "../../types/order-feed";
 
 

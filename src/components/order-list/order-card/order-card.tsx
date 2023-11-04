@@ -3,10 +3,10 @@ import { FC, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./order-card.module.css";
-import { IIngredient } from "../burger-constructor/burger-constructor";
-import { TOrderFeed } from "../../types/order-feed";
-import { formatDate } from "../../utils/date";
-import { getBurgerIngredientsStore } from "../../utils/store";
+import { IIngredient } from "../../burger-constructor/burger-constructor";
+import { TOrderFeed } from "../../../types/order-feed";
+import { formatDate } from "../../../utils/date";
+import { getBurgerIngredientsStore } from "../../../utils/store";
 
 
 type TOrderCard = {
