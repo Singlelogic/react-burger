@@ -13,7 +13,7 @@ export enum StatusOrderFeed {
 }
 
 export type TOrderFeed = {
-  _id: number;
+  _id: string;
   name: string;
   status: StatusOrderFeed;
   number: number;

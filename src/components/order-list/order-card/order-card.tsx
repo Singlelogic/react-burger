@@ -1,11 +1,13 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./order-card.module.css";
 import { IIngredient } from "../../burger-constructor/burger-constructor";
 import { TOrderFeed } from "../../../types/order-feed";
 import { formatDate } from "../../../utils/date";
+import { getStatusLabel, getStatusColor } from "../../../utils/order";
 import { getBurgerIngredientsStore } from "../../../utils/store";
 
 
@@ -15,6 +17,7 @@ type TOrderCard = {
 }
 
 const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
+  const navigate = useNavigate();
   const { ingredients } = useSelector(getBurgerIngredientsStore);
 
   const images = useMemo(() => {
@@ -71,30 +74,12 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
     }, 0)
   }, [order.ingredients, ingredients]);
 
-  const getStatusLabel = useCallback((status: string) => {
-    switch (status) {
-      case 'created':
-        return 'Создан';
-      case 'pending':
-        return 'Готовится';
-      case 'done':
-        return 'Выполнен';
-      default:
-        return 'unknown';
-    }
-  }, []);
-
-  const getStatusColor = useCallback((status: string) => {
-    switch (status) {
-      case 'pending':
-        return styles.pending;
-      default:
-        return '';
-    }
+  const handleClickCard = useCallback(() => {
+    navigate(order._id);
   }, []);
 
   return (
-    <div className={styles.cardOrder}>
+    <div className={styles.cardOrder} onClick={handleClickCard} >
       <div className={styles.orderNumber}>
         <span className="text text_type_digits-default">#{ order.number }</span>
         <span className={`text text_type_main-default text_color_inactive ${styles.timestamp}`}>
@@ -106,7 +91,10 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
           { order.name }
         </div>
         {isShowStatus &&
-          <div className={`text text_type_main-small ${getStatusColor(order.status)}`}>
+          <div
+            className="text text_type_main-small"
+            style={{'color': getStatusColor(order.status)}}
+          >
             { getStatusLabel(order.status) }
           </div>
         }

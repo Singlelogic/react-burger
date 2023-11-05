@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
 import AppHeader from "../../components/app-header/app-header";
 import IngredientDetails from "../../components/burger-ingredients/ingredient-details/ingredient-details";
+import OrderDetail from "../../components/order-list/order-detail/order-detail";
 import ForgotPassword from "../../pages/auth/forgot-password/forgot-password";
 import Login from "../../pages/auth/login/login";
 import Registration from "../../pages/auth/registration/registration";
@@ -42,10 +43,12 @@ function App() {
         <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
         <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
         <Route path="/feed" element={<OrderFeed />} />
+        <Route path="/feed/:id" element={<OrderDetail />} />
         <Route path="/profile" element={<OnlyAuth component={<Profile />} />} >
           <Route path="" element={<OnlyAuth component={<ProfileForm />} />} />
           <Route path="orders" element={<OnlyAuth component={<OrderHistory />} />} />
         </Route>
+        <Route path="profile/orders/:id" element={<OnlyAuth component={<OrderDetail />} />} />
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
