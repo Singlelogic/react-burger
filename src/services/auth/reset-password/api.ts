@@ -1,10 +1,6 @@
+import { IResetPasswordData } from "./actions";
 import { baseURL, checkResponse } from "../../base-api";
 
-
-interface IResetPasswordData {
-  password: string;
-  token: string;
-}
 
 export const resetPasswordRequest = (data: IResetPasswordData) => {
   return fetch(baseURL + "password-reset/reset", {

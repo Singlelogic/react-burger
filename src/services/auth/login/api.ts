@@ -1,11 +1,7 @@
+import { ILoginData } from "./actions";
 import { baseAuthURL } from "../base-auth-api";
 import { checkResponse } from "../../base-api";
 
-
-interface ILoginData {
-  email: string;
-  password: string;
-}
 
 export const loginRequest = (data: ILoginData) => {
   return fetch(baseAuthURL + "login", {

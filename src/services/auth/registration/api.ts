@@ -1,12 +1,7 @@
+import { IRegistrationData } from "./actions";
 import { baseAuthURL } from "../base-auth-api";
 import { checkResponse } from "../../base-api";
 
-
-interface IRegistrationData {
-  name: string;
-  email: string;
-  password: string;
-}
 
 export const registrationRequest = (data: IRegistrationData) => {
   return fetch(baseAuthURL + "register", {

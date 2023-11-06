@@ -2,15 +2,21 @@ import {
   REGISTRATION_REQUEST,
   REGISTRATION_SUCCESS,
   REGISTRATION_FAILED,
+  TRegistrationActions,
 } from "./actions";
 
 
-const initialState = {
+type TRegistrationState = {
+  isRegistrationRequest: boolean;
+  isRegistrationSuccess: boolean;
+}
+
+const initialState: TRegistrationState = {
   isRegistrationRequest: false,
   isRegistrationSuccess: false,
 }
 
-export const registrationReducer = (state = initialState, action) => {
+export const registrationReducer = (state = initialState, action: TRegistrationActions) => {
   switch (action.type) {
     case REGISTRATION_REQUEST:
       return {

@@ -1,10 +1,7 @@
+import { ILogoutData } from "./actions";
 import { baseAuthURL } from "../base-auth-api";
 import { checkResponse } from "../../base-api";
 
-
-interface ILogoutData {
-  refreshToken: string;
-}
 
 export const logoutRequest = (data: ILogoutData) => {
   return fetch(baseAuthURL + "logout", {

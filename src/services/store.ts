@@ -15,6 +15,11 @@ import {
   wsMessage as OrderFeedWsMessage,
   wsError as OrderFeedWsError,
 } from "./order-feed/actions";
+import { TForgotPasswordActions } from "./auth/forgot-password/actions";
+import { TLoginActions } from "./auth/login/actions";
+import { TLogoutActions } from "./auth/logout/actions";
+import { TRegistrationActions } from "./auth/registration/actions";
+import { TResetPasswordActions } from "./auth/reset-password/actions";
 import { rootReducer } from "./reducers";
 import { socketMiddleware } from "../middlewares/socket-middleware";
 import { TOrderFeedActions } from "../types/order-feed";
@@ -39,7 +44,12 @@ export const store = configureStore({
   }
 });
 
-export type TAppActions = TOrderFeedActions;
+export type TAppActions = TOrderFeedActions
+  | TForgotPasswordActions
+  | TLoginActions
+  | TLogoutActions
+  | TRegistrationActions
+  | TResetPasswordActions;
 export type TAppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TAppActions>
 export type AppDispatch = ThunkDispatch<RootState, unknown, TAppActions>;
 
