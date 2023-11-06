@@ -21,6 +21,7 @@ import { TLogoutActions } from "./auth/logout/actions";
 import { TRegistrationActions } from "./auth/registration/actions";
 import { TResetPasswordActions } from "./auth/reset-password/actions";
 import { TBurgerConstructorActions } from "./burger-constructor/actions";
+import { TBurgerIngredientsActions } from "./burger-ingredients/actions";
 import { rootReducer } from "./reducers";
 import { socketMiddleware } from "../middlewares/socket-middleware";
 import { TOrderFeedActions } from "../types/order-feed";
@@ -51,7 +52,8 @@ export type TAppActions = TOrderFeedActions
   | TLogoutActions
   | TRegistrationActions
   | TResetPasswordActions
-  | TBurgerConstructorActions;
+  | TBurgerConstructorActions
+  | TBurgerIngredientsActions;
 export type TAppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TAppActions>
 export type AppDispatch = ThunkDispatch<RootState, unknown, TAppActions>;
 
