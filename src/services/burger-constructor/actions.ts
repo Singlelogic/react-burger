@@ -45,6 +45,7 @@ interface ISendOrderRequest {
 
 interface ISendOrderSuccess {
   readonly type: typeof SEND_ORDER_SUCCESS;
+  orderNumber: number;
 }
 
 interface ISendOrderFailed {
@@ -53,6 +54,7 @@ interface ISendOrderFailed {
 
 interface IMoveIngredient {
   readonly type: typeof MOVE_INGREDIENT;
+  ingredients: Array<IIngredient>;
 }
 
 export type TBurgerConstructorActions =
