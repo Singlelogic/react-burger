@@ -6,7 +6,6 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useMemo } from "react";
 import { useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./burger-constructor.module.css";
@@ -15,6 +14,7 @@ import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
 import { getUserStore } from "../protected-route-element/protected-route-element";
 import { addIngredient, sendOrder } from "../../services/burger-constructor/actions";
+import { useDispatch, useSelector, RootState } from "../../services/store";
 
 
 export interface IIngredient {
@@ -30,9 +30,9 @@ export interface IIngredient {
   readonly image_mobile: string;
   readonly image_large: string;
   readonly __v: number;
-  id?: number;
+  id?: string;
 }
-export const getBurgerConstructor = (state: any) => state.burgerConstructor;
+export const getBurgerConstructor = (state: RootState) => state.burgerConstructor;
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -46,8 +46,7 @@ function BurgerConstructor() {
     collect: monitor => ({
       isHover: monitor.isOver(),
     }),
-    drop(ingredient) {
-      // @ts-ignore
+    drop(ingredient: any) {
       dispatch(addIngredient(ingredient))
     },
   })
@@ -59,7 +58,6 @@ function BurgerConstructor() {
   function handleOrder() {
     if (!loadUser.isRequest) {
       if (user.data) {
-        // @ts-ignore
         dispatch(sendOrder(ingredientIds));
         handleOpenModal();
       } else {
@@ -77,7 +75,7 @@ function BurgerConstructor() {
       }
     }
 
-    burgerConstructor.ingredients.map((ingredient: IIngredient) => {
+    burgerConstructor.ingredients.map((ingredient) => {
       return ingredientIds.push(ingredient._id);
     })
 
@@ -97,7 +95,7 @@ function BurgerConstructor() {
     const ingredients = burgerConstructor.ingredients;
 
     const priceBun = bun ? bun.price * 2 : 0;
-    const priceIngredients = ingredients.reduce((acc: number, ingredient: IIngredient) => {
+    const priceIngredients = ingredients.reduce((acc, ingredient) => {
       return acc + ingredient.price
     }, 0);
 
@@ -124,7 +122,7 @@ function BurgerConstructor() {
         }
 
         <div className={styles.middle_ingredients}>
-          {burgerConstructor.ingredients.map((ingredient: IIngredient) => {
+          {burgerConstructor.ingredients.map((ingredient) => {
             return <BurgerConstructorItem key={ingredient.id} ingredient={ingredient} />
           })}
         </div>

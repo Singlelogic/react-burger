@@ -10,8 +10,8 @@ import {
 import { IIngredient } from "../../../types/ingredient";
 
 type TConstructorIngredientsState = {
-  ingredients: Array<IIngredient>,
-  bun: null,
+  ingredients: Array<IIngredient>;
+  bun: null | IIngredient;
 }
 
 const initialState: TConstructorIngredientsState = {
