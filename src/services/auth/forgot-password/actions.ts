@@ -6,10 +6,6 @@ export const FORGOT_PASSWORD_REQUEST: "FORGOT_PASSWORD_REQUEST" = "FORGOT_PASSWO
 export const FORGOT_PASSWORD_SUCCESS: "FORGOT_PASSWORD_SUCCESS" = "FORGOT_PASSWORD_SUCCESS";
 export const FORGOT_PASSWORD_FAILED: "FORGOT_PASSWORD_FAILED" = "FORGOT_PASSWORD_FAILED";
 
-export interface IForgotPasswordData {
-  email: string;
-}
-
 interface IForgotPasswordRequest {
   readonly type: typeof FORGOT_PASSWORD_REQUEST;
 }
@@ -26,6 +22,10 @@ export type TForgotPasswordActions =
   | IForgotPasswordRequest
   | IForgotPasswordSuccess
   | IForgotPasswordFailed;
+
+export interface IForgotPasswordData {
+  email: string;
+}
 
 export const forgotPassword = (data: IForgotPasswordData): TAppThunk => {
   return function(dispatch) {
