@@ -93,8 +93,7 @@
 
 .imageCard::after {
     position: absolute;
-    top: -3px; bottom: -3px;
-    left: -3px; right: -3px;
+    inset: -3px;
     background: linear-gradient(#801AB2, #4C4CFF);
     content: '';
     z-index: -1;

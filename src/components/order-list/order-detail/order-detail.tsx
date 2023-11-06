@@ -21,31 +21,35 @@ const OrderDetail = () => {
   }, [orders, id]);
 
   const groupedIngredients = useMemo(() => {
-    return order.ingredients.reduce((acc: any, itemId: string) => {
-      if (acc[itemId] === undefined) {
-        const ingredient = ingredients.find(
-          (ingredient: IIngredient) => ingredient._id === itemId)
-        ;
-        acc[itemId] = {...ingredient, count: 1}
-      } else {
-        acc[itemId] = {...acc[itemId], count: acc[itemId]['count'] + 1}
-      }
-      return acc
-    }, {})
-  }, [order.ingredients, ingredients]);
+    if (order) {
+      return order.ingredients.reduce((acc: any, itemId: string) => {
+        if (acc[itemId] === undefined) {
+          const ingredient = ingredients.find(
+            (ingredient: IIngredient) => ingredient._id === itemId)
+          ;
+          acc[itemId] = {...ingredient, count: 1}
+        } else {
+          acc[itemId] = {...acc[itemId], count: acc[itemId]['count'] + 1}
+        }
+        return acc
+      }, {})
+    }
+  }, [order, ingredients]);
 
   const totalPrice = useMemo(() => {
-    return Object.values(groupedIngredients).reduce((acc: any, item: any) => {
-      return acc += (item.price * item.count)
-    }, 0)
-  }, [groupedIngredients]);
+    if (order) {
+      return Object.values(groupedIngredients).reduce((acc: any, item: any) => {
+        return acc += (item.price * item.count)
+      }, 0)
+    }
+  }, [order, groupedIngredients]);
 
   return (
-    <>
-      {order &&
-        <div className={styles.container}>
-          <div className={styles.content}>
+    <div className={styles.container}>
+      <div className={styles.content}>
 
+        {order ?
+          <div>
             <div className={`text text_type_digits-default ${styles.number}`}>
               #{ order.number }
             </div>
@@ -64,7 +68,6 @@ const OrderDetail = () => {
             <div className={`text text_type_main-medium ${styles.structure}`}>
               Состав:
             </div>
-
             <div className={styles.ingredients}>
               {Object.values(groupedIngredients).map((ingredient: any) => {
                 return (
@@ -97,11 +100,12 @@ const OrderDetail = () => {
                 <CurrencyIcon type="primary" />
               </div>
             </div>
-
           </div>
-        </div>
-      }
-    </>
+        :
+          <span>Заказ не найден!</span>
+        }
+      </div>
+    </div>
   )
 }
 
