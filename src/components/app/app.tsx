@@ -53,7 +53,7 @@ function App() {
           <Route path="" element={<OnlyAuth component={<ProfileForm />} />} />
           <Route path="orders" element={<OnlyAuth component={<OrderHistory />} />} />
         </Route>
-        <Route path="profile/orders/:id" element={<OnlyAuth component={<OrderDetail />} />} />
+        <Route path="/profile/orders/:id" element={<OnlyAuth component={<OrderDetail />} />} />
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
@@ -74,7 +74,7 @@ function App() {
       {location.state?.background && (
         <Routes>
           <Route
-            path="profile/orders/:id"
+            path="/profile/orders/:id"
             element={
               <Modal onClose={handleClose} header="">
                 <OnlyAuth component={<OrderDetail />} />

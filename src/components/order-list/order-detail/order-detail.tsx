@@ -31,13 +31,13 @@ const OrderDetail = () => {
 
   useEffect(() => {
     if (!order) {
-      const postfix = location.pathname === "/feed" ? "/all" : `?token=${token}`;
+      const postfix = location.pathname === `/feed/${id}` ? "/all" : `?token=${token}`;
       dispatch(wsConnectOrderFeed(wssBaseOrderFeedURL + postfix));
     }
     return () => {
       dispatch(wsDisconnectOrderFeed());
     }
-  }, [dispatch, order, location.pathname, token]);
+  }, [dispatch, order, location.pathname, token, id]);
 
   const groupedIngredients = useMemo(() => {
     if (order) {

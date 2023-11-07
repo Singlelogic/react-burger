@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./order-board.module.css";
@@ -13,19 +12,23 @@ const OrderBoard = () => {
       <div className={styles.listOrderStatuses}>
         <div className={`text text_type_main-medium ${styles.statusDone}`}>
           <span>Готовы:</span>
+          <div className={styles.list}>
             {orders && orders.map((order: any) => {
               if (order.status === 'done') {
                 return <div className={styles.done} key={order._id}>{ order.number }</div>
               }
             })}
+          </div>
         </div>
         <div className={`text text_type_main-medium ${styles.statusProgress}`}>
           <span>В работе:</span>
+          <div className={styles.list}>
             {orders && orders.map((order: any) => {
               if (order.status === 'pending') {
                 return <div key={order._id}>{ order.number }</div>
               }
             })}
+          </div>
         </div>
       </div>
 
