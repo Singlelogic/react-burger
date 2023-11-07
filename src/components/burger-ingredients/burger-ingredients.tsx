@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 
 import styles from "./burger-ingredients.module.css";
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
-import { IIngredient } from "../burger-constructor/burger-constructor";
 import { Loader } from "../../ui/loader/loader";
+import { IIngredient } from "../../types/ingredient";
 import { getBurgerIngredientsStore } from "../../utils/store";
 
 

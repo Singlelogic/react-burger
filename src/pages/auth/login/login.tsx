@@ -4,11 +4,11 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import styles from "./login.module.css";
 import { login } from "../../../services/auth/login/actions";
+import { useDispatch } from "../../../services/store";
 
 
 function Login() {
@@ -21,7 +21,6 @@ function Login() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(login(form));
   };
 

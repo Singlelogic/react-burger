@@ -4,8 +4,8 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 import Nutrient from "./nutrient/nutrient";
-import { IIngredient } from "../../burger-constructor/burger-constructor";
 import Modal from "../../modal/modal";
+import { IIngredient } from "../../../types/ingredient";
 import { getBurgerIngredientsStore } from "../../../utils/store";
 
 

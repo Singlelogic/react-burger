@@ -5,14 +5,18 @@ import { TOrdersFeed, WebSocketStatus } from "../../types/order-feed";
 
 
 export type OrderFeedStore = {
-  status: WebSocketStatus,
-  ordersFeed: TOrdersFeed,
-  connectingError: string,
+  status: WebSocketStatus;
+  ordersFeed: TOrdersFeed;
+  connectingError: string;
 }
 
-const initialState = {
+const initialState: OrderFeedStore = {
   status: WebSocketStatus.OFFLINE,
-  ordersFeed: [],
+  ordersFeed: {
+    orders: [],
+    total: "",
+    totalToday: "",
+  },
   connectingError: "",
 }
 

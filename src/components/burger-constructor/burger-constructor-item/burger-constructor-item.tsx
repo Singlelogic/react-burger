@@ -4,14 +4,14 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./burger-constructor-item.module.css";
-import { IIngredient } from "../burger-constructor";
 import {
   deleteIngredient,
   moveIngredient,
 } from "../../../services/burger-constructor/actions";
+import { useDispatch, useSelector } from "../../../services/store";
+import { IIngredient } from "../../../types/ingredient";
 
 
 export interface IIngredientProp {
@@ -51,7 +51,6 @@ const BurgerConstructorItem: FC<IIngredientProp> = ({ ingredient }) => {
           text={ingredient.name}
           price={ingredient.price}
           thumbnail={ingredient.image}
-          // @ts-ignore
           handleClose={() => dispatch(deleteIngredient(ingredient))}
         />
       </section>

@@ -1,8 +1,8 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./profile-form.module.css";
+import { useDispatch, useSelector } from "../../../services/store";
 import { updateUser } from "../../../services/user/actions";
 
 
@@ -19,7 +19,6 @@ function ProfileForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(updateUser(form));
   };
 

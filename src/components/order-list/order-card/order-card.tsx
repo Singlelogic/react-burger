@@ -1,10 +1,10 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, useCallback, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./order-card.module.css";
-import { IIngredient } from "../../burger-constructor/burger-constructor";
+import { useSelector } from "../../../services/store";
+import { IIngredient } from "../../../types/ingredient";
 import { TOrderFeed } from "../../../types/order-feed";
 import { formatDate } from "../../../utils/date";
 import { getStatusLabel, getStatusColor } from "../../../utils/order";
@@ -27,7 +27,7 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
     return order.ingredients.map((id: string) => {
       const ingredient = ingredients.find((item: IIngredient) => item._id === id)
 
-      if (ingredient.type === 'bun') {
+      if (ingredient && ingredient.type === 'bun') {
         if (hasBun) return;
         hasBun = true;
       }
@@ -38,7 +38,7 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
           <div className={styles.imageContainer} key={idx}>
             <div className={styles.imageCard}>
               <img
-                src={ingredient.image_mobile}
+                src={ingredient && ingredient.image_mobile}
                 className={styles.image}
                 alt="ingredient"
               />
@@ -55,7 +55,7 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
             </div>
             <div className={styles.imageCard}>
               <img
-                src={ingredient.image_mobile}
+                src={ingredient && ingredient.image_mobile}
                 className={styles.image}
                 alt="ingredient"
               />

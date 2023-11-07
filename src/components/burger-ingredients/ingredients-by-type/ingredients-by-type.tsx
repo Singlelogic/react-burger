@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import CardIngredient from "../ingredient-card/ingredient-card";
-import { IIngredient } from "../../burger-constructor/burger-constructor";
+import { IIngredient } from "../../../types/ingredient";
 
 
 interface IIngredientsByType {

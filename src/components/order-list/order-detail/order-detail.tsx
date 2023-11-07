@@ -1,14 +1,14 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import styles from "./order-detail.module.css";
-import { IIngredient } from "../../burger-constructor/burger-constructor";
+import { useSelector } from "../../../services/store";
+import { IIngredient } from "../../../types/ingredient";
+import { TOrderFeed } from "../../../types/order-feed";
 import { formatDate } from "../../../utils/date";
 import { getBurgerIngredientsStore, getOrderFeedStore } from "../../../utils/store";
 import { getStatusLabel, getStatusColor } from "../../../utils/order";
-import { TOrderFeed } from "../../../types/order-feed";
 
 
 const OrderDetail = () => {
@@ -17,7 +17,7 @@ const OrderDetail = () => {
   const { id } = useParams();
 
   const order = useMemo(() => {
-    return orders && orders.find((order: TOrderFeed) => order._id === id);
+    return orders.find((order: TOrderFeed) => order._id === id);
   }, [orders, id]);
 
   const groupedIngredients = useMemo(() => {

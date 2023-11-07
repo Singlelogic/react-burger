@@ -22,7 +22,11 @@ export type TOrderFeed = {
   ingredients: Array<string>;
 }
 
-export type TOrdersFeed = Array<TOrderFeed>;
+export type TOrdersFeed = {
+  orders: Array<TOrderFeed>;
+  total: string;
+  totalToday: string;
+}
 
 export type TData = {
   type: OrderFeedType.DATA;

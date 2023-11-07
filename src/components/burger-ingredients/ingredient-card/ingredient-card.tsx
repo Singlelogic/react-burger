@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import styles from "./ingredient-card.module.css";
-import { getBurgerConstructor } from "../../burger-constructor/burger-constructor";
-import { IIngredient } from "../../burger-constructor/burger-constructor";
 import {
   IIngredientProp,
 } from "../../burger-constructor/burger-constructor-item/burger-constructor-item";
+import { IIngredient } from "../../../types/ingredient";
+import { getBurgerConstructor } from "../../../utils/store";
 
 
 const CardIngredient: FC<IIngredientProp> = ({ ingredient }) => {

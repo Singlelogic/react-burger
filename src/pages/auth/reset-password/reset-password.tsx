@@ -3,10 +3,10 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./reset-password.module.css";
+import { useDispatch } from "../../../services/store";
 import { resetPassword } from "../../../services/auth/reset-password/actions";
 
 
@@ -27,7 +27,6 @@ function ResetPassword() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(resetPassword(form));
   };
 

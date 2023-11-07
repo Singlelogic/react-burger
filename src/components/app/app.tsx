@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
@@ -17,6 +16,7 @@ import Profile from "../../pages/profile/profile";
 import ProfileForm from "../../pages/profile/profile-form/profile-form";
 import OrderHistory from "../../pages/profile/order-history/order-history";
 import { getIngredients } from "../../services/burger-ingredients/actions";
+import { useDispatch } from "../../services/store";
 import { checkUserAuth } from "../../services/user/actions";
 
 
@@ -24,12 +24,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(checkUserAuth());
   }, [dispatch]);
 
   useEffect(() => {
-    // @ts-ignore
     dispatch(getIngredients());
   }, [dispatch]);
 
