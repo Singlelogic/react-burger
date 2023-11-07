@@ -1,6 +1,6 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 
 import styles from "./order-card.module.css";
 import { useSelector } from "../../../services/store";
@@ -18,6 +18,7 @@ type TOrderCard = {
 
 const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { ingredients } = useSelector(getBurgerIngredientsStore);
 
   const images = useMemo(() => {
@@ -64,7 +65,7 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
         )
       }
     })
-  }, [ingredients]);
+  }, [ingredients, order.ingredients]);
 
   const totalPrice = useMemo(() => {
     return order.ingredients.reduce((acc, id) => {
@@ -76,39 +77,46 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
 
   const handleClickCard = useCallback(() => {
     navigate(order._id);
-  }, []);
+  }, [navigate, order._id]);
 
   return (
-    <div className={styles.cardOrder} onClick={handleClickCard} >
-      <div className={styles.orderNumber}>
-        <span className="text text_type_digits-default">#{ order.number }</span>
-        <span className={`text text_type_main-default text_color_inactive ${styles.timestamp}`}>
-          { formatDate(order.createdAt) }
-        </span>
-      </div>
-      <div className={styles.info}>
-        <div className={`text text_type_main-medium ${styles.name}`}>
-          { order.name }
+    <Link
+      key={order._id}
+      to={location.pathname === "/feed" ? `/feed/${order._id}` : `/profile/orders/${order._id}`}
+      state={{ background: location }}
+      className={styles.link}
+    >
+      <div className={styles.cardOrder} onClick={handleClickCard} >
+        <div className={styles.orderNumber}>
+          <span className="text text_type_digits-default">#{ order.number }</span>
+          <span className={`text text_type_main-default text_color_inactive ${styles.timestamp}`}>
+            { formatDate(order.createdAt) }
+          </span>
         </div>
-        {isShowStatus &&
-          <div
-            className="text text_type_main-small"
-            style={{'color': getStatusColor(order.status)}}
-          >
-            { getStatusLabel(order.status) }
+        <div className={styles.info}>
+          <div className={`text text_type_main-medium ${styles.name}`}>
+            { order.name }
           </div>
-        }
-      </div>
-      <div className={styles.ingredients}>
-        <div className={styles.images}>
-          { images }
+          {isShowStatus &&
+            <div
+              className="text text_type_main-small"
+              style={{'color': getStatusColor(order.status)}}
+            >
+              { getStatusLabel(order.status) }
+            </div>
+          }
         </div>
-        <div className={styles.price}>
-          <span className="text text_type_digits-default">{ totalPrice }</span>
-          <CurrencyIcon type="primary" />
+        <div className={styles.ingredients}>
+          <div className={styles.images}>
+            { images }
+          </div>
+          <div className={styles.price}>
+            <span className="text text_type_digits-default">{ totalPrice }</span>
+            <CurrencyIcon type="primary" />
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

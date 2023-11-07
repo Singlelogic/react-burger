@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
+import AppHeader from "../app-header/app-header";
+import IngredientDetails from "../burger-ingredients/ingredient-details/ingredient-details";
+import Modal from "../modal/modal";
+import OrderDetail from "../order-list/order-detail/order-detail";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element/protected-route-element";
-import AppHeader from "../../components/app-header/app-header";
-import IngredientDetails from "../../components/burger-ingredients/ingredient-details/ingredient-details";
-import OrderDetail from "../../components/order-list/order-detail/order-detail";
 import ForgotPassword from "../../pages/auth/forgot-password/forgot-password";
 import Login from "../../pages/auth/login/login";
 import Registration from "../../pages/auth/registration/registration";
@@ -22,6 +23,8 @@ import { checkUserAuth } from "../../services/user/actions";
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -30,6 +33,10 @@ function App() {
   useEffect(() => {
     dispatch(getIngredients());
   }, [dispatch]);
+
+  function handleClose() {
+    navigate(-2);
+  }
 
   return (
     <>
@@ -50,6 +57,33 @@ function App() {
         <Route path="/ingredients/:id" element={<IngredientDetails />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
+
+      {location.state?.background && (
+        <Routes>
+          <Route
+            path="/feed/:id"
+            element={
+              <Modal onClose={handleClose} header="">
+                <OrderDetail />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+
+      {location.state?.background && (
+        <Routes>
+          <Route
+            path="profile/orders/:id"
+            element={
+              <Modal onClose={handleClose} header="">
+                <OnlyAuth component={<OrderDetail />} />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+
     </>
   )
 }

@@ -1,24 +1,43 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMemo } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useMemo } from "react";
+import { useDispatch } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
 
 import styles from "./order-detail.module.css";
+import { wssBaseOrderFeedURL } from "../../../services/base-api";
 import { useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
 import { TOrderFeed } from "../../../types/order-feed";
 import { formatDate } from "../../../utils/date";
 import { getBurgerIngredientsStore, getOrderFeedStore } from "../../../utils/store";
 import { getStatusLabel, getStatusColor } from "../../../utils/order";
+import {
+  wsConnect as wsConnectOrderFeed,
+  wsDisconnect as wsDisconnectOrderFeed
+} from "../../../services/order-feed/actions";
 
 
 const OrderDetail = () => {
+  const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsStore);
   const { ordersFeed: { orders } } = useSelector(getOrderFeedStore);
+  const location = useLocation();
   const { id } = useParams();
+  const token = localStorage.getItem("accessToken")
 
   const order = useMemo(() => {
     return orders.find((order: TOrderFeed) => order._id === id);
   }, [orders, id]);
+
+  useEffect(() => {
+    if (!order) {
+      const postfix = location.pathname === "/feed" ? "/all" : `?token=${token}`;
+      dispatch(wsConnectOrderFeed(wssBaseOrderFeedURL + postfix));
+    }
+    return () => {
+      dispatch(wsDisconnectOrderFeed());
+    }
+  }, [dispatch, order, location.pathname, token]);
 
   const groupedIngredients = useMemo(() => {
     if (order) {
