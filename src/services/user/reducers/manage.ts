@@ -2,17 +2,24 @@ import {
   UPDATE_USER_REQUEST,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILED,
-  SET_USER
+  SET_USER,
+  TUserActions,
 } from "../actions";
 
 
-const initialState = {
+type TUserManageState = {
+  data: null;
+  isRequest: boolean;
+  isFailed: boolean;
+}
+
+const initialState: TUserManageState = {
   data: null,
   isRequest: false,
   isFailed: false,
 }
 
-export const manageReducer = (state = initialState, action) => {
+export const manageReducer = (state = initialState, action: TUserActions) => {
   switch (action.type) {
     case SET_USER:
       return {
