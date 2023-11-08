@@ -67,7 +67,7 @@ const CardIngredient: FC<ICardIngredient> = ({ ingredient }) => {
       </div>
       {isModal &&
         <Modal header="Детали ингредиента" onClose={handleCloseModal} >
-          <IngredientDetails ingredientId={ingredient._id} />
+          <IngredientDetails ingredientId={ingredient._id} isShowTitle={false} />
         </Modal>
       }
     </>

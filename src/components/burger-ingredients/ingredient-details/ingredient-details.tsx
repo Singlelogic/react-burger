@@ -10,10 +10,11 @@ import { getBurgerIngredientsStore } from "../../../utils/store";
 
 
 interface ICardIngredient {
-  ingredientId?: string
+  ingredientId?: string;
+  isShowTitle?: boolean;
 }
 
-const IngredientDetails: FC<ICardIngredient> = ({ ingredientId }) => {
+const IngredientDetails: FC<ICardIngredient> = ({ ingredientId, isShowTitle = true }) => {
   const navigate = useNavigate();
   const { id: paramId } = useParams();
   const [searchParams] = useSearchParams();
@@ -30,9 +31,11 @@ const IngredientDetails: FC<ICardIngredient> = ({ ingredientId }) => {
 
   return (
     <>
-      <div className={`text text_type_main-large ${styles.title}`}>
-        Детали ингредиента
-      </div>
+      {isShowTitle &&
+        <div className={`text text_type_main-large ${styles.title}`}>
+          Детали ингредиента
+        </div>
+      }
       <div>
         {!ingredientsRequest && ingredient ?
           <div className={styles.content}>
