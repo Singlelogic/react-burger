@@ -24,18 +24,16 @@ const IngredientDetails: FC<ICardIngredient> = ({ ingredientId }) => {
     return ingredients.find((item: IIngredient) => item._id === id);
   }, [ingredients, id]);
 
-  const isModal = useMemo(() => {
-    const param = searchParams.get("isModal");
-    return param && param === "true";
-  }, [searchParams]);
-
   function handleCloseModal() {
     navigate("/");
   }
 
-  const content = useMemo(() => {
-    return (
-      <>
+  return (
+    <>
+      <div className={`text text_type_main-large ${styles.title}`}>
+        Детали ингредиента
+      </div>
+      <div>
         {!ingredientsRequest && ingredient ?
           <div className={styles.content}>
             <img src={ingredient.image} alt={ingredient.name} />
@@ -50,24 +48,7 @@ const IngredientDetails: FC<ICardIngredient> = ({ ingredientId }) => {
         :
           <span>Ингредиент с ID: "{id}" не найден!</span>
         }
-      </>
-    )
-  }, [ingredientsRequest, ingredient, id])
-
-  return (
-    <>
-      {isModal ?
-        <Modal header="Детали ингредиента" onClose={handleCloseModal} >
-          {content}
-        </Modal>
-      :
-        <>
-          <div className={`text text_type_main-large ${styles.title}`}>
-            Детали ингредиента
-          </div>
-          {content}
-        </>
-      }
+      </div>
     </>
   )
 }

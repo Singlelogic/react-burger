@@ -42,8 +42,7 @@ const CardIngredient: FC<ICardIngredient> = ({ ingredient }) => {
 
   function handleClickCard() {
     setModal(true);
-    const path = `/ingredients/${ingredient._id}?isModal=true`
-    window.history.pushState(null, '', path);
+    window.history.pushState(null, '', `/ingredients/${ingredient._id}`);
   }
 
   function handleCloseModal() {
