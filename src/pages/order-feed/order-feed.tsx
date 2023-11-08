@@ -36,7 +36,7 @@ const OrderFeed = () => {
           {status === WebSocketStatus.ONLINE ?
             <>
               <div className={styles.list}>
-                {orders && <OrderList orders={orders} isShowStatus={false} />}
+                <OrderList orders={orders} isShowStatus={false} />
               </div>
               <div>
                 <OrderBoard/>

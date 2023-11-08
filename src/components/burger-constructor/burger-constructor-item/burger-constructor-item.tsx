@@ -14,12 +14,12 @@ import { useDispatch, useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
 
 
-export interface IIngredientProp {
+interface IBurgerConstructorItem {
   ingredient: IIngredient;
 }
 const getConstructorIngredients = (state: any) => state.burgerConstructor.ingredients;
 
-const BurgerConstructorItem: FC<IIngredientProp> = ({ ingredient }) => {
+const BurgerConstructorItem: FC<IBurgerConstructorItem> = ({ ingredient }) => {
   const dispatch = useDispatch();
   const ingredients = useSelector(getConstructorIngredients);
 

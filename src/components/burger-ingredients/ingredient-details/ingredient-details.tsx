@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
@@ -9,11 +9,16 @@ import { IIngredient } from "../../../types/ingredient";
 import { getBurgerIngredientsStore } from "../../../utils/store";
 
 
-function IngredientDetails() {
+interface ICardIngredient {
+  ingredientId?: string
+}
+
+const IngredientDetails: FC<ICardIngredient> = ({ ingredientId }) => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id: paramId } = useParams();
   const [searchParams] = useSearchParams();
   const { ingredients, ingredientsRequest } = useSelector(getBurgerIngredientsStore);
+  const id = ingredientId ? ingredientId : paramId;
 
   const ingredient = useMemo(() => {
     return ingredients.find((item: IIngredient) => item._id === id);
