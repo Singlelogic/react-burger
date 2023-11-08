@@ -5,7 +5,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useMemo } from "react";
-import { useDrop } from "react-dnd";
+import { DropTargetMonitor, useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./burger-constructor.module.css";
@@ -15,6 +15,7 @@ import Modal from "../modal/modal";
 import { getUserStore } from "../protected-route-element/protected-route-element";
 import { addIngredient, sendOrder } from "../../services/burger-constructor/actions";
 import { useDispatch, useSelector } from "../../services/store";
+import { IIngredient } from "../../types/ingredient";
 import { getBurgerConstructor } from "../../utils/store";
 
 
@@ -27,10 +28,10 @@ function BurgerConstructor() {
 
   const [{ isHover }, dropTarget] = useDrop({
     accept: 'burger-ingredients',
-    collect: monitor => ({
+    collect: (monitor: DropTargetMonitor) => ({
       isHover: monitor.isOver(),
     }),
-    drop(ingredient: any) {
+    drop(ingredient: IIngredient) {
       dispatch(addIngredient(ingredient))
     },
   })

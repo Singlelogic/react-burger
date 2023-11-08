@@ -3,7 +3,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC } from "react";
-import { useDrag, useDrop } from "react-dnd";
+import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 
 import styles from "./burger-constructor-item.module.css";
 import {
@@ -12,16 +12,16 @@ import {
 } from "../../../services/burger-constructor/actions";
 import { useDispatch, useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
+import { getBurgerIngredientsStore } from "../../../utils/store";
 
 
 interface IBurgerConstructorItem {
   ingredient: IIngredient;
 }
-const getConstructorIngredients = (state: any) => state.burgerConstructor.ingredients;
 
 const BurgerConstructorItem: FC<IBurgerConstructorItem> = ({ ingredient }) => {
   const dispatch = useDispatch();
-  const ingredients = useSelector(getConstructorIngredients);
+  const { ingredients } = useSelector(getBurgerIngredientsStore);
 
   const [{ opacity }, refDrag] = useDrag({
     type: 'burger-constructor',
@@ -33,11 +33,10 @@ const BurgerConstructorItem: FC<IBurgerConstructorItem> = ({ ingredient }) => {
 
   const [{ isHover }, targetDrop] = useDrop({
     accept: 'burger-constructor',
-    collect: monitor => ({
+    collect: (monitor: DropTargetMonitor) => ({
       isHover: monitor.isOver(),
     }),
-    drop(dragIngredient) {
-      // @ts-ignore
+    drop(dragIngredient: IIngredient) {
       dispatch(moveIngredient(dragIngredient, ingredient, ingredients));
     }
   })
