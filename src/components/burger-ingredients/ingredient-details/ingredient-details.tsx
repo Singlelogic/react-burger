@@ -1,10 +1,9 @@
 import { FC, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 import Nutrient from "./nutrient/nutrient";
-import Modal from "../../modal/modal";
 import { IIngredient } from "../../../types/ingredient";
 import { getBurgerIngredientsStore } from "../../../utils/store";
 
@@ -15,19 +14,13 @@ interface ICardIngredient {
 }
 
 const IngredientDetails: FC<ICardIngredient> = ({ ingredientId, isShowTitle = true }) => {
-  const navigate = useNavigate();
   const { id: paramId } = useParams();
-  const [searchParams] = useSearchParams();
   const { ingredients, ingredientsRequest } = useSelector(getBurgerIngredientsStore);
   const id = ingredientId ? ingredientId : paramId;
 
   const ingredient = useMemo(() => {
     return ingredients.find((item: IIngredient) => item._id === id);
   }, [ingredients, id]);
-
-  function handleCloseModal() {
-    navigate("/");
-  }
 
   return (
     <>

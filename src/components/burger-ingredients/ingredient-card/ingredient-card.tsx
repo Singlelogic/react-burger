@@ -2,7 +2,6 @@ import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-c
 import { useMemo, useState, FC } from "react";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./ingredient-card.module.css";
 import IngredientDetails from "../ingredient-details/ingredient-details";
@@ -18,7 +17,6 @@ interface ICardIngredient {
 const CardIngredient: FC<ICardIngredient> = ({ ingredient }) => {
   const burgerConstructor = useSelector(getBurgerConstructor);
   const [isModal, setModal] = useState(false);
-  const navigate = useNavigate();
 
   const [, refDrag] = useDrag({
     type: 'burger-ingredients',
