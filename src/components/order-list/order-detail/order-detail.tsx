@@ -19,6 +19,14 @@ interface IOrderDetail {
   isShowTitle?: boolean;
 }
 
+export interface ICustomIngredient extends IIngredient {
+  count: number;
+}
+
+interface ICustomIngredients {
+  [key: string]: ICustomIngredient,
+}
+
 const OrderDetail: FC<IOrderDetail> = ({ orderNumber, isShowTitle = true }) => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsStore);
@@ -42,11 +50,12 @@ const OrderDetail: FC<IOrderDetail> = ({ orderNumber, isShowTitle = true }) => {
 
   const groupedIngredients = useMemo(() => {
     if (order) {
-      return order.ingredients.reduce((acc: any, itemId: string) => {
+      return order.ingredients.reduce((acc: ICustomIngredients, itemId: string) => {
         if (acc[itemId] === undefined) {
           const ingredient = ingredients.find(
             (ingredient: IIngredient) => ingredient._id === itemId)
           ;
+          // @ts-ignore
           acc[itemId] = {...ingredient, count: 1}
         } else {
           acc[itemId] = {...acc[itemId], count: acc[itemId]['count'] + 1}
@@ -58,9 +67,11 @@ const OrderDetail: FC<IOrderDetail> = ({ orderNumber, isShowTitle = true }) => {
 
   const totalPrice = useMemo(() => {
     if (order) {
-      return Object.values(groupedIngredients).reduce((acc: any, item: any) => {
-        return acc += (item.price * item.count)
-      }, 0)
+      return Object.values(groupedIngredients as ICustomIngredients).reduce(
+        (acc: number, item: ICustomIngredient) => {
+          return acc += (item.price * item.count)
+        }, 0
+      )
     }
   }, [order, groupedIngredients]);
 
@@ -90,7 +101,7 @@ const OrderDetail: FC<IOrderDetail> = ({ orderNumber, isShowTitle = true }) => {
               Состав:
             </div>
             <div className={styles.ingredients}>
-              {Object.values(groupedIngredients).map((ingredient: any) => {
+              {Object.values(groupedIngredients as ICustomIngredients).map((ingredient: ICustomIngredient) => {
                 return (
                   <div key={ingredient._id} className={styles.ingredient}>
                     <div className={styles.image}>
