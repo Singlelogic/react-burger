@@ -14,6 +14,7 @@ import {
   wsClose as OrderFeedWsClose,
   wsMessage as OrderFeedWsMessage,
   wsError as OrderFeedWsError,
+  setOrders as OrderFeedSetOrders,
 } from "./order-feed/actions";
 import { TForgotPasswordActions } from "./auth/forgot-password/actions";
 import { TLoginActions } from "./auth/login/actions";
@@ -25,7 +26,6 @@ import { TBurgerIngredientsActions } from "./burger-ingredients/actions";
 import { TUserActions } from "./user/actions";
 import { rootReducer } from "./reducers";
 import { socketMiddleware } from "../middlewares/socket-middleware";
-import { TOrderFeedActions } from "../types/order-feed";
 
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -38,6 +38,7 @@ const orderFeedMiddleware = socketMiddleware({
   wsClose: OrderFeedWsClose,
   wsMessage: OrderFeedWsMessage,
   wsError: OrderFeedWsError,
+  setOrders: OrderFeedSetOrders,
 });
 
 export const store = configureStore({
@@ -47,8 +48,7 @@ export const store = configureStore({
   }
 });
 
-export type TAppActions = TOrderFeedActions
-  | TForgotPasswordActions
+export type TAppActions = TForgotPasswordActions
   | TLoginActions
   | TLogoutActions
   | TRegistrationActions

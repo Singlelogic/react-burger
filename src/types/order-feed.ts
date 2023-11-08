@@ -4,18 +4,10 @@ export enum WebSocketStatus {
   OFFLINE = "OFFLINE",
 }
 
-export enum OrderFeedType {
-  DATA = "data",
-}
-
-export enum StatusOrderFeed {
-  DONE = "done",
-}
-
 export type TOrderFeed = {
   _id: string;
   name: string;
-  status: StatusOrderFeed;
+  status: string;
   number: number;
   createdAt: string;
   updatedAt: string;
@@ -27,12 +19,3 @@ export type TOrdersFeed = {
   total: string;
   totalToday: string;
 }
-
-export type TData = {
-  type: OrderFeedType.DATA;
-  data: TOrderFeed;
-}
-
-export type TOrderFeedAction = TData;
-
-export type TOrderFeedActions = TOrderFeedAction;

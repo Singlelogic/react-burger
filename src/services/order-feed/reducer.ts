@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 
 import { wsConnecting, wsOpen, wsClose, wsMessage, wsError, setOrders } from "./actions";
-import { TOrdersFeed, WebSocketStatus } from "../../types/order-feed";
+import { TOrdersFeed, WebSocketStatus, TOrderFeed } from "../../types/order-feed";
 
 
 export type OrderFeedStore = {
@@ -32,13 +32,13 @@ export const orderFeedReducer = createReducer(initialState, (builder) => {
     .addCase(wsClose, state => {
       state.status = WebSocketStatus.OFFLINE;
     })
-    .addCase(wsError, (state, action: any) => {
+    .addCase(wsError, (state, action: {payload: string}) => {
       state.connectingError = action.payload;
     })
-    .addCase(wsMessage, (state, action: any) => {
+    .addCase(wsMessage, (state, action: {payload: TOrdersFeed}) => {
       state.ordersFeed = action.payload;
     })
-    .addCase(setOrders, (state, action: any) => {
+    .addCase(setOrders, (state, action: {payload: Array<TOrderFeed>}) => {
       state.ordersFeed.orders = action.payload;
     })
 })

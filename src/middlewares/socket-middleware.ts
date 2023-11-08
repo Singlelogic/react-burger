@@ -2,17 +2,18 @@ import { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from "@reduxjs/
 import { Middleware } from "redux";
 
 import { RootState } from "../services/store";
+import { TOrderFeed, TOrdersFeed } from "../types/order-feed";
 
 
 export type TWsActionTypes = {
     wsConnect: ActionCreatorWithPayload<string>,
     wsDisconnect: ActionCreatorWithoutPayload,
-    wsSendMessage?: ActionCreatorWithPayload<any>,
     wsConnecting: ActionCreatorWithoutPayload,
     wsOpen: ActionCreatorWithoutPayload,
     wsClose: ActionCreatorWithoutPayload,
-    wsMessage: ActionCreatorWithPayload<any>,
+    wsMessage: ActionCreatorWithPayload<TOrdersFeed>,
     wsError: ActionCreatorWithPayload<string>,
+    setOrders: ActionCreatorWithPayload<Array<TOrderFeed>>,
 };
 
 export const socketMiddleware = (wsActions: TWsActionTypes): Middleware<{}, RootState> => {
@@ -47,7 +48,7 @@ export const socketMiddleware = (wsActions: TWsActionTypes): Middleware<{}, Root
 
         socket.onmessage = event => {
           const { data } = event;
-          const parsedData: any = JSON.parse(data);
+          const parsedData: TOrdersFeed = JSON.parse(data);
           dispatch(wsMessage(parsedData));
         };
 
