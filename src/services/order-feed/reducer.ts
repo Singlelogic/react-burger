@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 
-import { wsConnecting, wsOpen, wsClose, wsMessage, wsError } from "./actions";
+import { wsConnecting, wsOpen, wsClose, wsMessage, wsError, setOrders } from "./actions";
 import { TOrdersFeed, WebSocketStatus } from "../../types/order-feed";
 
 
@@ -37,5 +37,8 @@ export const orderFeedReducer = createReducer(initialState, (builder) => {
     })
     .addCase(wsMessage, (state, action: any) => {
       state.ordersFeed = action.payload;
+    })
+    .addCase(setOrders, (state, action: any) => {
+      state.ordersFeed.orders = action.payload;
     })
 })

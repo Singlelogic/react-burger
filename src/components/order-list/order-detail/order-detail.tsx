@@ -1,43 +1,44 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import styles from "./order-detail.module.css";
-import { wssBaseOrderFeedURL } from "../../../services/base-api";
+import { getOrderRequest } from "../../../services/burger-constructor/api";
+import { setOrders } from "../../../services/order-feed/actions";
 import { useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
 import { TOrderFeed } from "../../../types/order-feed";
 import { formatDate } from "../../../utils/date";
 import { getBurgerIngredientsStore, getOrderFeedStore } from "../../../utils/store";
 import { getStatusLabel, getStatusColor } from "../../../utils/order";
-import {
-  wsConnect as wsConnectOrderFeed,
-  wsDisconnect as wsDisconnectOrderFeed
-} from "../../../services/order-feed/actions";
 
 
-const OrderDetail = () => {
+interface IOrderDetail {
+  orderNumber?: number;
+  isShowTitle?: boolean;
+}
+
+const OrderDetail: FC<IOrderDetail> = ({ orderNumber, isShowTitle = true }) => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsStore);
   const { ordersFeed: { orders } } = useSelector(getOrderFeedStore);
-  const location = useLocation();
-  const { id } = useParams();
-  const token = localStorage.getItem("accessToken")
+  const { id: paramId } = useParams();
 
   const order = useMemo(() => {
-    return orders.find((order: TOrderFeed) => order._id === id);
-  }, [orders, id]);
+    const id = orderNumber ? orderNumber : paramId;
+    return orders.find((order: TOrderFeed) => {
+      return order.number === parseInt(id as string)
+    });
+  }, [orders, orderNumber, paramId]);
 
   useEffect(() => {
-    if (!order) {
-      const postfix = location.pathname === `/feed/${id}` ? "/all" : `?token=${token}`;
-      dispatch(wsConnectOrderFeed(wssBaseOrderFeedURL + postfix));
+    if (!order && paramId) {
+      getOrderRequest(paramId).then(res => {
+        dispatch(setOrders(res.orders))
+      })
     }
-    return () => {
-      dispatch(wsDisconnectOrderFeed());
-    }
-  }, [dispatch, order, location.pathname, token, id]);
+  }, [dispatch, order, orderNumber, paramId])
 
   const groupedIngredients = useMemo(() => {
     if (order) {
@@ -66,12 +67,13 @@ const OrderDetail = () => {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-
         {order ?
           <div>
-            <div className={`text text_type_digits-default ${styles.number}`}>
-              #{ order.number }
-            </div>
+            {isShowTitle &&
+              <div className={`text text_type_digits-default ${styles.number}`}>
+                #{order.number}
+              </div>
+            }
 
             <div className={`text text_type_main-medium ${styles.name}`}>
               { order.name }

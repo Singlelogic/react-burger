@@ -13,3 +13,11 @@ export const sendOrderRequest = (ingredientIds: string[]) => {
     })
   })
 }
+
+export const getOrderRequest = (orderNumber: string) => {
+  return fetchWithRefresh(baseURL + `orders/${orderNumber}`, {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
+}

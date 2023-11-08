@@ -48,6 +48,6 @@ export const refreshToken = () => {
       if (err.message === "Token is invalid") {
         localStorage.removeItem("accessToken");
         deleteCookie("refreshToken");
-      };
+      }
     })
 };

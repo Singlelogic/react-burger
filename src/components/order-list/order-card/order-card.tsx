@@ -1,14 +1,16 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { FC, useCallback, useMemo } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import {FC, useMemo, useState} from "react";
+import { useLocation } from "react-router-dom";
 
 import styles from "./order-card.module.css";
+import OrderDetail from "../order-detail/order-detail";
 import { useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
 import { TOrderFeed } from "../../../types/order-feed";
 import { formatDate } from "../../../utils/date";
 import { getStatusLabel, getStatusColor } from "../../../utils/order";
 import { getBurgerIngredientsStore } from "../../../utils/store";
+import Modal from "../../modal/modal";
 
 
 type TOrderCard = {
@@ -17,9 +19,9 @@ type TOrderCard = {
 }
 
 const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { ingredients } = useSelector(getBurgerIngredientsStore);
+  const [isModal, setModal] = useState(false);
 
   const images = useMemo(() => {
     let hasBun = false;
@@ -75,17 +77,18 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
     }, 0)
   }, [order.ingredients, ingredients]);
 
-  const handleClickCard = useCallback(() => {
-    navigate(order._id);
-  }, [navigate, order._id]);
+  function handleClickCard() {
+    setModal(true);
+    window.history.pushState(null, '', `${location.pathname}/${order.number}`);
+  }
+
+  function handleCloseModal() {
+    setModal(false);
+    window.history.pushState(null, '', location.pathname);
+  }
 
   return (
-    <Link
-      key={order._id}
-      to={location.pathname === "/feed" ? `/feed/${order._id}` : `/profile/orders/${order._id}`}
-      state={{ background: location }}
-      className={styles.link}
-    >
+    <>
       <div className={styles.cardOrder} onClick={handleClickCard} >
         <div className={styles.orderNumber}>
           <span className="text text_type_digits-default">#{ order.number }</span>
@@ -116,7 +119,12 @@ const OrderCard: FC<TOrderCard> = ({ order, isShowStatus = true }) => {
           </div>
         </div>
       </div>
-    </Link>
+      {isModal &&
+        <Modal header={`#${order.number}`} onClose={handleCloseModal} >
+          <OrderDetail orderNumber={order.number} isShowTitle={false} />
+        </Modal>
+      }
+    </>
   )
 }
 
