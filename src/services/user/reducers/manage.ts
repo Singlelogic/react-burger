@@ -6,9 +6,13 @@ import {
   TUserActions,
 } from "../actions";
 
+type TUser = {
+  email: string;
+  name: string;
+}
 
 type TUserManageState = {
-  data: null;
+  data: TUser | null;
   isRequest: boolean;
   isFailed: boolean;
 }

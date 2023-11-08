@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
+import { useSelector } from "../../services/store";
+import { getUserStore } from "../../utils/store";
 
-export const getUserStore = (store: any) => store.user;
 interface IProtectedRouteElement {
   onlyAuth?: boolean;
   component: React.ReactElement;

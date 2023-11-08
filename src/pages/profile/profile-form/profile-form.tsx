@@ -4,14 +4,13 @@ import { useMemo, useState } from "react";
 import styles from "./profile-form.module.css";
 import { useDispatch, useSelector } from "../../../services/store";
 import { updateUser } from "../../../services/user/actions";
+import { getUserStore} from "../../../utils/store";
 
-
-const getUserStore = (store: any) => store.user.user.data;
 
 function ProfileForm() {
   const dispatch = useDispatch();
-  const { name, email } = useSelector(getUserStore);
-  const [form, setForm] = useState({name, email, password: "********"});
+  const { user: { data } } = useSelector(getUserStore);
+  const [form, setForm] = useState({name: data?.name , email: data?.email, password: "********"});
 
   const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value });
@@ -19,16 +18,19 @@ function ProfileForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(updateUser(form));
   };
 
   const cancelChange = () => {
+    const name = data?.name;
+    const email = data?.email;
     setForm({...form, name, email});
   }
 
   const isChange = useMemo(() => {
-    return name !== form.name || email !== form.email
-  }, [form, name, email]);
+    return data?.name !== form.name || data?.email !== form.email
+  }, [form, data?.name, data?.email]);
 
   return (
     <form className={styles.form} onSubmit={(e) => {handleSubmit(e)}}>
@@ -37,7 +39,7 @@ function ProfileForm() {
         placeholder={"Имя"}
         onChange={handleChangeForm}
         icon={"EditIcon"}
-        value={form.name}
+        value={form.name ? form.name : ''}
         name={"name"}
         error={false}
         errorText={"Ошибка"}
@@ -48,7 +50,7 @@ function ProfileForm() {
         placeholder={"Логин"}
         onChange={handleChangeForm}
         icon={"EditIcon"}
-        value={form.email}
+        value={form.email ? form.email : ''}
         name={"email"}
         error={false}
         errorText={"Ошибка"}

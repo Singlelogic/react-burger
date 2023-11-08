@@ -12,3 +12,6 @@ export const getOrderStore = (state: RootState) => state.order;
 
 /* orderFeed */
 export const getOrderFeedStore = (state: RootState) => state.orderFeed;
+
+/* orderFeed */
+export const getUserStore = (store: RootState) => store.user;

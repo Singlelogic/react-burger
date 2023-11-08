@@ -12,11 +12,10 @@ import styles from "./burger-constructor.module.css";
 import BurgerConstructorItem from "./burger-constructor-item/burger-constructor-item";
 import OrderDetails from "./order-details/order-details";
 import Modal from "../modal/modal";
-import { getUserStore } from "../protected-route-element/protected-route-element";
 import { addIngredient, sendOrder } from "../../services/burger-constructor/actions";
 import { useDispatch, useSelector } from "../../services/store";
 import { IIngredient } from "../../types/ingredient";
-import { getBurgerConstructor } from "../../utils/store";
+import { getBurgerConstructor, getUserStore } from "../../utils/store";
 
 
 function BurgerConstructor() {
