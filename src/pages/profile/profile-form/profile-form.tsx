@@ -10,7 +10,13 @@ import { getUserStore} from "../../../utils/store";
 function ProfileForm() {
   const dispatch = useDispatch();
   const { user: { data } } = useSelector(getUserStore);
-  const [form, setForm] = useState({name: data?.name , email: data?.email, password: "********"});
+  const nameFromStore = data?.name || '';
+  const emailFromStore = data?.email || '';
+  const [form, setForm] = useState({
+    name: nameFromStore ,
+    email: emailFromStore,
+    password: "********"
+  });
 
   const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value });
@@ -18,19 +24,16 @@ function ProfileForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(updateUser(form));
   };
 
   const cancelChange = () => {
-    const name = data?.name;
-    const email = data?.email;
-    setForm({...form, name, email});
+    setForm({...form, name: nameFromStore, email: emailFromStore});
   }
 
   const isChange = useMemo(() => {
-    return data?.name !== form.name || data?.email !== form.email
-  }, [form, data?.name, data?.email]);
+    return nameFromStore !== form.name || emailFromStore !== form.email
+  }, [form, nameFromStore, emailFromStore]);
 
   return (
     <form className={styles.form} onSubmit={(e) => {handleSubmit(e)}}>
@@ -39,7 +42,7 @@ function ProfileForm() {
         placeholder={"Имя"}
         onChange={handleChangeForm}
         icon={"EditIcon"}
-        value={form.name ? form.name : ''}
+        value={form.name}
         name={"name"}
         error={false}
         errorText={"Ошибка"}
@@ -50,7 +53,7 @@ function ProfileForm() {
         placeholder={"Логин"}
         onChange={handleChangeForm}
         icon={"EditIcon"}
-        value={form.email ? form.email : ''}
+        value={form.email}
         name={"email"}
         error={false}
         errorText={"Ошибка"}
