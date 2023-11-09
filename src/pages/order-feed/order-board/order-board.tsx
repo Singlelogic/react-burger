@@ -13,7 +13,7 @@ const OrderBoard = () => {
         <div className={`text text_type_main-medium ${styles.statusDone}`}>
           <span>Готовы:</span>
           <div className={styles.list}>
-            {orders && orders.map((order: any) => {
+            {orders.map((order) => {
               if (order.status === 'done') {
                 return <div className={styles.done} key={order._id}>{ order.number }</div>
               }
@@ -23,7 +23,7 @@ const OrderBoard = () => {
         <div className={`text text_type_main-medium ${styles.statusProgress}`}>
           <span>В работе:</span>
           <div className={styles.list}>
-            {orders && orders.map((order: any) => {
+            {orders.map((order) => {
               if (order.status === 'pending') {
                 return <div key={order._id}>{ order.number }</div>
               }
