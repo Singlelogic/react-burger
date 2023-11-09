@@ -1,11 +1,11 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo, useState, FC } from "react";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
 
 import styles from "./ingredient-card.module.css";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import Modal from "../../modal/modal";
+import { useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
 import { getBurgerConstructor } from "../../../utils/store";
 

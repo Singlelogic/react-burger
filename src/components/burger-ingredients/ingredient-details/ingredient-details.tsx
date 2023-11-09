@@ -1,9 +1,9 @@
 import { FC, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 import Nutrient from "./nutrient/nutrient";
+import { useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
 import { getBurgerIngredientsStore } from "../../../utils/store";
 

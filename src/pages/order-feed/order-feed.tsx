@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import OrderBoard from "./order-board/order-board";
 import styles from "./order-feed.module.css";
@@ -9,6 +9,7 @@ import {
   wsConnect as wsConnectOrderFeed,
   wsDisconnect as wsDisconnectOrderFeed,
 } from "../../services/order-feed/actions";
+import { useSelector } from "../../services/store";
 import { getOrderFeedStore } from "../../utils/store";
 import { WebSocketStatus } from "../../types/order-feed";
 import { Loader } from "../../ui/loader/loader";

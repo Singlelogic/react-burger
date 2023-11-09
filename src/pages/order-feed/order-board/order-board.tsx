@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
-
 import styles from "./order-board.module.css";
+import { useSelector } from "../../../services/store";
 import { getOrderFeedStore } from "../../../utils/store";
 
 
