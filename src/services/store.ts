@@ -26,7 +26,7 @@ import { TBurgerConstructorActions } from "./burger-constructor/actions";
 import { TBurgerIngredientsActions } from "./burger-ingredients/actions";
 import { TUserActions } from "./user/actions";
 import { rootReducer } from "./reducers";
-import { socketMiddleware, TWsActionTypes } from "../middlewares/socket-middleware";
+import { socketMiddleware } from "../middlewares/socket-middleware";
 
 
 export type RootState = ReturnType<typeof rootReducer>;
