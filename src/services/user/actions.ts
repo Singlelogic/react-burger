@@ -89,7 +89,7 @@ export const getUser = (): TAppThunk => {
           });
         }
       })
-      .catch(err => console.log("ERROR: ", err.message));
+      .catch(err => console.log("ERROR: ", err));
   };
 }
 
@@ -111,5 +111,6 @@ export const updateUser = (data: IUserData): TAppThunk => {
           });
         }
       })
+     .catch(err => console.log("ERROR: ", err));
   };
 }

@@ -32,17 +32,22 @@ export const forgotPassword = (data: IForgotPasswordData): TAppThunk => {
     dispatch({
       type: FORGOT_PASSWORD_REQUEST,
     });
-    forgotPasswordRequest(data).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: FORGOT_PASSWORD_SUCCESS,
-        });
-        window.location.replace("/reset-password");
-      } else {
-        dispatch({
-          type: FORGOT_PASSWORD_FAILED,
-        });
-      }
-    });
+    forgotPasswordRequest(data)
+      .then(res => {
+        if (res && res.success) {
+          dispatch({
+            type: FORGOT_PASSWORD_SUCCESS,
+          });
+          window.location.replace("/reset-password");
+        } else {
+          dispatch({
+            type: FORGOT_PASSWORD_FAILED,
+          });
+        }
+      })
+      .catch(err => {
+        dispatch({ type: FORGOT_PASSWORD_FAILED});
+        console.log("ERROR: ", err);
+      });
   };
 }

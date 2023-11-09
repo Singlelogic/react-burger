@@ -31,22 +31,21 @@ export type TLogoutActions =
 
 export const logout = (data: ILogoutData): TAppThunk => {
   return function(dispatch) {
-    dispatch({
-      type: LOGOUT_REQUEST
-    });
-    logoutRequest(data).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: LOGOUT_SUCCESS,
-        });
-        localStorage.removeItem("accessToken");
-        deleteCookie("refreshToken");
-        dispatch(setUser(null));
-      } else {
-        dispatch({
-          type: LOGOUT_FAILED
-        });
-      }
-    });
+    dispatch({ type: LOGOUT_REQUEST });
+    logoutRequest(data)
+      .then(res => {
+        if (res && res.success) {
+          dispatch({ type: LOGOUT_SUCCESS });
+          localStorage.removeItem("accessToken");
+          deleteCookie("refreshToken");
+          dispatch(setUser(null));
+        } else {
+          dispatch({ type: LOGOUT_FAILED });
+        }
+      })
+      .catch(err => {
+        dispatch({ type: LOGOUT_FAILED});
+        console.log("ERROR: ", err);
+      });
   };
 }

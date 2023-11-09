@@ -33,22 +33,21 @@ export type TRegistrationActions =
 
 export const registration = (data: IRegistrationData): TAppThunk => {
   return function(dispatch) {
-    dispatch({
-      type: REGISTRATION_REQUEST
-    });
-    registrationRequest(data).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: REGISTRATION_SUCCESS,
-        });
-        dispatch(setUser(res.user));
-        localStorage.setItem("accessToken", res.accessToken.split("Bearer ")[1]);
-        setCookie("refreshToken", res.refreshToken);
-      } else {
-        dispatch({
-          type: REGISTRATION_FAILED
-        });
-      }
-    });
+    dispatch({ type: REGISTRATION_REQUEST });
+    registrationRequest(data)
+      .then(res => {
+        if (res && res.success) {
+          dispatch({ type: REGISTRATION_SUCCESS });
+          dispatch(setUser(res.user));
+          localStorage.setItem("accessToken", res.accessToken.split("Bearer ")[1]);
+          setCookie("refreshToken", res.refreshToken);
+        } else {
+          dispatch({ type: REGISTRATION_FAILED });
+        }
+      })
+      .catch(err => {
+        dispatch({ type: REGISTRATION_FAILED});
+        console.log("ERROR: ", err);
+      });
   };
 }

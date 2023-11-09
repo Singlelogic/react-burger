@@ -41,9 +41,11 @@ const OrderDetail: FC<IOrderDetail> = ({ orderNumber, isShowTitle = true }) => {
 
   useEffect(() => {
     if (!order && paramId) {
-      getOrderRequest(paramId).then(res => {
+      getOrderRequest(paramId)
+      .then(res => {
         dispatch(setOrders(res.orders))
       })
+      .catch(err => console.log("ERROR: ", err));
     }
   }, [dispatch, order, orderNumber, paramId])
 

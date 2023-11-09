@@ -30,21 +30,20 @@ export type TResetPasswordActions =
 
 export function resetPassword(data: IResetPasswordData): TAppThunk {
   return function(dispatch) {
-    dispatch({
-      type: RESET_PASSWORD_REQUEST,
-    });
-    resetPasswordRequest(data).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: RESET_PASSWORD_SUCCESS,
-        });
-        window.location.replace("/login");
-        localStorage.removeItem("forgotPasswordPageVisited");
-      } else {
-        dispatch({
-          type: RESET_PASSWORD_FAILED,
-        });
-      }
-    });
+    dispatch({ type: RESET_PASSWORD_REQUEST });
+    resetPasswordRequest(data)
+      .then(res => {
+        if (res && res.success) {
+          dispatch({ type: RESET_PASSWORD_SUCCESS });
+          window.location.replace("/login");
+          localStorage.removeItem("forgotPasswordPageVisited");
+        } else {
+          dispatch({ type: RESET_PASSWORD_FAILED });
+        }
+      })
+      .catch(err => {
+        dispatch({ type: RESET_PASSWORD_FAILED});
+        console.log("ERROR: ", err);
+      });
   };
 }

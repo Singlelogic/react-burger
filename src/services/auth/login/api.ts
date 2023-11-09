@@ -1,10 +1,9 @@
 import { ILoginData } from "./actions";
-import { baseAuthURL } from "../base-auth-api";
-import { checkResponse } from "../../base-api";
+import { request } from "../../base-api";
 
 
 export const loginRequest = (data: ILoginData) => {
-  return fetch(baseAuthURL + "login", {
+  return request("auth/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -14,6 +13,4 @@ export const loginRequest = (data: ILoginData) => {
       "password": data.password,
     })
   })
-    .then((res) => checkResponse(res))
-    .catch(err => console.log("ERROR: ", err.message));
 }

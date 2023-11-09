@@ -1,10 +1,9 @@
 import { ILogoutData } from "./actions";
-import { baseAuthURL } from "../base-auth-api";
-import { checkResponse } from "../../base-api";
+import { request } from "../../base-api";
 
 
 export const logoutRequest = (data: ILogoutData) => {
-  return fetch(baseAuthURL + "logout", {
+  return request("auth/logout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -14,6 +13,4 @@ export const logoutRequest = (data: ILogoutData) => {
       token: data.refreshToken,
     }),
   })
-    .then((res) => checkResponse(res))
-    .catch(err => console.log("ERROR: ", err.message));
 }

@@ -1,8 +1,8 @@
-import { baseURL, fetchWithRefresh } from "../base-api";
+import { request, requestWithRefresh } from "../base-api";
 
 
 export const sendOrderRequest = (ingredientIds: string[]) => {
-  return fetchWithRefresh(baseURL + "orders", {
+  return requestWithRefresh("orders", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export const sendOrderRequest = (ingredientIds: string[]) => {
 }
 
 export const getOrderRequest = (orderNumber: string) => {
-  return fetchWithRefresh(baseURL + `orders/${orderNumber}`, {
+  return request(`orders/${orderNumber}`, {
     headers: {
       "Content-Type": "application/json",
     }

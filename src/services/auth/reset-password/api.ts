@@ -1,9 +1,9 @@
 import { IResetPasswordData } from "./actions";
-import { baseURL, checkResponse } from "../../base-api";
+import { request } from "../../base-api";
 
 
 export const resetPasswordRequest = (data: IResetPasswordData) => {
-  return fetch(baseURL + "password-reset/reset", {
+  return request("auth/password-reset/reset", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,6 +13,4 @@ export const resetPasswordRequest = (data: IResetPasswordData) => {
       "token": data.token,
     })
   })
-    .then((res) => checkResponse(res))
-    .catch(err => console.log("ERROR: ", err.message));
 }

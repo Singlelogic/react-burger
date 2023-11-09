@@ -8,10 +8,29 @@ interface IOptions {
   [key: string]: any,
 }
 
-export const fetchWithRefresh = async (url: string, options: IOptions) => {
+export const request = (endpoint: string, options?: IOptions) => {
+  return fetch(`${baseURL}${endpoint}`, options)
+    .then(checkResponse)
+    .then(checkSuccess);
+};
+
+export const checkResponse = (res: any) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка ${res.status}`);
+};
+
+const checkSuccess = (res: any) => {
+  if (res && res.success) {
+    return res;
+  }
+  return Promise.reject(`Ответ не success: ${res}`);
+};
+
+export const requestWithRefresh = async (endpoint: string, options: any) => {
   try {
-    const res = await fetch(url, options);
-    return await checkResponse(res);
+    return await request(endpoint, options);
   } catch (err: any) {
     if (err.message === "jwt expired") {
       const data = await refreshToken();
@@ -21,20 +40,15 @@ export const fetchWithRefresh = async (url: string, options: IOptions) => {
       localStorage.setItem("accessToken", data.accessToken.split("Bearer ")[1]);
       setCookie("refreshToken", data.refreshToken);
       options.headers.authorization = data.accessToken;
-      const res = await fetch(url, options);
-      return await checkResponse(res);
+      return await request(endpoint, options);
     } else {
       return Promise.reject(err);
     }
   }
 };
 
-export const checkResponse = (res: Response) => {
-  return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
-};
-
 export const refreshToken = () => {
-  return fetch(baseURL + "auth/token", {
+  return request("auth/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -43,9 +57,8 @@ export const refreshToken = () => {
       token: getCookie("refreshToken"),
     }),
   })
-    .then(checkResponse)
     .catch(err => {
-      if (err.message === "Token is invalid") {
+      if (err === "Token is invalid") {
         localStorage.removeItem("accessToken");
         deleteCookie("refreshToken");
       }

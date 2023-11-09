@@ -132,20 +132,25 @@ export const sendOrder = (ingredientIds: Array<string>): TAppThunk => {
     dispatch({
       type: SEND_ORDER_REQUEST,
     });
-    sendOrderRequest(ingredientIds).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: SEND_ORDER_SUCCESS,
-          orderNumber: res.order.number,
-        });
-        dispatch({
-          type: CLEAR_CONSTRUCTOR,
-        })
-      } else {
-        dispatch({
-          type: SEND_ORDER_FAILED,
-        });
-      }
-    });
+    sendOrderRequest(ingredientIds)
+      .then(res => {
+        if (res && res.success) {
+          dispatch({
+            type: SEND_ORDER_SUCCESS,
+            orderNumber: res.order.number,
+          });
+          dispatch({
+            type: CLEAR_CONSTRUCTOR,
+          })
+        } else {
+          dispatch({
+            type: SEND_ORDER_FAILED,
+          });
+        }
+      })
+      .catch(err => {
+        dispatch({ type: SEND_ORDER_FAILED});
+        console.log("ERROR: ", err);
+      });
   };
 }
