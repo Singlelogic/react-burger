@@ -1,15 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 import OrderBoard from "./order-board/order-board";
 import styles from "./order-feed.module.css";
 import OrderList from "../../components/order-list/order-list";
 import { wssBaseOrderFeedURL } from "../../services/base-api";
-import {
-  wsConnect as wsConnectOrderFeed,
-  wsDisconnect as wsDisconnectOrderFeed,
-} from "../../services/order-feed/actions";
-import { useSelector } from "../../services/store";
+import { wsConnect, wsDisconnect } from "../../services/order-feed/actions";
+import { useDispatch, useSelector } from "../../services/store";
 import { getOrderFeedStore } from "../../utils/store";
 import { WebSocketStatus } from "../../types/order-feed";
 import { Loader } from "../../ui/loader/loader";
@@ -20,10 +16,10 @@ const OrderFeed = () => {
   const { status, ordersFeed: { orders } } = useSelector(getOrderFeedStore);
 
   useEffect(() => {
-    dispatch(wsConnectOrderFeed(wssBaseOrderFeedURL + "/all"));
+    dispatch(wsConnect(wssBaseOrderFeedURL + "/all"));
 
     return () => {
-      dispatch(wsDisconnectOrderFeed());
+      dispatch(wsDisconnect());
     }
   }, [dispatch]);
 

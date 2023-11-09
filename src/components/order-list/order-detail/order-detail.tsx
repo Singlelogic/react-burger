@@ -1,12 +1,11 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { FC, useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import styles from "./order-detail.module.css";
 import { getOrderRequest } from "../../../services/burger-constructor/api";
 import { setOrders } from "../../../services/order-feed/actions";
-import { useSelector } from "../../../services/store";
+import { useDispatch, useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
 import { TOrderFeed } from "../../../types/order-feed";
 import { formatDate } from "../../../utils/date";

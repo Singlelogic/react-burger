@@ -15,6 +15,7 @@ import {
   wsMessage as OrderFeedWsMessage,
   wsError as OrderFeedWsError,
   setOrders as OrderFeedSetOrders,
+  TWsActions,
 } from "./order-feed/actions";
 import { TForgotPasswordActions } from "./auth/forgot-password/actions";
 import { TLoginActions } from "./auth/login/actions";
@@ -25,7 +26,7 @@ import { TBurgerConstructorActions } from "./burger-constructor/actions";
 import { TBurgerIngredientsActions } from "./burger-ingredients/actions";
 import { TUserActions } from "./user/actions";
 import { rootReducer } from "./reducers";
-import { socketMiddleware } from "../middlewares/socket-middleware";
+import { socketMiddleware, TWsActionTypes } from "../middlewares/socket-middleware";
 
 
 export type RootState = ReturnType<typeof rootReducer>;
@@ -55,7 +56,8 @@ export type TAppActions = TForgotPasswordActions
   | TResetPasswordActions
   | TBurgerConstructorActions
   | TBurgerIngredientsActions
-  | TUserActions;
+  | TUserActions
+  | TWsActions;
 export type TAppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TAppActions>
 export type AppDispatch = ThunkDispatch<RootState, unknown, TAppActions>;
 
