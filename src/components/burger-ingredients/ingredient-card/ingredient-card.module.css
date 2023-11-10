@@ -6,10 +6,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 10vw;
+  width: 225px;
   position: relative;
   padding-bottom: 32px;
-  margin-right: 80px;
+  margin-right: 24px;
   color: white;
 }
 
