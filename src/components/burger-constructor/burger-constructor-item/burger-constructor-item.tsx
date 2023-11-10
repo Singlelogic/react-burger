@@ -12,7 +12,7 @@ import {
 } from "../../../services/burger-constructor/actions";
 import { useDispatch, useSelector } from "../../../services/store";
 import { IIngredient } from "../../../types/ingredient";
-import { getBurgerIngredientsStore } from "../../../utils/store";
+import { getBurgerConstructor } from "../../../utils/store";
 
 
 interface IBurgerConstructorItem {
@@ -21,7 +21,7 @@ interface IBurgerConstructorItem {
 
 const BurgerConstructorItem: FC<IBurgerConstructorItem> = ({ ingredient }) => {
   const dispatch = useDispatch();
-  const { ingredients } = useSelector(getBurgerIngredientsStore);
+  const { ingredients } = useSelector(getBurgerConstructor);
 
   const [{ opacity }, refDrag] = useDrag({
     type: 'burger-constructor',
