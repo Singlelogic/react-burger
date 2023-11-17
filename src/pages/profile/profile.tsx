@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 
 import styles from "./profile.module.css";
 import { logout } from "../../services/auth/logout/actions";
+import { useDispatch } from "../../services/store";
 import { getCookie } from "../../services/utils/cookie";
 
 
@@ -11,7 +11,6 @@ function Profile() {
 
   const logoutOnClick = () => {
     const refreshToken = getCookie("refreshToken");
-    // @ts-ignore
     dispatch(logout({refreshToken: refreshToken}));
   }
 
@@ -24,7 +23,7 @@ function Profile() {
           <nav className={styles.nav}>
             <ul className={styles.list}>
               <li className={styles.item}>
-                <NavLink to="" className={({ isActive }) =>
+                <NavLink end to="" className={({ isActive }) =>
                   `${classNameLink} ${isActive ? styles.active : ""}`
                 }>
                   Профиль

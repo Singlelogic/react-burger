@@ -1,8 +1,8 @@
-import { baseURL, fetchWithRefresh } from "../base-api";
+import { requestWithRefresh } from "../base-api";
 
 
 export const getUserRequest = () => {
-  return fetchWithRefresh(baseURL + "auth/user", {
+  return requestWithRefresh("auth/user", {
     headers: {
       "Content-Type": "application/json",
       "authorization": "Bearer " + localStorage.getItem("accessToken"),
@@ -16,7 +16,7 @@ interface IUpdateUserData {
 }
 
 export const updateUserRequest = (data: IUpdateUserData) => {
-  return fetchWithRefresh(baseURL + "auth/user", {
+  return requestWithRefresh("auth/user", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

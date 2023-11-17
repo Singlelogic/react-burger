@@ -1,12 +1,9 @@
-import { baseURL, checkResponse } from "../../base-api";
+import { request } from "../../base-api";
+import { IForgotPasswordData } from "./actions";
 
-
-interface IForgotPasswordData {
-  email: string;
-}
 
 export const forgotPasswordRequest = (data: IForgotPasswordData) => {
-  return fetch(baseURL + "password-reset", {
+  return request("password-reset", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,6 +12,4 @@ export const forgotPasswordRequest = (data: IForgotPasswordData) => {
       "email": data.email,
     })
   })
-    .then((res) => checkResponse(res))
-    .catch(err => console.log("ERROR: ", err.message));
 }

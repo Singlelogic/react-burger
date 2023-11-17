@@ -1,0 +1,23 @@
+.customScrollbar::-webkit-scrollbar {
+  background-color: #2F2F37;
+  width: 10px;
+  height: 10px;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.customScrollbar {
+  overflow: auto;
+  max-height: 80vh;
+}
+
+.content {
+  composes: customScrollbar;
+}
+
+.card {
+  margin-right: 8px;
+  margin-bottom: 14px;
+}

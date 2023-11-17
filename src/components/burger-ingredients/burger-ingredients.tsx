@@ -1,11 +1,12 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, { useEffect, useMemo, useRef, useCallback } from "react";
-import { useSelector } from "react-redux";
 
 import styles from "./burger-ingredients.module.css";
 import IngredientsByType from "./ingredients-by-type/ingredients-by-type";
-import { IIngredient } from "../burger-constructor/burger-constructor";
+import { useSelector } from "../../services/store";
 import { Loader } from "../../ui/loader/loader";
+import { IIngredient } from "../../types/ingredient";
+import { getBurgerIngredientsStore } from "../../utils/store";
 
 
 type TTypeIngredients = {
@@ -18,8 +19,6 @@ const typeIngredients: TTypeIngredients = {
   'main': 'Начинки',
 };
 
-export const getBurgerIngredients = (state: any) => state.burgerIngredients;
-
 function BurgerIngredients() {
   const [current, setCurrent] = React.useState('bun');
 
@@ -27,7 +26,7 @@ function BurgerIngredients() {
     ingredients,
     ingredientsRequest,
     ingredientsFailed
-  } = useSelector(getBurgerIngredients);
+  } = useSelector(getBurgerIngredientsStore);
 
   type TRefs = {
     [key: string]: React.RefObject<HTMLDivElement>,
@@ -74,7 +73,7 @@ function BurgerIngredients() {
       <Loader size="large" />
     ) : (
       ingredientsFailed ?
-        <p className="text text_type_main-default">
+        <p className="text text_type_main-default error-text">
           Ошибка загрузки данных!
         </p>
       :

@@ -1,13 +1,9 @@
-import { baseAuthURL } from "../base-auth-api";
-import { checkResponse } from "../../base-api";
+import { ILogoutData } from "./actions";
+import { request } from "../../base-api";
 
-
-interface ILogoutData {
-  refreshToken: string;
-}
 
 export const logoutRequest = (data: ILogoutData) => {
-  return fetch(baseAuthURL + "logout", {
+  return request("auth/logout", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,6 +13,4 @@ export const logoutRequest = (data: ILogoutData) => {
       token: data.refreshToken,
     }),
   })
-    .then((res) => checkResponse(res))
-    .catch(err => console.log("ERROR: ", err.message));
 }

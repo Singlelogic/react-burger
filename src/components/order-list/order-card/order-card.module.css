@@ -1,0 +1,124 @@
+.cardOrder {
+  padding: 24px;
+  border-radius: 35px;
+  background-color: #1C1C21;
+}
+
+.orderNumber {
+  padding-bottom: 24px;
+}
+
+.timestamp {
+  float: right;
+}
+
+.info {
+  padding-bottom: 24px;
+}
+
+.ingredients {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.images {
+  width: 436px;
+  margin-right: 24px;
+}
+
+.price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  margin-bottom: 10px;
+}
+
+.pending {
+  color: #00CCCC;
+}
+
+.images {
+    position: relative;
+    display: flex;
+}
+
+.imageContainer:nth-child(1) {
+    z-index: 6;
+}
+
+.imageContainer:nth-child(2) {
+    position: absolute;
+    left: 50px;
+    z-index: 5;
+}
+
+.imageContainer:nth-child(3) {
+    position: absolute;
+    left: 100px;
+    z-index: 4;
+}
+
+.imageContainer:nth-child(4) {
+    position: absolute;
+    left: 150px;
+    z-index: 3;
+}
+
+.imageContainer:nth-child(5) {
+    position: absolute;
+    left: 200px;
+    z-index: 2;
+}
+
+.imageContainer:nth-child(6) {
+    position: absolute;
+    left: 250px;
+    z-index: 1;
+}
+
+.imageCard {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-radius: 100%;
+    width: 65px;
+    height: 65px;
+    background: black;
+}
+
+.imageCard::after {
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(#801AB2, #4C4CFF);
+    content: '';
+    z-index: -1;
+    border-radius: 100%;
+}
+
+.imageCardCount {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: 65px;
+    border-radius: 100%;
+    background-color: rgba(25, 25, 30, 0.5);
+    z-index: 2;
+}
+
+.image {
+    position: absolute;
+    width: 125px;
+    transform: translate(-29px, 0);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

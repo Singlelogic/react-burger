@@ -1,15 +1,9 @@
-import { baseAuthURL } from "../base-auth-api";
-import { checkResponse } from "../../base-api";
+import { IRegistrationData } from "./actions";
+import { request } from "../../base-api";
 
-
-interface IRegistrationData {
-  name: string;
-  email: string;
-  password: string;
-}
 
 export const registrationRequest = (data: IRegistrationData) => {
-  return fetch(baseAuthURL + "register", {
+  return request("auth/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,6 +14,4 @@ export const registrationRequest = (data: IRegistrationData) => {
       "password": data.password,
     })
   })
-    .then((res) => checkResponse(res))
-    .catch(err => console.log("ERROR: ", err.message));
 }

@@ -1,0 +1,50 @@
+.listOrderStatuses {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 60px;
+}
+
+.list {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  width: 280px;
+  overflow: auto;
+}
+
+.list::-webkit-scrollbar {
+  background-color: #2F2F37;
+  width: 10px;
+  height: 10px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.status {
+  width: 280px;
+  padding-bottom: 24px;
+}
+
+.statusDone {
+  composes: status;
+  margin-right: 35px;
+}
+
+.statusProgress {
+  composes: status;
+}
+
+.completedInTime {
+  padding-bottom: 60px;
+}
+
+.done {
+  color: #00CCCC;
+}

@@ -4,10 +4,10 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import styles from "./registration.module.css";
+import { useDispatch } from "../../../services/store";
 import { registration } from "../../../services/auth/registration/actions";
 
 
@@ -21,7 +21,6 @@ function Registration() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(registration(form));
   }
 

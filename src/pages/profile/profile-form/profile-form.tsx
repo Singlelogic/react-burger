@@ -1,17 +1,22 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import styles from "./profile-form.module.css";
+import { useDispatch, useSelector } from "../../../services/store";
 import { updateUser } from "../../../services/user/actions";
+import { getUserStore} from "../../../utils/store";
 
-
-const getUserStore = (store: any) => store.user.user.data;
 
 function ProfileForm() {
   const dispatch = useDispatch();
-  const { name, email } = useSelector(getUserStore);
-  const [form, setForm] = useState({name, email, password: "********"});
+  const { user: { data } } = useSelector(getUserStore);
+  const nameFromStore = data?.name || '';
+  const emailFromStore = data?.email || '';
+  const [form, setForm] = useState({
+    name: nameFromStore ,
+    email: emailFromStore,
+    password: "********"
+  });
 
   const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({...form, [e.target.name]: e.target.value });
@@ -19,17 +24,16 @@ function ProfileForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(updateUser(form));
   };
 
   const cancelChange = () => {
-    setForm({...form, name, email});
+    setForm({...form, name: nameFromStore, email: emailFromStore});
   }
 
   const isChange = useMemo(() => {
-    return name !== form.name || email !== form.email
-  }, [form, name, email]);
+    return nameFromStore !== form.name || emailFromStore !== form.email
+  }, [form, nameFromStore, emailFromStore]);
 
   return (
     <form className={styles.form} onSubmit={(e) => {handleSubmit(e)}}>

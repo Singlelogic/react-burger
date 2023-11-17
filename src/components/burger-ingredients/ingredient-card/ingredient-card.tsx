@@ -1,19 +1,22 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMemo, FC } from "react";
+import { useMemo, useState, FC } from "react";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 import styles from "./ingredient-card.module.css";
-import { getBurgerConstructor } from "../../burger-constructor/burger-constructor";
-import { IIngredient } from "../../burger-constructor/burger-constructor";
-import {
-  IIngredientProp,
-} from "../../burger-constructor/burger-constructor-item/burger-constructor-item";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import Modal from "../../modal/modal";
+import { useSelector } from "../../../services/store";
+import { IIngredient } from "../../../types/ingredient";
+import { getBurgerConstructor } from "../../../utils/store";
 
 
-const CardIngredient: FC<IIngredientProp> = ({ ingredient }) => {
+interface ICardIngredient {
+  ingredient: IIngredient;
+}
+
+const CardIngredient: FC<ICardIngredient> = ({ ingredient }) => {
   const burgerConstructor = useSelector(getBurgerConstructor);
+  const [isModal, setModal] = useState(false);
 
   const [, refDrag] = useDrag({
     type: 'burger-ingredients',
@@ -35,12 +38,19 @@ const CardIngredient: FC<IIngredientProp> = ({ ingredient }) => {
     ingredient.type,
   ]);
 
+  function handleClickCard() {
+    setModal(true);
+    window.history.pushState(null, '', `/ingredients/${ingredient._id}`);
+  }
+
+  function handleCloseModal() {
+    setModal(false);
+    window.history.pushState(null, '', '/');
+  }
+
   return (
-    <div className={styles.content}>
-      <Link style= {{ textDecoration: "none" }} to={{
-        pathname: `ingredients/${ingredient._id}`,
-        search: "isModal=true",
-      }}>
+    <>
+      <div className={styles.content} onClick={handleClickCard}>
         <div className={styles.card} ref={refDrag}>
           {count !== 0 && <Counter count={count} size="small" />}
           <img src={ingredient.image} alt={ingredient.name} />
@@ -52,8 +62,13 @@ const CardIngredient: FC<IIngredientProp> = ({ ingredient }) => {
             {ingredient.name}
           </span>
         </div>
-      </Link>
-    </div>
+      </div>
+      {isModal &&
+        <Modal header="Детали ингредиента" onClose={handleCloseModal} >
+          <IngredientDetails ingredientId={ingredient._id} isShowTitle={false} />
+        </Modal>
+      }
+    </>
   )
 }
 

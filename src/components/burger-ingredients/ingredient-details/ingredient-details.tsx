@@ -1,36 +1,35 @@
-import { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { FC, useMemo } from "react";
+import { useParams } from "react-router-dom";
 
 import styles from "./ingredient-details.module.css";
 import Nutrient from "./nutrient/nutrient";
-import { getBurgerIngredients } from "../burger-ingredients";
-import { IIngredient } from "../../burger-constructor/burger-constructor";
-import Modal from "../../modal/modal";
+import { useSelector } from "../../../services/store";
+import { IIngredient } from "../../../types/ingredient";
+import { getBurgerIngredientsStore } from "../../../utils/store";
 
 
-function IngredientDetails() {
-  const navigate = useNavigate();
-  const { id } = useParams();
-  const [searchParams] = useSearchParams();
-  const { ingredients, ingredientsRequest } = useSelector(getBurgerIngredients);
+interface ICardIngredient {
+  ingredientId?: string;
+  isShowTitle?: boolean;
+}
+
+const IngredientDetails: FC<ICardIngredient> = ({ ingredientId, isShowTitle = true }) => {
+  const { id: paramId } = useParams();
+  const { ingredients, ingredientsRequest } = useSelector(getBurgerIngredientsStore);
+  const id = ingredientId ? ingredientId : paramId;
 
   const ingredient = useMemo(() => {
     return ingredients.find((item: IIngredient) => item._id === id);
   }, [ingredients, id]);
 
-  const isModal = useMemo(() => {
-    const param = searchParams.get("isModal");
-    return param && param === "true";
-  }, [searchParams]);
-
-  function handleCloseModal() {
-    navigate("/");
-  }
-
-  const content = useMemo(() => {
-    return (
-      <>
+  return (
+    <>
+      {isShowTitle &&
+        <div className={`text text_type_main-large ${styles.title}`}>
+          Детали ингредиента
+        </div>
+      }
+      <div>
         {!ingredientsRequest && ingredient ?
           <div className={styles.content}>
             <img src={ingredient.image} alt={ingredient.name} />
@@ -45,24 +44,7 @@ function IngredientDetails() {
         :
           <span>Ингредиент с ID: "{id}" не найден!</span>
         }
-      </>
-    )
-  }, [ingredientsRequest, ingredient, id])
-
-  return (
-    <>
-      {isModal ?
-        <Modal header="Детали ингредиента" onClose={handleCloseModal} >
-          {content}
-        </Modal>
-      :
-        <>
-          <div className={`text text_type_main-large ${styles.title}`}>
-            Детали ингредиента
-          </div>
-          {content}
-        </>
-      }
+      </div>
     </>
   )
 }
