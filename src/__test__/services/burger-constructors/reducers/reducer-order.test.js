@@ -9,7 +9,6 @@ import {
 } from "../../../../services/burger-constructor/reducers/order";
 
 
-console.log("initialState", initialState);
 describe("Order reducer", () => {
   it("should return the initial state", () => {
     expect(
