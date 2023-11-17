@@ -1,6 +1,6 @@
 import { registrationRequest } from "./api";
 import { setUser } from "../../user/actions";
-import { setCookie } from "../../utils/cookie";
+import { setCookie } from "../../../utils/cookie";
 import { TAppThunk } from "../../store";
 
 

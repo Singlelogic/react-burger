@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import styles from "./profile.module.css";
 import { logout } from "../../services/auth/logout/actions";
 import { useDispatch } from "../../services/store";
-import { getCookie } from "../../services/utils/cookie";
+import { getCookie } from "../../utils/cookie";
 
 
 function Profile() {
