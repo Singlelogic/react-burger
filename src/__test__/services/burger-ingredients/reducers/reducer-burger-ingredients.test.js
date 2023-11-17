@@ -1,30 +1,29 @@
+import { ingredients } from "../../../fixtures/ingredient";
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
 } from "../../../../services/burger-ingredients/actions";
 import {
-  burgerIngredientsReducer
+  burgerIngredientsReducer,
+  initialState
 } from "../../../../services/burger-ingredients/reducers/burger-ingredients";
 
 
-describe("ingredientsReducer", () => {
+describe("Burger ingredients reducer", () => {
   it("should return the initial state", () => {
     expect(
       burgerIngredientsReducer(undefined, {})
-    ).toEqual({
-      ingredients: [],
-      ingredientsRequest: false,
-      ingredientsFailed: false,
-    });
+    ).toEqual(initialState);
   });
 
   it("should handle GET_INGREDIENTS_REQUEST", () => {
     expect(
-      burgerIngredientsReducer([], {
+      burgerIngredientsReducer(initialState, {
         type: GET_INGREDIENTS_REQUEST,
       })
     ).toEqual({
+      ...initialState,
       ingredientsRequest: true,
       ingredientsFailed: false,
     });
@@ -32,23 +31,25 @@ describe("ingredientsReducer", () => {
 
   it("should handle GET_INGREDIENTS_SUCCESS", () => {
     expect(
-      burgerIngredientsReducer([], {
+      burgerIngredientsReducer(initialState, {
         type: GET_INGREDIENTS_SUCCESS,
-        data: "DATA"
+        data: ingredients,
       })
     ).toEqual({
+      ...initialState,
       ingredientsRequest: false,
       ingredientsFailed: false,
-      ingredients: "DATA",
+      ingredients: ingredients,
     });
   });
 
   it("should handle GET_INGREDIENTS_FAILED", () => {
     expect(
-      burgerIngredientsReducer([], {
+      burgerIngredientsReducer(initialState, {
         type: GET_INGREDIENTS_FAILED,
       })
     ).toEqual({
+      ...initialState,
       ingredientsRequest: false,
       ingredientsFailed: true,
     });

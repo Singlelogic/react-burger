@@ -13,7 +13,7 @@ type TBurgerIngredientType = {
   ingredientsFailed: boolean;
 }
 
-const initialState: TBurgerIngredientType = {
+export const initialState: TBurgerIngredientType = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
