@@ -10,7 +10,7 @@ export type OrderFeedStore = {
   connectingError: string;
 }
 
-const initialState: OrderFeedStore = {
+export const initialState: OrderFeedStore = {
   status: WebSocketStatus.OFFLINE,
   ordersFeed: {
     orders: [],
