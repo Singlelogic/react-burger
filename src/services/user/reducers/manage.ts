@@ -17,7 +17,7 @@ type TUserManageState = {
   isFailed: boolean;
 }
 
-const initialState: TUserManageState = {
+export const initialState: TUserManageState = {
   data: null,
   isRequest: false,
   isFailed: false,
