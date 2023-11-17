@@ -1,4 +1,3 @@
-import { ingredient1, ingredient2, ingredients } from "../../../fixtures/ingredient";
 import {
   ADD_INGREDIENT_BUN,
   ADD_INGREDIENT,
@@ -36,11 +35,11 @@ describe("Constructor ingredients reducer", () => {
     expect(
       ConstructorIngredientsReducer(initialState, {
         type: ADD_INGREDIENT,
-        ingredient: "DATA",
+        ingredient: 1,
       })
     ).toEqual({
       ...initialState,
-      ingredients: ["DATA"],
+      ingredients: [1],
     });
   });
 
@@ -57,24 +56,24 @@ describe("Constructor ingredients reducer", () => {
   });
 
   it("should handle DELETE_INGREDIENT", () => {
-    const constructorIngredient1 = {...ingredient1, id: 1};
-    const constructorIngredient2 = {...ingredient2, id: 2};
+    const ingredient1 = { id: 1 };
+    const ingredient2 = { id: 2 };
     const customInitialState = {
       ...initialState,
       ingredients: [
-        constructorIngredient1,
-        constructorIngredient2,
+        ingredient1,
+        ingredient2,
       ]
     }
 
     expect(
       ConstructorIngredientsReducer(customInitialState, {
         type: DELETE_INGREDIENT,
-        ingredient: constructorIngredient1,
+        ingredient: ingredient1,
       })
     ).toEqual({
       ...initialState,
-      ingredients: [constructorIngredient2],
+      ingredients: [ingredient2],
     });
   });
 
@@ -82,11 +81,11 @@ describe("Constructor ingredients reducer", () => {
     expect(
       ConstructorIngredientsReducer(initialState, {
         type: MOVE_INGREDIENT,
-        ingredients,
+        ingredients: [1, 2, 3],
       })
     ).toEqual({
       ...initialState,
-      ingredients,
+      ingredients: [1, 2, 3],
     });
   });
 

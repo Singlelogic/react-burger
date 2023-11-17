@@ -1,4 +1,3 @@
-import { ingredients } from "../../../fixtures/ingredient";
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -33,13 +32,13 @@ describe("Burger ingredients reducer", () => {
     expect(
       burgerIngredientsReducer(initialState, {
         type: GET_INGREDIENTS_SUCCESS,
-        data: ingredients,
+        data: [1, 2, 3],
       })
     ).toEqual({
       ...initialState,
       ingredientsRequest: false,
       ingredientsFailed: false,
-      ingredients: ingredients,
+      ingredients: [1, 2, 3],
     });
   });
 
