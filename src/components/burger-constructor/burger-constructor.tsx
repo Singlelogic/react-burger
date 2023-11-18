@@ -128,22 +128,22 @@ function BurgerConstructor() {
       <div className={styles.order}>
         <p className="text text_type_digits-medium">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-        <Button
-          type="primary"
-          size="medium"
-          onClick={handleOrder}
-          htmlType={"button"}
-          disabled={!isOrderAllowed}
-          data-test-id="btn-make-an-order"
+        <div
+          className={`${isOrderAllowed ? '': styles.tooltipContent}`}
+          data-tooltip="Для оформления заказа необходимо добавить булку!"
         >
-          Оформить заказ
-        </Button>
-      </div>
-      {!isOrderAllowed &&
-        <div className={styles.help_text}>
-          Для оформления заказа необходимо добавить булку!
+          <Button
+            type="primary"
+            size="medium"
+            onClick={handleOrder}
+            htmlType={"button"}
+            disabled={!isOrderAllowed}
+            data-test-id="btn-make-an-order"
+          >
+            Оформить заказ
+          </Button>
         </div>
-      }
+      </div>
 
       {isVisible &&
         <Modal onClose={handleCloseModal} >

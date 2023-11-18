@@ -11,7 +11,7 @@
 
 .custom_scrollbar {
   overflow: auto;
-  height: 330px;
+  height: 540px;
   margin-top:10px;
   margin-bottom:10px;
 }
@@ -55,4 +55,29 @@
   margin-left: auto;
   margin-right: 0;
   color: #404053;
+}
+
+.tooltipContent {
+  position: relative;
+  display: inline-block;
+}
+.tooltipContent::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  width: 360px;
+  top: 0;
+  left: 0;
+  background: #f8d7da;
+  color: #842029;
+  padding: 0.5em;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #f5c2c7;
+}
+.tooltipContent:hover::after {
+  opacity: 1;
+  top: 4em;
 }
