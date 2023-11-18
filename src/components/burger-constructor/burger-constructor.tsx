@@ -91,7 +91,7 @@ function BurgerConstructor() {
   return (
     <div className={styles.burger_constructor}>
 
-      <div className={className} ref={dropTarget}>
+      <div className={className} ref={dropTarget} data-test-id="constructor-drop">
         {burgerConstructor.bun &&
           <>
             <span className={styles.drag_bun}><DragIcon type="primary" /></span>
@@ -134,6 +134,7 @@ function BurgerConstructor() {
           onClick={handleOrder}
           htmlType={"button"}
           disabled={!isOrderAllowed}
+          data-test-id="btn-make-an-order"
         >
           Оформить заказ
         </Button>

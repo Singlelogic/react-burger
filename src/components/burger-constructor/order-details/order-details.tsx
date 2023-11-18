@@ -23,7 +23,9 @@ function OrderDetails() {
         </p>
       :
         <div className={styles.content}>
-          <p className="text text_type_digits-large">{orderNumber}</p>
+          <p className="text text_type_digits-large" data-test-id="order-number">
+            {orderNumber}
+          </p>
           <p className="text text_type_main-default">Идентификатор заказа</p>
           <p className={styles.icon}><CheckMarkIcon type="secondary" /></p>
           <p className="text text_type_main-small">Ваш заказ начали готовить</p>

@@ -33,7 +33,10 @@ const Modal: FC<IModal> = ({ children, header, onClose }) => {
         <ModalOverlay onClose={onClose} />
         <div className={styles.modal}>
           <p>
-            <span className={styles.header + ' text text_type_main-default'}>
+            <span
+              className={styles.header + ' text text_type_main-default'}
+              data-test-id="modal-header"
+            >
               {header}
             </span>
             <span className={styles.btn_close} onClick={onClose}>x</span>

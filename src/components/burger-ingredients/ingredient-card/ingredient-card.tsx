@@ -51,7 +51,7 @@ const CardIngredient: FC<ICardIngredient> = ({ ingredient }) => {
   return (
     <>
       <div className={styles.content} onClick={handleClickCard}>
-        <div className={styles.card} ref={refDrag}>
+        <div className={styles.card} ref={refDrag} data-test-id={ingredient._id}>
           {count !== 0 && <Counter count={count} size="small" />}
           <img src={ingredient.image} alt={ingredient.name} />
           <span className={styles.price}>

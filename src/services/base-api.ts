@@ -58,7 +58,7 @@ export const refreshToken = () => {
     }),
   })
     .catch(err => {
-      if (err === "Token is invalid") {
+      if (err.message === "Token is invalid") {
         localStorage.removeItem("accessToken");
         deleteCookie("refreshToken");
       }
