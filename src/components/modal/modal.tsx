@@ -39,7 +39,13 @@ const Modal: FC<IModal> = ({ children, header, onClose }) => {
             >
               {header}
             </span>
-            <span className={styles.btn_close} onClick={onClose}>x</span>
+            <span
+              className={styles.btn_close}
+              onClick={onClose}
+              data-test-id="modal-close"
+            >
+              x
+            </span>
           </p>
           <span className='text text_type_main-default'>
             {children}

@@ -18,13 +18,13 @@ describe("Checking basic functionality", () => {
     cy.get("[data-test-id=643d69a5c3f7b9001cfa0941]").drag("[data-test-id=constructor-drop]");
     cy.get("[data-test-id=btn-make-an-order]").click();
     cy.get("[data-test-id=order-number]").contains("26475");
-    cy.get('body').type('{esc}');
+    cy.get("[data-test-id=modal-close]").click();
   });
 
   it("Modal window with ingredient details", () => {
     cy.get("[data-test-id=643d69a5c3f7b9001cfa093c]").click();
     cy.get("[data-test-id=modal-header]").contains("Детали ингредиента");
     cy.get("[data-test-id=ingredient-name]").contains("Краторная булка N-200i");
-    cy.get('body').type('{esc}');
+    cy.get("[data-test-id=modal-close]").click();
   });
 });
