@@ -86,15 +86,15 @@ function BurgerConstructor() {
     return priceBun + priceIngredients;
   }, [burgerConstructor])
 
-  const className = `${styles.list_ingredients} ${ isHover ? styles.on_hover : '' }`;
+  const className = `${styles.listIngredients} ${ isHover ? styles.onHover : '' }`;
 
   return (
-    <div className={styles.burger_constructor}>
+    <div className={styles.content}>
 
       <div className={className} ref={dropTarget} data-test-id="constructor-drop">
         {burgerConstructor.bun &&
           <>
-            <span className={styles.drag_bun}><DragIcon type="primary" /></span>
+            <span className={styles.dragBun}><DragIcon type="primary" /></span>
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -105,7 +105,7 @@ function BurgerConstructor() {
           </>
         }
 
-        <div className={styles.middle_ingredients}>
+        <div className={styles.middleIngredients}>
           {burgerConstructor.ingredients.map((ingredient) => {
             return <BurgerConstructorItem key={ingredient.id} ingredient={ingredient} />
           })}
@@ -113,7 +113,7 @@ function BurgerConstructor() {
 
         {burgerConstructor.bun &&
           <>
-            <span className={styles.drag_bun}><DragIcon type="primary" /></span>
+            <span className={styles.dragBun}><DragIcon type="primary" /></span>
             <ConstructorElement
               type="bottom"
               isLocked={true}

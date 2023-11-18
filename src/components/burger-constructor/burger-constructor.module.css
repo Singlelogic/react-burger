@@ -1,33 +1,35 @@
-.burger_constructor{
+.content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 42vw;
+  height: 80vh;
 }
 
-.list_ingredients {
+.listIngredients {
   margin-top: 100px;
   margin-bottom: 30px;
 }
 
-.custom_scrollbar {
+.customScrollbar {
   overflow: auto;
-  height: 540px;
+  height: 41vh;
   margin-top:10px;
   margin-bottom:10px;
 }
 
-.custom_scrollbar::-webkit-scrollbar {
+.customScrollbar::-webkit-scrollbar {
   background-color: #2F2F37;
   width: 10px;
   height: 10px;
 }
 
-.custom_scrollbar::-webkit-scrollbar-thumb {
+.customScrollbar::-webkit-scrollbar-thumb {
   background: #8585AD;
 }
 
-.middle_ingredients {
-  composes: custom_scrollbar;
+.middleIngredients {
+  composes: customScrollbar;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -41,26 +43,20 @@
   gap: 20px;
 }
 
-.on_hover {
+.onHover {
   border: dashed green;
   border-radius: 55px;
 }
 
-.drag_bun {
+.dragBun {
   visibility: hidden;
-}
-
-.help_text {
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: 0;
-  color: #404053;
 }
 
 .tooltipContent {
   position: relative;
   display: inline-block;
 }
+
 .tooltipContent::after {
   content: attr(data-tooltip);
   position: absolute;
@@ -77,6 +73,7 @@
   border-style: solid;
   border-color: #f5c2c7;
 }
+
 .tooltipContent:hover::after {
   opacity: 1;
   top: 4em;
