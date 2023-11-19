@@ -1,4 +1,4 @@
-import { setCookie, getCookie, deleteCookie } from "./utils/cookie";
+import { setCookie, getCookie, deleteCookie } from "../utils/cookie";
 
 
 export const baseURL = "https://norma.nomoreparties.space/api/";
@@ -18,7 +18,7 @@ export const checkResponse = (res: Response) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Ошибка ${res.status}`);
+  return res.json().then((err) => Promise.reject(err));
 };
 
 const checkSuccess = (res: any) => {
@@ -58,7 +58,7 @@ export const refreshToken = () => {
     }),
   })
     .catch(err => {
-      if (err === "Token is invalid") {
+      if (err.message === "Token is invalid") {
         localStorage.removeItem("accessToken");
         deleteCookie("refreshToken");
       }

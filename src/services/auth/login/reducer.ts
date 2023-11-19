@@ -12,7 +12,7 @@ type TLoginState = {
   isLoginFailed: boolean;
 }
 
-const initialState: TLoginState = {
+export const initialState: TLoginState = {
   isLoginRequest: false,
   isLoginSuccess: false,
   isLoginFailed: false,

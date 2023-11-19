@@ -49,7 +49,9 @@ export const socketMiddleware = (wsActions: TWsActionTypes): Middleware<{}, Root
         socket.onmessage = event => {
           const { data } = event;
           const parsedData: TOrdersFeed = JSON.parse(data);
-          dispatch(wsMessage(parsedData));
+          if (parsedData?.orders) {
+            dispatch(wsMessage(parsedData));
+          }
         };
 
         socket.onclose = event => {

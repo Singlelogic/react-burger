@@ -86,15 +86,15 @@ function BurgerConstructor() {
     return priceBun + priceIngredients;
   }, [burgerConstructor])
 
-  const className = `${styles.list_ingredients} ${ isHover ? styles.on_hover : '' }`;
+  const className = `${styles.listIngredients} ${ isHover ? styles.onHover : '' }`;
 
   return (
-    <div className={styles.burger_constructor}>
+    <div className={styles.content}>
 
-      <div className={className} ref={dropTarget}>
+      <div className={className} ref={dropTarget} data-test-id="constructor-drop">
         {burgerConstructor.bun &&
           <>
-            <span className={styles.drag_bun}><DragIcon type="primary" /></span>
+            <span className={styles.dragBun}><DragIcon type="primary" /></span>
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -105,7 +105,7 @@ function BurgerConstructor() {
           </>
         }
 
-        <div className={styles.middle_ingredients}>
+        <div className={styles.middleIngredients}>
           {burgerConstructor.ingredients.map((ingredient) => {
             return <BurgerConstructorItem key={ingredient.id} ingredient={ingredient} />
           })}
@@ -113,7 +113,7 @@ function BurgerConstructor() {
 
         {burgerConstructor.bun &&
           <>
-            <span className={styles.drag_bun}><DragIcon type="primary" /></span>
+            <span className={styles.dragBun}><DragIcon type="primary" /></span>
             <ConstructorElement
               type="bottom"
               isLocked={true}
@@ -128,21 +128,22 @@ function BurgerConstructor() {
       <div className={styles.order}>
         <p className="text text_type_digits-medium">{totalPrice}</p>
         <CurrencyIcon type="primary"/>
-        <Button
-          type="primary"
-          size="medium"
-          onClick={handleOrder}
-          htmlType={"button"}
-          disabled={!isOrderAllowed}
+        <div
+          className={`${isOrderAllowed ? '': styles.tooltipContent}`}
+          data-tooltip="Для оформления заказа необходимо добавить булку!"
         >
-          Оформить заказ
-        </Button>
-      </div>
-      {!isOrderAllowed &&
-        <div className={styles.help_text}>
-          Для оформления заказа необходимо добавить булку!
+          <Button
+            type="primary"
+            size="medium"
+            onClick={handleOrder}
+            htmlType={"button"}
+            disabled={!isOrderAllowed}
+            data-test-id="btn-make-an-order"
+          >
+            Оформить заказ
+          </Button>
         </div>
-      }
+      </div>
 
       {isVisible &&
         <Modal onClose={handleCloseModal} >

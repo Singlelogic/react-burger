@@ -1,5 +1,5 @@
 import { getUserRequest, updateUserRequest } from "./api";
-import { getCookie } from "../utils/cookie";
+import { getCookie } from "../../utils/cookie";
 import { TAppThunk } from "../store";
 
 

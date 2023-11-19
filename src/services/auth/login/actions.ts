@@ -1,7 +1,7 @@
 import { loginRequest } from "./api";
 import { TAppThunk } from "../../store";
 import { setUser } from "../../user/actions";
-import { setCookie } from "../../utils/cookie";
+import { setCookie } from "../../../utils/cookie";
 
 
 export const LOGIN_REQUEST: "LOGIN_REQUEST" = "LOGIN_REQUEST";

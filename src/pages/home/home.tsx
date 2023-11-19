@@ -9,12 +9,16 @@ import BurgerIngredients from "../../components/burger-ingredients/burger-ingred
 
 function Home() {
   return (
-    <section className={styles.content}>
-      <DndProvider backend={HTML5Backend}>
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </DndProvider>
-    </section>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div className={styles.main}>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
+        </div>
+      </div>
+    </div>
   )
 }
 

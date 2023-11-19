@@ -9,11 +9,13 @@ import {
 type TLogoutState = {
   isLogoutRequest: false;
   isLogoutSuccess: false;
+  isLogoutFailed: false;
 }
 
-const initialState: TLogoutState = {
+export const initialState: TLogoutState = {
   isLogoutRequest: false,
   isLogoutSuccess: false,
+  isLogoutFailed: false,
 }
 
 export const logoutReducer = (state = initialState, action: TLogoutActions) => {
@@ -23,18 +25,21 @@ export const logoutReducer = (state = initialState, action: TLogoutActions) => {
         ...state,
         isLogoutRequest: true,
         isLogoutSuccess: false,
+        isLogoutFailed: false,
       }
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isLogoutRequest: false,
-        isLogoutSuccess: false,
+        isLogoutSuccess: true,
+        isLogoutFailed: false,
       }
     case LOGOUT_FAILED:
       return {
         ...state,
         isLogoutRequest: false,
-        isLogoutSuccess: true,
+        isLogoutSuccess: false,
+        isLogoutFailed: true,
       }
     default:
       return state;

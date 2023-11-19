@@ -8,11 +8,13 @@ import {
 
 type TResetPassword = {
   isRequest: boolean;
+  isSuccess: boolean;
   isFailed: boolean;
 }
 
-const initialState: TResetPassword = {
+export const initialState: TResetPassword = {
   isRequest: false,
+  isSuccess: false,
   isFailed: false,
 }
 
@@ -22,18 +24,21 @@ export const resetPasswordReducer = (state = initialState, action: TResetPasswor
       return {
         ...state,
         isRequest: true,
+        isSuccess: false,
         isFailed: false,
       }
     case RESET_PASSWORD_SUCCESS:
       return {
         ...state,
         isRequest: false,
+        isSuccess: true,
         isFailed: false,
       }
     case RESET_PASSWORD_FAILED:
       return {
         ...state,
         isRequest: false,
+        isSuccess: false,
         isFailed: true,
       }
     default:

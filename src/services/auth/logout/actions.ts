@@ -1,7 +1,7 @@
 import { logoutRequest } from "./api";
 import { TAppThunk } from "../../store";
 import { setUser } from "../../user/actions";
-import { deleteCookie } from "../../utils/cookie";
+import { deleteCookie } from "../../../utils/cookie";
 
 
 export const LOGOUT_REQUEST: "LOGOUT_REQUEST" = "LOGOUT_REQUEST";
